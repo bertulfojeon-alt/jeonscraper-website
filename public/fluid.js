@@ -28,13 +28,13 @@
 
   const config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 1024,
-    DENSITY_DISSIPATION: 1.0,
-    VELOCITY_DISSIPATION: 0.2,
+    DYE_RESOLUTION: 512,
+    DENSITY_DISSIPATION: 0.97,
+    VELOCITY_DISSIPATION: 0.98,
     PRESSURE: 0.8,
-    PRESSURE_ITERATIONS: 20,
-    CURL: 30,
-    SPLAT_RADIUS: 0.25,
+    PRESSURE_ITERATIONS: 10,
+    CURL: 5,
+    SPLAT_RADIUS: 0.6,
     SPLAT_FORCE: 6000,
     COLOR_UPDATE_SPEED: 10,
     TRANSPARENT: true,
@@ -263,9 +263,8 @@
     }
     void main () {
       vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
-      vec4 result = texture2D(uSource, coord);
-      float decay = 1.0 + dissipation * dt;
-      gl_FragColor = result / decay;
+      gl_FragColor = dissipation * texture2D(uSource, coord);
+      gl_FragColor.a = 1.0;
     }
   `, supportLinearFiltering ? null : ['MANUAL_FILTERING']);
 

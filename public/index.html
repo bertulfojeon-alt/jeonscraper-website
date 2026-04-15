@@ -167,9 +167,17 @@
     </h2>
     <div class="features-grid">
 
+      <!-- PRODUCT SCRAPING -->
       <div class="feature-card anim-scale" data-delay="0">
         <div class="feature-glow"></div>
-        <div class="feature-icon-wrap"><div class="feature-icon">🛍️</div></div>
+        <div class="feat-mini" data-feat="scrape">
+          <div class="fm-scrape">
+            <div class="fm-scrape-item" style="--d:0"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$29.99</div></div></div>
+            <div class="fm-scrape-item" style="--d:1"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$49.95</div></div></div>
+            <div class="fm-scrape-item" style="--d:2"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$18.50</div></div></div>
+            <div class="fm-scrape-item" style="--d:3"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$64.00</div></div></div>
+          </div>
+        </div>
         <h3>Product Scraping</h3>
         <p>Full product catalogs from any Shopify store — names, prices, images, variants, vendors, tags. Delivered as Shopify-ready CSV or professional Excel reports.</p>
         <ul class="feature-list">
@@ -179,9 +187,23 @@
         </ul>
       </div>
 
+      <!-- WAR ROOM -->
       <div class="feature-card anim-scale" data-delay="100">
         <div class="feature-glow"></div>
-        <div class="feature-icon-wrap"><div class="feature-icon">⚔️</div></div>
+        <div class="feat-mini" data-feat="warroom">
+          <div class="fm-warroom">
+            <div class="fm-wr-stats">
+              <div class="fm-wr-stat"><div class="fm-wr-val" data-v="3">0</div><div class="fm-wr-lbl">Stores</div></div>
+              <div class="fm-wr-stat purple"><div class="fm-wr-val" data-v="847">0</div><div class="fm-wr-lbl">Products</div></div>
+              <div class="fm-wr-stat teal"><div class="fm-wr-val" data-v="23">0</div><div class="fm-wr-lbl">Overlap %</div></div>
+            </div>
+            <div class="fm-wr-bars">
+              <div class="fm-wr-bar" style="--w:75%;--c:var(--green)"><span>My Store</span></div>
+              <div class="fm-wr-bar" style="--w:62%;--c:var(--pink)"><span>Competitor</span></div>
+              <div class="fm-wr-bar" style="--w:48%;--c:var(--blue)"><span>Supplier</span></div>
+            </div>
+          </div>
+        </div>
         <h3>War Room Intelligence</h3>
         <p>Military-grade competitive analysis. Compare your store against competitors and suppliers. Find pricing gaps, product overlaps, and sourcing opportunities.</p>
         <ul class="feature-list">
@@ -191,9 +213,22 @@
         </ul>
       </div>
 
+      <!-- PRICE MONITORING -->
       <div class="feature-card anim-scale" data-delay="200">
         <div class="feature-glow"></div>
-        <div class="feature-icon-wrap"><div class="feature-icon">💰</div></div>
+        <div class="feat-mini" data-feat="price">
+          <div class="fm-price">
+            <svg class="fm-chart" viewBox="0 0 200 80" preserveAspectRatio="none">
+              <polyline class="fm-chart-line green-line" points="0,60 30,55 60,40 90,45 120,30 150,28 180,25 200,20"/>
+              <polyline class="fm-chart-line pink-line" points="0,50 30,48 60,55 90,35 120,50 150,42 180,38 200,45"/>
+            </svg>
+            <div class="fm-price-legend">
+              <span class="fm-pl-item green">● My Store</span>
+              <span class="fm-pl-item pink">● Competitor</span>
+            </div>
+            <div class="fm-price-alert">▼ -12% Price Drop Detected</div>
+          </div>
+        </div>
         <h3>Price Monitoring</h3>
         <p>Weekly or daily price tracking across competitors. Get alerted when prices change, products go on sale, or new discounts appear.</p>
         <ul class="feature-list">
@@ -203,9 +238,18 @@
         </ul>
       </div>
 
+      <!-- NEW & REMOVED -->
       <div class="feature-card anim-scale" data-delay="0">
         <div class="feature-glow"></div>
-        <div class="feature-icon-wrap"><div class="feature-icon">🔄</div></div>
+        <div class="feat-mini" data-feat="diff">
+          <div class="fm-diff">
+            <div class="fm-diff-row new" style="--d:0"><span class="fm-diff-badge new">+NEW</span><span class="fm-diff-name"></span></div>
+            <div class="fm-diff-row new" style="--d:1"><span class="fm-diff-badge new">+NEW</span><span class="fm-diff-name"></span></div>
+            <div class="fm-diff-row removed" style="--d:2"><span class="fm-diff-badge removed">-GONE</span><span class="fm-diff-name"></span></div>
+            <div class="fm-diff-row price" style="--d:3"><span class="fm-diff-badge price">▲ +8%</span><span class="fm-diff-name"></span></div>
+            <div class="fm-diff-row price-down" style="--d:4"><span class="fm-diff-badge price-down">▼ -15%</span><span class="fm-diff-name"></span></div>
+          </div>
+        </div>
         <h3>New & Removed Detection</h3>
         <p>Know when competitors add new products or discontinue old ones. Stay ahead of market trends before they become obvious.</p>
         <ul class="feature-list">
@@ -215,9 +259,23 @@
         </ul>
       </div>
 
+      <!-- STORE INTEL -->
       <div class="feature-card anim-scale" data-delay="100">
         <div class="feature-glow"></div>
-        <div class="feature-icon-wrap"><div class="feature-icon">🏪</div></div>
+        <div class="feat-mini" data-feat="intel">
+          <div class="fm-intel">
+            <div class="fm-intel-center">
+              <div class="fm-intel-ring"></div>
+              <div class="fm-intel-icon">🏪</div>
+            </div>
+            <div class="fm-intel-tag" style="--a:0deg;--r:52px;--d:0">🎨 Theme</div>
+            <div class="fm-intel-tag" style="--a:60deg;--r:52px;--d:1">🧩 Apps</div>
+            <div class="fm-intel-tag" style="--a:120deg;--r:52px;--d:2">📡 Pixels</div>
+            <div class="fm-intel-tag" style="--a:180deg;--r:52px;--d:3">💳 Payments</div>
+            <div class="fm-intel-tag" style="--a:240deg;--r:52px;--d:4">💬 Chat</div>
+            <div class="fm-intel-tag" style="--a:300deg;--r:52px;--d:5">📱 Social</div>
+          </div>
+        </div>
         <h3>Store Intelligence</h3>
         <p>Full audit of any Shopify store — theme, apps, tracking pixels, payment methods, social links, chat widgets, and 15+ feature detections.</p>
         <ul class="feature-list">
@@ -227,9 +285,22 @@
         </ul>
       </div>
 
+      <!-- MARKET RESEARCH -->
       <div class="feature-card anim-scale" data-delay="200">
         <div class="feature-glow"></div>
-        <div class="feature-icon-wrap"><div class="feature-icon">📈</div></div>
+        <div class="feat-mini" data-feat="market">
+          <div class="fm-market">
+            <div class="fm-market-cats">
+              <div class="fm-cat-bar" style="--w:85%;--d:0"><span>Apparel</span><span>85%</span></div>
+              <div class="fm-cat-bar" style="--w:62%;--d:1"><span>Accessories</span><span>62%</span></div>
+              <div class="fm-cat-bar" style="--w:44%;--d:2"><span>Footwear</span><span>44%</span></div>
+              <div class="fm-cat-bar" style="--w:31%;--d:3"><span>Home</span><span>31%</span></div>
+            </div>
+            <div class="fm-market-trend">
+              <span class="fm-trend-badge">🔥 Trending: +24 new products this week</span>
+            </div>
+          </div>
+        </div>
         <h3>Market Research</h3>
         <p>Understand your entire niche. Trending products, category gaps, brand analysis, vendor cleanup, and bestseller detection across the market.</p>
         <ul class="feature-list">
@@ -248,9 +319,9 @@
   <div class="container">
     <div class="section-label anim-slide-up">See It In Action</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
-      Real Reports. <span class="gradient-text">Real Intelligence.</span>
+      Live Intelligence. <span class="gradient-text">Real-Time Data.</span>
     </h2>
-    <p class="section-sub anim-slide-up" data-delay="150">Every report is generated from our proprietary intelligence engine. Here's what you actually receive.</p>
+    <p class="section-sub anim-slide-up" data-delay="150">Every report is generated from our proprietary intelligence engine. Watch the data come alive.</p>
 
     <div class="showcase-tabs anim-slide-up" data-delay="200">
       <button class="sc-tab active" onclick="switchShowcase(0)">Briefing</button>
@@ -261,14 +332,121 @@
       <button class="sc-tab" onclick="switchShowcase(5)">Opportunities</button>
     </div>
 
-    <div class="showcase-viewer anim-scale" data-delay="250">
+    <div class="showcase-viewer anim-scale" data-delay="250" id="showcase-viewer">
       <div class="sc-screen" id="sc-screen">
-        <img src="img/warroom-briefing.png" alt="War Room Briefing" id="sc-img" class="sc-img">
+
+        <!-- TAB 0: BRIEFING -->
+        <div class="sc-anim active" id="sc-anim-0">
+          <div class="sa-topbar"><span class="sa-back">← Back</span><span class="sa-mission">Q2 Competitor Analysis</span><div class="sa-chips"><span class="sa-chip green">🏪 My Store</span><span class="sa-chip pink">⚔️ Competitor A</span><span class="sa-chip blue">📦 Supplier</span></div></div>
+          <div class="sa-stats">
+            <div class="sa-stat"><div class="sa-stat-val sa-count" data-v="3">0</div><div class="sa-stat-lbl">Stores</div></div>
+            <div class="sa-stat purple"><div class="sa-stat-val sa-count" data-v="2942">0</div><div class="sa-stat-lbl">Products</div></div>
+            <div class="sa-stat teal"><div class="sa-stat-val sa-count" data-v="704">0</div><div class="sa-stat-lbl">Avg Price</div><div class="sa-stat-prefix">$</div></div>
+            <div class="sa-stat green"><div class="sa-stat-val sa-count" data-v="99">0</div><div class="sa-stat-lbl">In Stock %</div></div>
+            <div class="sa-stat orange"><div class="sa-stat-val sa-count" data-v="2">0</div><div class="sa-stat-lbl">Overlap %</div></div>
+            <div class="sa-stat pink"><div class="sa-stat-val sa-count" data-v="15">0</div><div class="sa-stat-lbl">Opportunities</div></div>
+          </div>
+          <div class="sa-alerts">
+            <div class="sa-alert sa-alert-green sa-row-anim" style="--d:0">🟢 <strong>8 Order Opportunities</strong> — Products competitors sell that you could source.</div>
+            <div class="sa-alert sa-alert-red sa-row-anim" style="--d:1">🔴 <strong>3 Price Risks</strong> — Competitors undercut your pricing.</div>
+          </div>
+          <div class="sa-stores">
+            <div class="sa-store-card sa-row-anim" style="--d:2"><span class="sa-store-icon">🏪</span><div><div class="sa-store-name">blueleafbath.com.au</div><div class="sa-store-role green">MY STORE</div></div><div class="sa-store-stats"><span>1000</span><span>$509</span><span>991</span></div></div>
+            <div class="sa-store-card sa-row-anim" style="--d:3"><span class="sa-store-icon">⚔️</span><div><div class="sa-store-name">freshbathware.com.au</div><div class="sa-store-role pink">COMPETITOR</div></div><div class="sa-store-stats"><span>1800</span><span>$450</span><span>941</span></div></div>
+            <div class="sa-store-card sa-row-anim" style="--d:4"><span class="sa-store-icon">📦</span><div><div class="sa-store-name">easternfitters.com.au</div><div class="sa-store-role blue">SUPPLIER</div></div><div class="sa-store-stats"><span>142</span><span>$1124</span><span>996</span></div></div>
+          </div>
+        </div>
+
+        <!-- TAB 1: PRODUCT MATRIX -->
+        <div class="sc-anim" id="sc-anim-1">
+          <div class="sa-matrix-head sa-row-anim" style="--d:0"><span>Product</span><span>My Store</span><span>Competitor</span><span>Supplier</span><span>Tag</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:0"><span class="sa-m-name">Celine Flutes Millenia 4pc</span><span class="green">$60.00</span><span class="pink">$55.00</span><span class="dim">—</span><span class="sa-tag risk">PRICE RISK</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:1"><span class="sa-m-name">Linsol Elbe Wall Basin Set</span><span class="green">$188.00</span><span class="pink">$199.00</span><span class="dim">—</span><span class="sa-tag adv">ADVANTAGE</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:2"><span class="sa-m-name">Phoenix Vivid Slimline Shower</span><span class="dim">—</span><span class="pink">$420.00</span><span class="blue">$380.00</span><span class="sa-tag opp">OPPORTUNITY</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:3"><span class="sa-m-name">Meir Round Wall Mixer</span><span class="green">$240.00</span><span class="dim">—</span><span class="dim">—</span><span class="sa-tag excl">EXCLUSIVE</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:4"><span class="sa-m-name">Caroma Luna Cleanflush Toilet</span><span class="green">$899.00</span><span class="pink">$849.00</span><span class="blue">$720.00</span><span class="sa-tag risk">PRICE RISK</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:5"><span class="sa-m-name">Fienza Delta Back to Wall</span><span class="green">$449.00</span><span class="pink">$510.00</span><span class="dim">—</span><span class="sa-tag adv">ADVANTAGE</span></div>
+          <div class="sa-matrix-row sa-row-anim" style="--d:6"><span class="sa-m-name">ADP Joy Semi Inset Basin</span><span class="dim">—</span><span class="dim">—</span><span class="blue">$295.00</span><span class="sa-tag untap">UNTAPPED</span></div>
+        </div>
+
+        <!-- TAB 2: PRICE INTEL -->
+        <div class="sc-anim" id="sc-anim-2">
+          <div class="sa-pi-stats">
+            <div class="sa-stat"><div class="sa-stat-val sa-count" data-v="57">0</div><div class="sa-stat-lbl">Shared Products</div></div>
+            <div class="sa-stat green"><div class="sa-stat-val">+88.7%</div><div class="sa-stat-lbl">Avg Gap vs Competitor</div></div>
+            <div class="sa-stat teal"><div class="sa-stat-val">19.3%</div><div class="sa-stat-lbl">Avg Margin</div></div>
+          </div>
+          <div class="sa-pi-chart" id="sa-pi-chart">
+            <div class="sa-pi-header"><span>Product</span><span>My Price</span><span>Competitor</span><span>Gap</span></div>
+            <div class="sa-pi-row sa-row-anim" style="--d:0"><span>Celine Flutes Millenia</span><span class="green">$60.00</span><span class="pink">$55.00</span><div class="sa-gap-bar"><div class="sa-gap-fill red" style="--w:9%"></div><span class="red">-9.1%</span></div></div>
+            <div class="sa-pi-row sa-row-anim" style="--d:1"><span>Linsol Elbe Basin Set</span><span class="green">$188.00</span><span class="pink">$199.00</span><div class="sa-gap-bar"><div class="sa-gap-fill grn" style="--w:6%"></div><span class="green">+5.9%</span></div></div>
+            <div class="sa-pi-row sa-row-anim" style="--d:2"><span>Caroma Luna Toilet</span><span class="green">$899.00</span><span class="pink">$849.00</span><div class="sa-gap-bar"><div class="sa-gap-fill red" style="--w:6%"></div><span class="red">-5.9%</span></div></div>
+            <div class="sa-pi-row sa-row-anim" style="--d:3"><span>Fienza Delta BTW</span><span class="green">$449.00</span><span class="pink">$510.00</span><div class="sa-gap-bar"><div class="sa-gap-fill grn" style="--w:14%"></div><span class="green">+13.6%</span></div></div>
+            <div class="sa-pi-row sa-row-anim" style="--d:4"><span>Phoenix Vivid Mixer</span><span class="green">$320.00</span><span class="pink">$289.00</span><div class="sa-gap-bar"><div class="sa-gap-fill red" style="--w:10%"></div><span class="red">-9.7%</span></div></div>
+          </div>
+        </div>
+
+        <!-- TAB 3: CATEGORY INTEL -->
+        <div class="sc-anim" id="sc-anim-3">
+          <div class="sa-cat-title">Category Distribution by Store</div>
+          <div class="sa-cat-grid">
+            <div class="sa-cat-col">
+              <div class="sa-cat-store green">🏪 My Store</div>
+              <div class="sa-hbar sa-row-anim" style="--d:0"><span>Bathroom</span><div class="sa-hbar-track"><div class="sa-hbar-fill" style="--w:72%;--c:var(--green)"></div></div><span>72%</span></div>
+              <div class="sa-hbar sa-row-anim" style="--d:1"><span>Kitchen</span><div class="sa-hbar-track"><div class="sa-hbar-fill" style="--w:18%;--c:var(--green)"></div></div><span>18%</span></div>
+              <div class="sa-hbar sa-row-anim" style="--d:2"><span>Laundry</span><div class="sa-hbar-track"><div class="sa-hbar-fill" style="--w:10%;--c:var(--green)"></div></div><span>10%</span></div>
+            </div>
+            <div class="sa-cat-col">
+              <div class="sa-cat-store pink">⚔️ Competitor</div>
+              <div class="sa-hbar sa-row-anim" style="--d:1"><span>Bathroom</span><div class="sa-hbar-track"><div class="sa-hbar-fill" style="--w:55%;--c:var(--pink)"></div></div><span>55%</span></div>
+              <div class="sa-hbar sa-row-anim" style="--d:2"><span>Kitchen</span><div class="sa-hbar-track"><div class="sa-hbar-fill" style="--w:25%;--c:var(--pink)"></div></div><span>25%</span></div>
+              <div class="sa-hbar sa-row-anim" style="--d:3"><span>Outdoor</span><div class="sa-hbar-track"><div class="sa-hbar-fill" style="--w:20%;--c:var(--pink)"></div></div><span>20%</span></div>
+            </div>
+          </div>
+          <div class="sa-cat-gap sa-row-anim" style="--d:4">
+            <div class="sa-cat-gap-title">⚠️ Category Gaps Detected</div>
+            <div class="sa-cat-pills">
+              <span class="sa-cat-pill">Outdoor</span>
+              <span class="sa-cat-pill">Heating</span>
+              <span class="sa-cat-pill">Ventilation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: BRAND INTEL -->
+        <div class="sc-anim" id="sc-anim-4">
+          <div class="sa-brand-title">Brand Overlap Matrix</div>
+          <div class="sa-brand-header sa-row-anim" style="--d:0"><span>Brand</span><span class="green">My Store</span><span class="pink">Competitor</span><span class="blue">Supplier</span></div>
+          <div class="sa-brand-row sa-row-anim" style="--d:0"><span>Phoenix</span><div class="sa-brand-dot filled green"></div><div class="sa-brand-dot filled pink"></div><div class="sa-brand-dot empty"></div></div>
+          <div class="sa-brand-row sa-row-anim" style="--d:1"><span>Caroma</span><div class="sa-brand-dot filled green"></div><div class="sa-brand-dot filled pink"></div><div class="sa-brand-dot filled blue"></div></div>
+          <div class="sa-brand-row sa-row-anim" style="--d:2"><span>Meir</span><div class="sa-brand-dot filled green"></div><div class="sa-brand-dot empty"></div><div class="sa-brand-dot empty"></div></div>
+          <div class="sa-brand-row sa-row-anim" style="--d:3"><span>Linsol</span><div class="sa-brand-dot empty"></div><div class="sa-brand-dot filled pink"></div><div class="sa-brand-dot filled blue"></div></div>
+          <div class="sa-brand-row sa-row-anim" style="--d:4"><span>Fienza</span><div class="sa-brand-dot filled green"></div><div class="sa-brand-dot filled pink"></div><div class="sa-brand-dot empty"></div></div>
+          <div class="sa-brand-row sa-row-anim" style="--d:5"><span>ADP</span><div class="sa-brand-dot empty"></div><div class="sa-brand-dot empty"></div><div class="sa-brand-dot filled blue"></div></div>
+          <div class="sa-brand-exclusive sa-row-anim" style="--d:6">
+            <div class="sa-brand-excl-title">🏆 Your Exclusive Brands</div>
+            <div class="sa-brand-pills"><span class="sa-bp green">Meir</span></div>
+            <div class="sa-brand-excl-title" style="margin-top:8px;">⚔️ Competitor Exclusives</div>
+            <div class="sa-brand-pills"><span class="sa-bp pink">Linsol</span></div>
+          </div>
+        </div>
+
+        <!-- TAB 5: OPPORTUNITIES -->
+        <div class="sc-anim" id="sc-anim-5">
+          <div class="sa-opp-count sa-row-anim" style="--d:0">15 OPPORTUNITIES DETECTED</div>
+          <div class="sa-opp-card high sa-row-anim" style="--d:0"><div class="sa-opp-badge high">🟢 HIGH — Order Opportunity</div><div class="sa-opp-desc">"Phoenix Vivid Slimline Shower" is sold by competitors and available from suppliers ($380.00) — consider adding to your store.</div></div>
+          <div class="sa-opp-card high sa-row-anim" style="--d:1"><div class="sa-opp-badge high">🟢 HIGH — Order Opportunity</div><div class="sa-opp-desc">"Linsol Elbe Wall Mixer" is sold by competitors and available from suppliers ($145.00) — consider adding to your store.</div></div>
+          <div class="sa-opp-card alert sa-row-anim" style="--d:2"><div class="sa-opp-badge alert">🔴 ALERT — Price Risk</div><div class="sa-opp-desc">Competitor sells "Celine Flutes Millenia" at $55.00 vs your $60.00. You may be undercut.</div></div>
+          <div class="sa-opp-card alert sa-row-anim" style="--d:3"><div class="sa-opp-badge alert">🔴 ALERT — Price Risk</div><div class="sa-opp-desc">Competitor sells "Caroma Luna Toilet" at $849.00 vs your $899.00. You may be undercut.</div></div>
+          <div class="sa-opp-card adv sa-row-anim" style="--d:4"><div class="sa-opp-badge adv">🔵 ADVANTAGE</div><div class="sa-opp-desc">"Meir Round Wall Mixer" is exclusive to your store — no competitors carry it.</div></div>
+          <div class="sa-opp-card untap sa-row-anim" style="--d:5"><div class="sa-opp-badge untap">🟠 UNTAPPED</div><div class="sa-opp-desc">"ADP Joy Semi Inset Basin" is available from suppliers at $295.00 but not sold by you or competitors.</div></div>
+        </div>
+
       </div>
       <div class="sc-info" id="sc-info">
         <div class="sc-info-tag">WAR ROOM</div>
         <h3 class="sc-info-title" id="sc-info-title">Briefing Dashboard</h3>
-        <p class="sc-info-desc" id="sc-info-desc">Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance. Instantly spot order opportunities and price risks.</p>
+        <p class="sc-info-desc" id="sc-info-desc">Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance.</p>
       </div>
     </div>
   </div>

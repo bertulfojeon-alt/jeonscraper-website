@@ -203,30 +203,123 @@ if (hcWindow) {
   }, { passive: true });
 }
 
-// ── SHOWCASE TABS ──
-const showcaseData = [
-  { img: 'img/warroom-briefing.png', title: 'Briefing Dashboard', desc: 'Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance. Instantly spot order opportunities and price risks.' },
-  { img: 'img/warroom-matrix.png', title: 'Product Matrix', desc: 'Every product mapped across every store. See who sells what, at what price, and with what action tags — ORDER OPPORTUNITY, PRICE ADVANTAGE, PRICE RISK, MY EXCLUSIVE, COMPETITOR EXCLUSIVE.' },
-  { img: 'img/warroom-price.png', title: 'Price Intelligence', desc: 'Side-by-side pricing for all shared products. See the price gap percentage between you and competitors, margin calculations against suppliers, and identify where you are overpriced or underpriced.' },
-  { img: 'img/warroom-category.png', title: 'Category Intelligence', desc: 'Category distribution breakdown per store. Instantly see which product categories competitors invest in that you are missing, and which categories you dominate.' },
-  { img: 'img/warroom-brand.png', title: 'Brand Intelligence', desc: 'Brand overlap matrix showing which vendors/brands each store carries. Find exclusive brands, trending vendors, and identify sourcing gaps in your catalog.' },
-  { img: 'img/warroom-opportunities.png', title: 'Actionable Opportunities', desc: 'Priority-ranked intelligence cards: ORDER opportunities (competitors sell it, suppliers have it, you don\'t), PRICE RISKS (competitors undercut you), ADVANTAGES (you are cheaper), and UNTAPPED products.' }
+// ── SHOWCASE TABS (animated dashboards) ──
+const showcaseDescs = [
+  { title: 'Briefing Dashboard', desc: 'Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance. Instantly spot order opportunities and price risks.' },
+  { title: 'Product Matrix', desc: 'Every product mapped across every store. See who sells what, at what price, and with what action tags — ORDER OPPORTUNITY, PRICE ADVANTAGE, PRICE RISK, MY EXCLUSIVE, COMPETITOR EXCLUSIVE.' },
+  { title: 'Price Intelligence', desc: 'Side-by-side pricing for all shared products. See the price gap percentage between you and competitors, margin calculations against suppliers, and identify where you are overpriced or underpriced.' },
+  { title: 'Category Intelligence', desc: 'Category distribution breakdown per store. Instantly see which product categories competitors invest in that you are missing, and which categories you dominate.' },
+  { title: 'Brand Intelligence', desc: 'Brand overlap matrix showing which vendors/brands each store carries. Find exclusive brands, trending vendors, and identify sourcing gaps in your catalog.' },
+  { title: 'Actionable Opportunities', desc: 'Priority-ranked intelligence cards: ORDER opportunities (competitors sell it, suppliers have it, you don\'t), PRICE RISKS (competitors undercut you), ADVANTAGES (you are cheaper), and UNTAPPED products.' }
 ];
 
 window.switchShowcase = function(idx) {
-  const data = showcaseData[idx];
+  // Update tab buttons
   document.querySelectorAll('.sc-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
 
-  const img = document.getElementById('sc-img');
-  img.classList.add('switching');
-  setTimeout(() => {
-    img.src = data.img;
-    img.alt = data.title;
-    document.getElementById('sc-info-title').textContent = data.title;
-    document.getElementById('sc-info-desc').textContent = data.desc;
-    img.classList.remove('switching');
-  }, 300);
+  // Switch animated panels
+  document.querySelectorAll('.sc-anim').forEach((panel, i) => {
+    if (i === idx) {
+      panel.classList.add('active');
+      // Re-trigger row animations by removing & re-adding class
+      restartAnimations(panel);
+      // Animate counters inside this panel
+      animateSaCounters(panel);
+    } else {
+      panel.classList.remove('active');
+    }
+  });
+
+  // Update info bar
+  const data = showcaseDescs[idx];
+  if (data) {
+    const titleEl = document.getElementById('sc-info-title');
+    const descEl = document.getElementById('sc-info-desc');
+    if (titleEl) titleEl.textContent = data.title;
+    if (descEl) descEl.textContent = data.desc;
+  }
 };
+
+// Re-trigger CSS animations by cloning nodes in-place
+function restartAnimations(panel) {
+  panel.querySelectorAll('.sa-row-anim').forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight; // force reflow
+    el.style.animation = '';
+  });
+  panel.querySelectorAll('.sa-gap-fill, .sa-hbar-fill').forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+  });
+}
+
+// Animate .sa-count elements (counter up)
+function animateSaCounters(panel) {
+  panel.querySelectorAll('.sa-count').forEach(el => {
+    const target = parseInt(el.dataset.v);
+    if (isNaN(target)) return;
+    const duration = 1500;
+    const start = performance.now();
+    const prefix = el.closest('.sa-stat')?.querySelector('.sa-stat-prefix') ? '$' : '';
+    const lbl = el.closest('.sa-stat')?.querySelector('.sa-stat-lbl')?.textContent || '';
+    const suffix = lbl.includes('%') ? '%' : '';
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = prefix + current.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+// ── FEATURE CARD VISIBILITY (trigger mini-animations) ──
+const featureCards = document.querySelectorAll('.feature-card');
+const featureObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate fm-wr-val counters
+      entry.target.querySelectorAll('.fm-wr-val[data-v]').forEach(el => {
+        const target = parseInt(el.dataset.v);
+        if (isNaN(target)) return;
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target);
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+      featureObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+featureCards.forEach(el => featureObserver.observe(el));
+
+// Trigger showcase counters on first view
+const showcaseSection = document.querySelector('.section-showcase');
+if (showcaseSection) {
+  const scObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const activePanel = document.querySelector('.sc-anim.active');
+        if (activePanel) {
+          restartAnimations(activePanel);
+          animateSaCounters(activePanel);
+        }
+        scObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  scObserver.observe(showcaseSection);
+}
 
 // ── PRICING CARD HOVER GLOW ──
 document.querySelectorAll('.pricing-card').forEach(card => {

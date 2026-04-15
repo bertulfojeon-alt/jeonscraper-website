@@ -58,69 +58,13 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }
 
-/* ── AURORA — Rainbow Smoke Mouse Follower ── */
+/* ── AURORA — Canvas Fluid Smoke ── */
 .aurora {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   overflow: hidden;
 }
-.aurora-orb {
-  position: absolute; border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0;
-  transition: opacity 1.2s ease;
-  will-change: transform;
-  mix-blend-mode: screen;
-}
-.aurora.active .aurora-orb { opacity: 1; }
-
-.aurora-orb-1 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0) 70%);
-}
-.aurora-orb-2 {
-  width: 350px; height: 350px;
-  background: radial-gradient(circle, rgba(79,142,247,0.3) 0%, rgba(79,142,247,0) 70%);
-}
-.aurora-orb-3 {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(255,107,157,0.28) 0%, rgba(255,107,157,0) 70%);
-}
-.aurora-orb-4 {
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, rgba(52,211,153,0.25) 0%, rgba(52,211,153,0) 70%);
-}
-
-/* Ambient drift when no mouse interaction */
-.aurora-orb-1 { animation: auroraDrift1 12s ease-in-out infinite; }
-.aurora-orb-2 { animation: auroraDrift2 15s ease-in-out infinite; }
-.aurora-orb-3 { animation: auroraDrift3 18s ease-in-out infinite; }
-.aurora-orb-4 { animation: auroraDrift4 14s ease-in-out infinite; }
-
-.aurora.tracking .aurora-orb { animation: none; }
-
-@keyframes auroraDrift1 {
-  0%, 100% { transform: translate(20vw, 30vh); }
-  25% { transform: translate(60vw, 20vh); }
-  50% { transform: translate(40vw, 60vh); }
-  75% { transform: translate(80vw, 40vh); }
-}
-@keyframes auroraDrift2 {
-  0%, 100% { transform: translate(70vw, 50vh); }
-  25% { transform: translate(30vw, 70vh); }
-  50% { transform: translate(50vw, 25vh); }
-  75% { transform: translate(20vw, 55vh); }
-}
-@keyframes auroraDrift3 {
-  0%, 100% { transform: translate(50vw, 20vh); }
-  25% { transform: translate(80vw, 60vh); }
-  50% { transform: translate(20vw, 45vh); }
-  75% { transform: translate(60vw, 75vh); }
-}
-@keyframes auroraDrift4 {
-  0%, 100% { transform: translate(30vw, 60vh); }
-  25% { transform: translate(70vw, 30vh); }
-  50% { transform: translate(60vw, 70vh); }
-  75% { transform: translate(15vw, 35vh); }
+.aurora canvas {
+  display: block; width: 100%; height: 100%;
 }
 
 /* Ensure all content sits above aurora */
@@ -1272,11 +1216,6 @@ img { max-width: 100%; }
   .hero-stat-divider { width: 40px; height: 1px; }
   .svc-grid, .svc-grid.svc-grid-row2 { grid-template-columns: 1fr 1fr; }
   .svc-card-num { font-size: 32px; }
-  .aurora-orb { filter: blur(60px); }
-  .aurora-orb-1 { width: 250px; height: 250px; }
-  .aurora-orb-2 { width: 220px; height: 220px; }
-  .aurora-orb-3 { width: 200px; height: 200px; }
-  .aurora-orb-4 { width: 200px; height: 200px; }
 
   .sa-stats, .sa-pi-stats { flex-wrap:wrap; }
   .sa-stat { min-width:60px; }

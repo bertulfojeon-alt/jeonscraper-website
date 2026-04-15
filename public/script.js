@@ -336,112 +336,233 @@ document.querySelectorAll('.pricing-card').forEach(card => {
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
-//  AURORA — Rainbow Smoke Mouse Follower
+//  AURORA — Canvas Fluid Smoke with Curl Noise
+//  Creates vivid, wispy rainbow smoke tendrils that react to the mouse
 // ══════════════════════════════════════════════════════════════════════════════
 (function() {
-  const aurora = document.getElementById('aurora');
-  if (!aurora) return;
+  const container = document.getElementById('aurora');
+  if (!container) return;
 
-  const orbs = [
-    document.getElementById('aurora-1'),
-    document.getElementById('aurora-2'),
-    document.getElementById('aurora-3'),
-    document.getElementById('aurora-4')
-  ];
+  // Replace div children with a canvas
+  container.innerHTML = '';
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'width:100%;height:100%;';
+  container.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
 
-  // Each orb trails at a different speed (lower = more lag = more smoke trail)
-  const speeds = [0.06, 0.04, 0.025, 0.015];
-  // Offset from cursor so orbs spread out like smoke
-  const offsets = [
-    { x: 0, y: 0 },
-    { x: 60, y: -40 },
-    { x: -50, y: 50 },
-    { x: 40, y: 60 }
-  ];
+  let W, H, dpr;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-  // Current positions
-  const pos = orbs.map(() => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 }));
-  // Target position (mouse)
-  let mx = window.innerWidth / 2;
-  let my = window.innerHeight / 2;
-  let mouseActive = false;
-  let fadeTimer = null;
+  // ── Simplex-like noise (fast 2D) ──
+  // Permutation table
+  const perm = new Uint8Array(512);
+  const grad = [[1,1],[-1,1],[1,-1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];
+  for (let i = 0; i < 256; i++) perm[i] = i;
+  for (let i = 255; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; }
+  for (let i = 0; i < 256; i++) perm[i + 256] = perm[i];
 
-  // Rainbow hue rotation for each orb
-  const hueBase = [270, 220, 330, 160]; // purple, blue, pink, green
-  let hueShift = 0;
-
-  // Activate aurora on first mouse move
-  function onFirstMove() {
-    aurora.classList.add('active');
+  function noise2D(x, y) {
+    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255;
+    const xf = x - Math.floor(x), yf = y - Math.floor(y);
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    const aa = perm[perm[X] + Y], ab = perm[perm[X] + Y + 1];
+    const ba = perm[perm[X + 1] + Y], bb = perm[perm[X + 1] + Y + 1];
+    const g = (h, dx, dy) => { const g2 = grad[h & 7]; return g2[0] * dx + g2[1] * dy; };
+    const x1 = g(aa, xf, yf) + u * (g(ba, xf - 1, yf) - g(aa, xf, yf));
+    const x2 = g(ab, xf, yf - 1) + u * (g(bb, xf - 1, yf - 1) - g(ab, xf, yf - 1));
+    return x1 + v * (x2 - x1);
   }
 
-  window.addEventListener('mousemove', (e) => {
-    mx = e.clientX;
-    my = e.clientY;
+  // Curl noise for fluid-like motion
+  function curl(x, y, t) {
+    const eps = 0.01;
+    const n1 = noise2D(x, y + eps + t);
+    const n2 = noise2D(x, y - eps + t);
+    const n3 = noise2D(x + eps, y + t);
+    const n4 = noise2D(x - eps, y + t);
+    return { x: (n1 - n2) / (2 * eps), y: -(n3 - n4) / (2 * eps) };
+  }
 
-    if (!mouseActive) {
-      mouseActive = true;
-      aurora.classList.add('tracking');
-      onFirstMove();
+  // ── Smoke Particles ──
+  const MAX_PARTICLES = 300;
+  const particles = [];
+  let mx = W / 2, my = H / 2, pmx = mx, pmy = my;
+  let mouseSpeed = 0;
+  let mouseActive = false;
+  let time = 0;
+  let hueOffset = 0;
+
+  class SmokeParticle {
+    constructor(x, y, hue) {
+      this.x = x;
+      this.y = y;
+      this.vx = (Math.random() - 0.5) * 2;
+      this.vy = (Math.random() - 0.5) * 2;
+      this.life = 1.0;
+      this.decay = 0.003 + Math.random() * 0.004;
+      this.size = 30 + Math.random() * 80;
+      this.hue = hue;
+      this.sat = 70 + Math.random() * 30;
+      this.light = 50 + Math.random() * 20;
+      this.noiseScale = 0.003 + Math.random() * 0.002;
+      this.noiseSpeed = 0.3 + Math.random() * 0.3;
+      this.angle = Math.random() * Math.PI * 2;
+      this.spin = (Math.random() - 0.5) * 0.02;
     }
 
-    // Reset idle timer — return to drift after 3s of no mouse
+    update() {
+      // Curl noise for organic swirl motion
+      const c = curl(
+        this.x * this.noiseScale,
+        this.y * this.noiseScale,
+        time * this.noiseSpeed
+      );
+      this.vx += c.x * 0.8;
+      this.vy += c.y * 0.8;
+
+      // Gentle upward drift (smoke rises)
+      this.vy -= 0.03;
+
+      // Damping
+      this.vx *= 0.96;
+      this.vy *= 0.96;
+
+      this.x += this.vx;
+      this.y += this.vy;
+      this.angle += this.spin;
+      this.life -= this.decay;
+      this.size += 0.3; // slowly expand
+    }
+
+    draw() {
+      if (this.life <= 0) return;
+      const alpha = this.life * this.life * 0.4; // quadratic falloff for smoke
+      const s = this.size;
+
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
+      ctx.globalAlpha = alpha;
+      ctx.globalCompositeOperation = 'screen';
+
+      // Multi-layer gradient for wispy look
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, s);
+      g.addColorStop(0, `hsla(${this.hue}, ${this.sat}%, ${this.light}%, 0.6)`);
+      g.addColorStop(0.3, `hsla(${this.hue + 20}, ${this.sat}%, ${this.light - 10}%, 0.3)`);
+      g.addColorStop(0.6, `hsla(${this.hue + 40}, ${this.sat - 20}%, ${this.light - 20}%, 0.1)`);
+      g.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = g;
+
+      // Draw stretched ellipse for wispy tendrils
+      ctx.beginPath();
+      ctx.ellipse(0, 0, s, s * 0.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  // Emit particles near mouse
+  function emitParticles() {
+    const count = Math.min(Math.floor(mouseSpeed * 0.5 + 1), 6);
+    for (let i = 0; i < count; i++) {
+      if (particles.length >= MAX_PARTICLES) {
+        // Recycle oldest dead particle
+        const idx = particles.findIndex(p => p.life <= 0);
+        if (idx >= 0) {
+          particles[idx] = new SmokeParticle(
+            mx + (Math.random() - 0.5) * 40,
+            my + (Math.random() - 0.5) * 40,
+            hueOffset + Math.random() * 60
+          );
+        }
+      } else {
+        particles.push(new SmokeParticle(
+          mx + (Math.random() - 0.5) * 40,
+          my + (Math.random() - 0.5) * 40,
+          hueOffset + Math.random() * 60
+        ));
+      }
+    }
+  }
+
+  // Also emit ambient particles when idle
+  function emitAmbient() {
+    if (particles.length >= MAX_PARTICLES) return;
+    particles.push(new SmokeParticle(
+      Math.random() * W,
+      Math.random() * H,
+      hueOffset + Math.random() * 120
+    ));
+  }
+
+  // ── Mouse tracking ──
+  let fadeTimer = null;
+  window.addEventListener('mousemove', (e) => {
+    pmx = mx; pmy = my;
+    mx = e.clientX; my = e.clientY;
+    mouseSpeed = Math.hypot(mx - pmx, my - pmy);
+    mouseActive = true;
     clearTimeout(fadeTimer);
-    fadeTimer = setTimeout(() => {
-      mouseActive = false;
-      aurora.classList.remove('tracking');
-    }, 3000);
+    fadeTimer = setTimeout(() => { mouseActive = false; }, 2000);
   }, { passive: true });
 
-  // Also track scroll offset for orb positions
-  let scrollY = window.scrollY;
-  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
-
-  // Rainbow hue slowly cycles
-  function tick() {
-    hueShift += 0.3;
-
-    for (let i = 0; i < orbs.length; i++) {
-      if (!orbs[i]) continue;
-
-      if (mouseActive) {
-        // Lerp toward mouse + offset
-        const tx = mx + offsets[i].x;
-        const ty = my + offsets[i].y + scrollY;
-        pos[i].x += (tx - pos[i].x) * speeds[i];
-        pos[i].y += (ty - pos[i].y) * speeds[i];
-      }
-
-      // Update position — center the orb on its position
-      const ox = pos[i].x - (orbs[i].offsetWidth / 2);
-      const oy = pos[i].y - scrollY - (orbs[i].offsetHeight / 2);
-      orbs[i].style.transform = `translate(${ox}px, ${oy}px)`;
-
-      // Rainbow hue shift
-      const hue = (hueBase[i] + hueShift) % 360;
-      const alpha = [0.35, 0.3, 0.28, 0.25][i];
-      orbs[i].style.background = `radial-gradient(circle, hsla(${hue},80%,60%,${alpha}) 0%, hsla(${hue},80%,60%,0) 70%)`;
-    }
-
-    requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
-
-  // On touch devices, track touch instead
   window.addEventListener('touchmove', (e) => {
     const t = e.touches[0];
-    mx = t.clientX;
-    my = t.clientY;
-    if (!mouseActive) {
-      mouseActive = true;
-      aurora.classList.add('tracking', 'active');
-    }
+    pmx = mx; pmy = my;
+    mx = t.clientX; my = t.clientY;
+    mouseSpeed = Math.hypot(mx - pmx, my - pmy);
+    mouseActive = true;
     clearTimeout(fadeTimer);
-    fadeTimer = setTimeout(() => {
-      mouseActive = false;
-      aurora.classList.remove('tracking');
-    }, 3000);
+    fadeTimer = setTimeout(() => { mouseActive = false; }, 2000);
   }, { passive: true });
+
+  // ── Render Loop ──
+  let frameCount = 0;
+  function render() {
+    time += 0.01;
+    hueOffset += 0.4; // slowly cycle rainbow
+    frameCount++;
+
+    // Fade the canvas (creates trail effect)
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(7, 9, 13, 0.06)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Emit
+    if (mouseActive && mouseSpeed > 1) {
+      emitParticles();
+    }
+    // Ambient emission every ~20 frames
+    if (frameCount % 20 === 0) emitAmbient();
+
+    // Update and draw
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+
+    // Clean up dead particles periodically
+    if (frameCount % 120 === 0) {
+      for (let i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].life <= 0) particles.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  // Initial ambient particles
+  for (let i = 0; i < 15; i++) emitAmbient();
+  render();
 })();

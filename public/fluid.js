@@ -41,14 +41,12 @@
   };
 
   function pointerPrototype() {
-    this.texcoordX = 0;
-    this.texcoordY = 0;
-    this.prevTexcoordX = 0;
-    this.prevTexcoordY = 0;
-    this.deltaX = 0;
-    this.deltaY = 0;
+    this.x = 0;
+    this.y = 0;
+    this.prevX = 0;
+    this.prevY = 0;
     this.moved = false;
-    this.color = [30, 0, 300];
+    this.down = true;
   }
 
   let pointers = [new pointerPrototype()];
@@ -488,7 +486,6 @@
 
   // ── Simulation Loop ──
   let lastUpdateTime = Date.now();
-  let colorUpdateTimer = 0.0;
 
   function update() {
     let dt = calcDeltaTime();
@@ -509,10 +506,7 @@
   }
 
   function updateColors(dt) {
-    colorUpdateTimer += dt * config.COLOR_UPDATE_SPEED;
-    pointers.forEach(p => {
-      p.color = HSVtoRGB(colorUpdateTimer % 1, 1.0, 1.0);
-    });
+    // Colors are assigned per-splat (random hue), not per-frame
   }
 
   function applyInputs() {
@@ -601,8 +595,8 @@
     splatProgram.bind();
     gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
     gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
-    gl.uniform2f(splatProgram.uniforms.point, x, y);
-    gl.uniform3f(splatProgram.uniforms.color, dx, dy, 0.0);
+    gl.uniform2f(splatProgram.uniforms.point, x / canvas.width, 1.0 - y / canvas.height);
+    gl.uniform3f(splatProgram.uniforms.color, dx, -dy, 1.0);
     gl.uniform1f(splatProgram.uniforms.radius, correctRadius(config.SPLAT_RADIUS / 100.0));
     blit(velocity.write);
     velocity.swap();
@@ -614,13 +608,15 @@
   }
 
   function splatPointer(pointer) {
-    let dx = pointer.deltaX * config.SPLAT_FORCE;
-    let dy = pointer.deltaY * config.SPLAT_FORCE;
-    splat(pointer.texcoordX, pointer.texcoordY, dx, dy, {
-      r: pointer.color[0] * 0.08,
-      g: pointer.color[1] * 0.08,
-      b: pointer.color[2] * 0.08
-    });
+    let dx = 5 * (pointer.x - pointer.prevX);
+    let dy = 5 * (pointer.y - pointer.prevY);
+    let color = generateColor();
+    splat(pointer.x, pointer.y, dx, dy, color);
+  }
+
+  function generateColor() {
+    let c = HSVtoRGB(Math.random(), 1.0, 1.0);
+    return { r: c[0] * 0.15, g: c[1] * 0.15, b: c[2] * 0.15 };
   }
 
   function correctRadius(radius) {
@@ -648,10 +644,14 @@
   }
 
   // ── Input Events ──
+  pointers[0].down = true;
+
   window.addEventListener('mousemove', e => {
-    let posX = scaleByPixelRatio(e.clientX);
-    let posY = scaleByPixelRatio(e.clientY);
-    updatePointerMoveData(pointers[0], posX, posY);
+    pointers[0].moved = pointers[0].down;
+    pointers[0].prevX = pointers[0].x;
+    pointers[0].prevY = pointers[0].y;
+    pointers[0].x = e.clientX;
+    pointers[0].y = e.clientY;
   }, { passive: true });
 
   window.addEventListener('touchmove', e => {
@@ -659,33 +659,13 @@
     while (pointers.length > touches.length) pointers.pop();
     while (pointers.length < touches.length) pointers.push(new pointerPrototype());
     for (let i = 0; i < touches.length; i++) {
-      let posX = scaleByPixelRatio(touches[i].clientX);
-      let posY = scaleByPixelRatio(touches[i].clientY);
-      updatePointerMoveData(pointers[i], posX, posY);
+      pointers[i].moved = pointers[i].down;
+      pointers[i].prevX = pointers[i].x;
+      pointers[i].prevY = pointers[i].y;
+      pointers[i].x = touches[i].clientX;
+      pointers[i].y = touches[i].clientY;
     }
   }, { passive: true });
-
-  function updatePointerMoveData(pointer, posX, posY) {
-    pointer.prevTexcoordX = pointer.texcoordX;
-    pointer.prevTexcoordY = pointer.texcoordY;
-    pointer.texcoordX = posX / canvas.width;
-    pointer.texcoordY = 1.0 - posY / canvas.height;
-    pointer.deltaX = correctDeltaX(pointer.texcoordX - pointer.prevTexcoordX);
-    pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
-    pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
-  }
-
-  function correctDeltaX(delta) {
-    let aspectRatio = canvas.width / canvas.height;
-    if (aspectRatio < 1) delta *= aspectRatio;
-    return delta;
-  }
-
-  function correctDeltaY(delta) {
-    let aspectRatio = canvas.width / canvas.height;
-    if (aspectRatio > 1) delta /= aspectRatio;
-    return delta;
-  }
 
   // ── Resize ──
   window.addEventListener('resize', () => {

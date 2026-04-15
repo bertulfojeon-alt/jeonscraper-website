@@ -281,6 +281,93 @@ img { max-width: 100%; }
 .tag-risk { font-size: 8px; padding: 2px 8px; border-radius: 4px; background: var(--pink-dim); color: var(--pink); font-weight: 700; font-family: var(--mono); }
 .tag-opp { font-size: 8px; padding: 2px 8px; border-radius: 4px; background: var(--blue-dim); color: var(--blue); font-weight: 700; font-family: var(--mono); }
 
+/* ── HERO CAROUSEL ── */
+.hero-carousel {
+  width: 100%; max-width: 860px; margin: 0 auto; position: relative;
+  border-radius: var(--radius-xl); overflow: hidden;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow-lg), var(--shadow-glow), 0 0 80px rgba(124,58,237,0.08);
+  background: var(--bg2);
+}
+.hc-window { overflow: hidden; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+.hc-track {
+  display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hc-slide { min-width: 100%; }
+.hc-slide img {
+  width: 100%; height: auto; display: block;
+  object-fit: cover;
+}
+.hc-controls {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 14px 20px; background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.hc-btn {
+  width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--surface2); border: 1px solid var(--border2); cursor: pointer;
+  color: var(--text2); transition: var(--transition);
+}
+.hc-btn:hover { background: var(--purple-dim); border-color: var(--purple); color: var(--purple-light); transform: scale(1.1); }
+.hc-btn svg { width: 18px; height: 18px; }
+.hc-dots { display: flex; gap: 8px; }
+.hc-dot {
+  width: 10px; height: 10px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--surface3); transition: var(--transition);
+}
+.hc-dot.active { background: var(--purple); box-shadow: 0 0 10px rgba(124,58,237,0.5); transform: scale(1.2); }
+.hc-dot:hover { background: var(--purple-light); }
+.hc-label {
+  text-align: center; padding: 10px; font-size: 12px; font-family: var(--mono);
+  color: var(--text3); background: var(--surface); letter-spacing: 0.04em;
+  border-top: 1px solid var(--border);
+}
+
+/* ── SHOWCASE SECTION ── */
+.section-showcase { background: var(--bg2); }
+.showcase-tabs {
+  display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;
+}
+.sc-tab {
+  padding: 10px 20px; border-radius: 100px; font-size: 13px; font-weight: 600;
+  background: var(--surface); border: 1px solid var(--border); color: var(--text3);
+  cursor: pointer; transition: var(--transition); font-family: var(--font);
+}
+.sc-tab:hover { border-color: var(--border2); color: var(--text2); }
+.sc-tab.active {
+  background: var(--purple-dim); border-color: var(--purple); color: var(--purple-light);
+  box-shadow: 0 0 20px rgba(124,58,237,0.15);
+}
+
+.showcase-viewer {
+  max-width: 960px; margin: 0 auto;
+  border-radius: var(--radius-xl); overflow: hidden;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow-lg), 0 0 100px rgba(124,58,237,0.06);
+  background: var(--surface);
+}
+.sc-screen {
+  overflow: hidden; position: relative;
+  background: var(--bg3);
+}
+.sc-img {
+  width: 100%; height: auto; display: block;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.sc-img.switching { opacity: 0; transform: scale(0.98); }
+
+.sc-info {
+  padding: 24px 32px; display: flex; align-items: flex-start; gap: 16px;
+  border-top: 1px solid var(--border);
+}
+.sc-info-tag {
+  padding: 4px 12px; border-radius: 100px; font-size: 10px; font-weight: 700;
+  font-family: var(--mono); background: var(--purple-dim); color: var(--purple-light);
+  letter-spacing: 0.08em; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+}
+.sc-info-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.sc-info-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
 /* Scroll indicator */
 .scroll-indicator {
   position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -634,7 +721,11 @@ img { max-width: 100%; }
   .hero-sub { font-size: 15px; }
   .hero-stats { gap: 16px; }
   .hero-stat-val { font-size: 24px; }
-  .hero-mockup { display: none; }
+  .hero-carousel { border-radius: var(--radius); }
+  .hc-window { border-radius: var(--radius) var(--radius) 0 0; }
+  .sc-info { flex-direction: column; padding: 16px 20px; }
+  .showcase-tabs { gap: 4px; }
+  .sc-tab { padding: 8px 14px; font-size: 11px; }
   .hero-ctas { flex-direction: column; align-items: center; }
 
   .section { padding: 80px 0; }

@@ -161,19 +161,72 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// ── TILT on hero mockup ──
-const mockup = document.querySelector('.hero-mockup');
-if (mockup && window.innerWidth > 768) {
-  mockup.addEventListener('mousemove', (e) => {
-    const rect = mockup.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mockup.style.transform = `rotateX(${-y * 6}deg) rotateY(${x * 6}deg) scale(1.01)`;
-  });
-  mockup.addEventListener('mouseleave', () => {
-    mockup.style.transform = 'rotateX(2deg)';
-  });
+// ── HERO CAROUSEL ──
+let heroSlide = 0;
+const heroLabels = [
+  'War Room — Briefing Dashboard',
+  'War Room — Product Matrix',
+  'War Room — Price Intelligence',
+  'War Room — Opportunities',
+  'Scrape Page — Enter Any Store URL'
+];
+const heroTotal = heroLabels.length;
+let heroAutoTimer = null;
+
+function heroGoTo(idx) {
+  heroSlide = ((idx % heroTotal) + heroTotal) % heroTotal;
+  const track = document.getElementById('hc-track');
+  if (track) track.style.transform = `translateX(-${heroSlide * 100}%)`;
+  document.querySelectorAll('.hc-dot').forEach((d, i) => d.classList.toggle('active', i === heroSlide));
+  const label = document.getElementById('hc-label');
+  if (label) label.textContent = heroLabels[heroSlide];
+  resetHeroAuto();
 }
+
+window.heroGoTo = heroGoTo;
+window.heroCarousel = function(dir) { heroGoTo(heroSlide + dir); };
+
+function resetHeroAuto() {
+  if (heroAutoTimer) clearInterval(heroAutoTimer);
+  heroAutoTimer = setInterval(() => heroGoTo(heroSlide + 1), 5000);
+}
+resetHeroAuto();
+
+// Touch swipe for carousel
+const hcWindow = document.querySelector('.hc-window');
+if (hcWindow) {
+  let touchStartX = 0;
+  hcWindow.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  hcWindow.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) heroGoTo(heroSlide + (diff > 0 ? 1 : -1));
+  }, { passive: true });
+}
+
+// ── SHOWCASE TABS ──
+const showcaseData = [
+  { img: 'img/warroom-briefing.png', title: 'Briefing Dashboard', desc: 'Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance. Instantly spot order opportunities and price risks.' },
+  { img: 'img/warroom-matrix.png', title: 'Product Matrix', desc: 'Every product mapped across every store. See who sells what, at what price, and with what action tags — ORDER OPPORTUNITY, PRICE ADVANTAGE, PRICE RISK, MY EXCLUSIVE, COMPETITOR EXCLUSIVE.' },
+  { img: 'img/warroom-price.png', title: 'Price Intelligence', desc: 'Side-by-side pricing for all shared products. See the price gap percentage between you and competitors, margin calculations against suppliers, and identify where you are overpriced or underpriced.' },
+  { img: 'img/warroom-category.png', title: 'Category Intelligence', desc: 'Category distribution breakdown per store. Instantly see which product categories competitors invest in that you are missing, and which categories you dominate.' },
+  { img: 'img/warroom-brand.png', title: 'Brand Intelligence', desc: 'Brand overlap matrix showing which vendors/brands each store carries. Find exclusive brands, trending vendors, and identify sourcing gaps in your catalog.' },
+  { img: 'img/warroom-opportunities.png', title: 'Actionable Opportunities', desc: 'Priority-ranked intelligence cards: ORDER opportunities (competitors sell it, suppliers have it, you don\'t), PRICE RISKS (competitors undercut you), ADVANTAGES (you are cheaper), and UNTAPPED products.' }
+];
+
+window.switchShowcase = function(idx) {
+  const data = showcaseData[idx];
+  document.querySelectorAll('.sc-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+
+  const img = document.getElementById('sc-img');
+  img.classList.add('switching');
+  setTimeout(() => {
+    img.src = data.img;
+    img.alt = data.title;
+    document.getElementById('sc-info-title').textContent = data.title;
+    document.getElementById('sc-info-desc').textContent = data.desc;
+    img.classList.remove('switching');
+  }, 300);
+};
 
 // ── PRICING CARD HOVER GLOW ──
 document.querySelectorAll('.pricing-card').forEach(card => {

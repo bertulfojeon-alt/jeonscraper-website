@@ -82,42 +82,42 @@
     </div>
   </div>
   <div class="hero-visual anim-fade" data-delay="300">
-    <div class="hero-mockup">
-      <div class="mockup-bar">
-        <div class="mockup-dots"><span></span><span></span><span></span></div>
-        <div class="mockup-title">JeonScraper — War Room</div>
-      </div>
-      <div class="mockup-body">
-        <div class="mockup-sidebar">
-          <div class="ms-item active">Dashboard</div>
-          <div class="ms-item">Scrape</div>
-          <div class="ms-item glow">War Room</div>
-          <div class="ms-item">Watchlist</div>
-          <div class="ms-item">Alerts</div>
-        </div>
-        <div class="mockup-content">
-          <div class="mc-header">
-            <div class="mc-title">Q2 Competitor Analysis</div>
-            <div class="mc-chips">
-              <span class="mc-chip green">My Store</span>
-              <span class="mc-chip pink">Competitor A</span>
-              <span class="mc-chip blue">Supplier</span>
-            </div>
+    <div class="hero-carousel" id="hero-carousel">
+      <div class="hc-window">
+        <div class="hc-track" id="hc-track">
+          <div class="hc-slide">
+            <img src="img/warroom-briefing.png" alt="War Room Briefing — competitive intelligence dashboard">
           </div>
-          <div class="mc-stats">
-            <div class="mc-stat"><div class="mc-stat-val">3</div><div class="mc-stat-lbl">Stores</div></div>
-            <div class="mc-stat"><div class="mc-stat-val">847</div><div class="mc-stat-lbl">Products</div></div>
-            <div class="mc-stat"><div class="mc-stat-val">23%</div><div class="mc-stat-lbl">Overlap</div></div>
-            <div class="mc-stat"><div class="mc-stat-val">12</div><div class="mc-stat-lbl">Opportunities</div></div>
+          <div class="hc-slide">
+            <img src="img/warroom-matrix.png" alt="Product Matrix — cross-store product comparison">
           </div>
-          <div class="mc-table">
-            <div class="mc-row mc-row-head"><span>Product</span><span>My Price</span><span>Competitor</span><span>Tag</span></div>
-            <div class="mc-row"><span>Classic T-Shirt</span><span class="green">$29.99</span><span class="pink">$34.99</span><span class="tag-adv">ADVANTAGE</span></div>
-            <div class="mc-row"><span>Leather Wallet</span><span class="green">$49.95</span><span class="pink">$42.00</span><span class="tag-risk">RISK</span></div>
-            <div class="mc-row"><span>Canvas Bag</span><span class="dim">—</span><span class="pink">$24.99</span><span class="tag-opp">OPPORTUNITY</span></div>
+          <div class="hc-slide">
+            <img src="img/warroom-price.png" alt="Price Intel — price gap and margin analysis">
+          </div>
+          <div class="hc-slide">
+            <img src="img/warroom-opportunities.png" alt="Opportunities — actionable intelligence">
+          </div>
+          <div class="hc-slide">
+            <img src="img/scrape-page.png" alt="Scrape page — enter any Shopify store URL">
           </div>
         </div>
       </div>
+      <div class="hc-controls">
+        <button class="hc-btn" onclick="heroCarousel(-1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="hc-dots" id="hc-dots">
+          <button class="hc-dot active" onclick="heroGoTo(0)"></button>
+          <button class="hc-dot" onclick="heroGoTo(1)"></button>
+          <button class="hc-dot" onclick="heroGoTo(2)"></button>
+          <button class="hc-dot" onclick="heroGoTo(3)"></button>
+          <button class="hc-dot" onclick="heroGoTo(4)"></button>
+        </div>
+        <button class="hc-btn" onclick="heroCarousel(1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="hc-label" id="hc-label">War Room — Briefing Dashboard</div>
     </div>
   </div>
   <div class="scroll-indicator">
@@ -239,6 +239,37 @@
         </ul>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ── SHOWCASE ── -->
+<section class="section section-showcase" id="showcase">
+  <div class="container">
+    <div class="section-label anim-slide-up">See It In Action</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      Real Reports. <span class="gradient-text">Real Intelligence.</span>
+    </h2>
+    <p class="section-sub anim-slide-up" data-delay="150">Every report is generated from our proprietary intelligence engine. Here's what you actually receive.</p>
+
+    <div class="showcase-tabs anim-slide-up" data-delay="200">
+      <button class="sc-tab active" onclick="switchShowcase(0)">Briefing</button>
+      <button class="sc-tab" onclick="switchShowcase(1)">Product Matrix</button>
+      <button class="sc-tab" onclick="switchShowcase(2)">Price Intel</button>
+      <button class="sc-tab" onclick="switchShowcase(3)">Category Intel</button>
+      <button class="sc-tab" onclick="switchShowcase(4)">Brand Intel</button>
+      <button class="sc-tab" onclick="switchShowcase(5)">Opportunities</button>
+    </div>
+
+    <div class="showcase-viewer anim-scale" data-delay="250">
+      <div class="sc-screen" id="sc-screen">
+        <img src="img/warroom-briefing.png" alt="War Room Briefing" id="sc-img" class="sc-img">
+      </div>
+      <div class="sc-info" id="sc-info">
+        <div class="sc-info-tag">WAR ROOM</div>
+        <h3 class="sc-info-title" id="sc-info-title">Briefing Dashboard</h3>
+        <p class="sc-info-desc" id="sc-info-desc">Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance. Instantly spot order opportunities and price risks.</p>
+      </div>
     </div>
   </div>
 </section>

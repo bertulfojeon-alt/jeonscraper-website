@@ -36,7 +36,7 @@
     CURL: 5,
     SPLAT_RADIUS: 0.6,
     SPLAT_FORCE: 6000,
-    COLOR_UPDATE_SPEED: 10,
+    COLOR_UPDATE_SPEED: 3,
     TRANSPARENT: true,
   };
 
@@ -617,9 +617,9 @@
     let dx = pointer.deltaX * config.SPLAT_FORCE;
     let dy = pointer.deltaY * config.SPLAT_FORCE;
     splat(pointer.texcoordX, pointer.texcoordY, dx, dy, {
-      r: pointer.color[0] * 0.3,
-      g: pointer.color[1] * 0.3,
-      b: pointer.color[2] * 0.3
+      r: pointer.color[0] * 0.08,
+      g: pointer.color[1] * 0.08,
+      b: pointer.color[2] * 0.08
     });
   }
 

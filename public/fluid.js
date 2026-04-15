@@ -9,8 +9,9 @@
   if (!canvas) return;
 
   function resize() {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    let dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(canvas.clientWidth * dpr);
+    canvas.height = Math.floor(canvas.clientHeight * dpr);
   }
   resize();
   window.addEventListener('resize', resize);
@@ -71,7 +72,7 @@
       supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
     }
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearColor(0.0, 0.0, 0.0, 0.0);
     const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : (halfFloat ? halfFloat.HALF_FLOAT_OES : null);
     if (!halfFloatTexType) return { gl: null, ext: {} };
 
@@ -587,6 +588,12 @@
   }
 
   function render(target) {
+    if (target == null) {
+      // Clear screen to transparent before drawing
+      gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+    }
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.enable(gl.BLEND);
     displayProgram.bind();

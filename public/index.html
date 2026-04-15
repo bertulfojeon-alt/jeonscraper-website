@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JeonScraper — Shopify Competitive Intelligence Service</title>
+<meta name="description" content="Know exactly what your competitors sell, at what price, before they do. Shopify intelligence reports delivered to your inbox.">
+<meta name="theme-color" content="#0B0F14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" fill="url(#lg)"/><path d="M10 16l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F8EF7"/></linearGradient></defs></svg>
+      </div>
+      <span>JeonScraper</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#pricing" class="btn-nav-cta">Start Free Trial</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-particles" id="hero-particles"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-badge anim-fade" data-delay="0">
+      <span class="badge-dot"></span>
+      Trusted by 50+ Shopify Store Owners
+    </div>
+    <h1 class="hero-title anim-fade" data-delay="100">
+      Know What Your<br>
+      <span class="gradient-text">Competitors Sell</span><br>
+      Before They Do
+    </h1>
+    <p class="hero-sub anim-fade" data-delay="200">
+      Get professional competitive intelligence reports delivered to your inbox.<br>
+      Product scrapes, price monitoring, market analysis — all done for you.
+    </p>
+    <div class="hero-ctas anim-fade" data-delay="300">
+      <a href="#pricing" class="btn-primary btn-glow">
+        <span>Start Free Trial</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#features" class="btn-secondary">
+        <span>See Features</span>
+      </a>
+    </div>
+    <div class="hero-stats anim-fade" data-delay="400">
+      <div class="hero-stat">
+        <div class="hero-stat-val" data-count="10000">0</div>
+        <div class="hero-stat-label">Products Scraped</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" data-count="200">0</div>
+        <div class="hero-stat-label">Stores Analyzed</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" data-count="99">0</div>
+        <div class="hero-stat-label">% Data Accuracy</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual anim-fade" data-delay="300">
+    <div class="hero-mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-title">JeonScraper — War Room</div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div class="ms-item active">Dashboard</div>
+          <div class="ms-item">Scrape</div>
+          <div class="ms-item glow">War Room</div>
+          <div class="ms-item">Watchlist</div>
+          <div class="ms-item">Alerts</div>
+        </div>
+        <div class="mockup-content">
+          <div class="mc-header">
+            <div class="mc-title">Q2 Competitor Analysis</div>
+            <div class="mc-chips">
+              <span class="mc-chip green">My Store</span>
+              <span class="mc-chip pink">Competitor A</span>
+              <span class="mc-chip blue">Supplier</span>
+            </div>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-stat"><div class="mc-stat-val">3</div><div class="mc-stat-lbl">Stores</div></div>
+            <div class="mc-stat"><div class="mc-stat-val">847</div><div class="mc-stat-lbl">Products</div></div>
+            <div class="mc-stat"><div class="mc-stat-val">23%</div><div class="mc-stat-lbl">Overlap</div></div>
+            <div class="mc-stat"><div class="mc-stat-val">12</div><div class="mc-stat-lbl">Opportunities</div></div>
+          </div>
+          <div class="mc-table">
+            <div class="mc-row mc-row-head"><span>Product</span><span>My Price</span><span>Competitor</span><span>Tag</span></div>
+            <div class="mc-row"><span>Classic T-Shirt</span><span class="green">$29.99</span><span class="pink">$34.99</span><span class="tag-adv">ADVANTAGE</span></div>
+            <div class="mc-row"><span>Leather Wallet</span><span class="green">$49.95</span><span class="pink">$42.00</span><span class="tag-risk">RISK</span></div>
+            <div class="mc-row"><span>Canvas Bag</span><span class="dim">—</span><span class="pink">$24.99</span><span class="tag-opp">OPPORTUNITY</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ── PAIN POINTS ── -->
+<section class="section section-problems" id="problems">
+  <div class="container">
+    <div class="section-label anim-slide-up">The Problem</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      You're Flying Blind Against<br><span class="gradient-text">Your Competitors</span>
+    </h2>
+    <div class="problems-grid">
+      <div class="problem-card anim-slide-up" data-delay="100">
+        <div class="problem-icon">🔍</div>
+        <h3>Hours of Manual Research</h3>
+        <p>Checking competitor stores one by one, copy-pasting prices into spreadsheets. Your VA takes days for what we do in minutes.</p>
+      </div>
+      <div class="problem-card anim-slide-up" data-delay="200">
+        <div class="problem-icon">💸</div>
+        <h3>Losing Sales to Wrong Pricing</h3>
+        <p>You don't know when competitors drop prices. By the time you notice, customers already left for cheaper options.</p>
+      </div>
+      <div class="problem-card anim-slide-up" data-delay="300">
+        <div class="problem-icon">🕳️</div>
+        <h3>Missing Product Opportunities</h3>
+        <p>Competitors sell products you don't even know about. Every day without that data is revenue left on the table.</p>
+      </div>
+      <div class="problem-card anim-slide-up" data-delay="400">
+        <div class="problem-icon">📊</div>
+        <h3>No Market Intelligence</h3>
+        <p>No idea which brands are trending, which categories are growing, or what your competitors are doing differently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section section-features" id="features">
+  <div class="container">
+    <div class="section-label anim-slide-up">What You Get</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      Everything You Need to<br><span class="gradient-text">Dominate Your Niche</span>
+    </h2>
+    <div class="features-grid">
+
+      <div class="feature-card anim-scale" data-delay="0">
+        <div class="feature-glow"></div>
+        <div class="feature-icon-wrap"><div class="feature-icon">🛍️</div></div>
+        <h3>Product Scraping</h3>
+        <p>Full product catalogs from any Shopify store — names, prices, images, variants, vendors, tags. Delivered as Shopify-ready CSV or professional Excel reports.</p>
+        <ul class="feature-list">
+          <li>Unlimited products per store</li>
+          <li>CSV ready for Shopify import</li>
+          <li>Multi-store in one report</li>
+        </ul>
+      </div>
+
+      <div class="feature-card anim-scale" data-delay="100">
+        <div class="feature-glow"></div>
+        <div class="feature-icon-wrap"><div class="feature-icon">⚔️</div></div>
+        <h3>War Room Intelligence</h3>
+        <p>Military-grade competitive analysis. Compare your store against competitors and suppliers. Find pricing gaps, product overlaps, and sourcing opportunities.</p>
+        <ul class="feature-list">
+          <li>Product matrix comparison</li>
+          <li>Price advantage/risk detection</li>
+          <li>Actionable opportunities list</li>
+        </ul>
+      </div>
+
+      <div class="feature-card anim-scale" data-delay="200">
+        <div class="feature-glow"></div>
+        <div class="feature-icon-wrap"><div class="feature-icon">💰</div></div>
+        <h3>Price Monitoring</h3>
+        <p>Weekly or daily price tracking across competitors. Get alerted when prices change, products go on sale, or new discounts appear.</p>
+        <ul class="feature-list">
+          <li>Price change alerts</li>
+          <li>Discount & sale tracking</li>
+          <li>Historical price data</li>
+        </ul>
+      </div>
+
+      <div class="feature-card anim-scale" data-delay="0">
+        <div class="feature-glow"></div>
+        <div class="feature-icon-wrap"><div class="feature-icon">🔄</div></div>
+        <h3>New & Removed Detection</h3>
+        <p>Know when competitors add new products or discontinue old ones. Stay ahead of market trends before they become obvious.</p>
+        <ul class="feature-list">
+          <li>New product alerts</li>
+          <li>Discontinued product tracking</li>
+          <li>Trend identification</li>
+        </ul>
+      </div>
+
+      <div class="feature-card anim-scale" data-delay="100">
+        <div class="feature-glow"></div>
+        <div class="feature-icon-wrap"><div class="feature-icon">🏪</div></div>
+        <h3>Store Intelligence</h3>
+        <p>Full audit of any Shopify store — theme, apps, tracking pixels, payment methods, social links, chat widgets, and 15+ feature detections.</p>
+        <ul class="feature-list">
+          <li>App & theme detection</li>
+          <li>Tech stack analysis</li>
+          <li>Feature gap finder</li>
+        </ul>
+      </div>
+
+      <div class="feature-card anim-scale" data-delay="200">
+        <div class="feature-glow"></div>
+        <div class="feature-icon-wrap"><div class="feature-icon">📈</div></div>
+        <h3>Market Research</h3>
+        <p>Understand your entire niche. Trending products, category gaps, brand analysis, vendor cleanup, and bestseller detection across the market.</p>
+        <ul class="feature-list">
+          <li>Trending products report</li>
+          <li>Category & brand analysis</li>
+          <li>Vendor normalization</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPARISON BANNER ── -->
+<section class="section section-compare">
+  <div class="container">
+    <div class="compare-card anim-slide-up">
+      <div class="compare-header">
+        <h3>Why JeonScraper vs. Hiring a VA?</h3>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-label bad">Traditional VA</div>
+          <div class="compare-item"><span class="x-mark">✕</span> 2-5 days for 500 products</div>
+          <div class="compare-item"><span class="x-mark">✕</span> Human errors & missed products</div>
+          <div class="compare-item"><span class="x-mark">✕</span> $500-2,000/month</div>
+          <div class="compare-item"><span class="x-mark">✕</span> Can monitor 1-2 competitors</div>
+          <div class="compare-item"><span class="x-mark">✕</span> Basic spreadsheet reports</div>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-col">
+          <div class="compare-label good">JeonScraper</div>
+          <div class="compare-item"><span class="check-mark">✓</span> Same-day delivery</div>
+          <div class="compare-item"><span class="check-mark">✓</span> 100% data accuracy</div>
+          <div class="compare-item"><span class="check-mark">✓</span> Starting at $29/month</div>
+          <div class="compare-item"><span class="check-mark">✓</span> Monitor 10+ stores simultaneously</div>
+          <div class="compare-item"><span class="check-mark">✓</span> Professional War Room reports</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section section-how" id="how-it-works">
+  <div class="container">
+    <div class="section-label anim-slide-up">Simple Process</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      How It <span class="gradient-text">Works</span>
+    </h2>
+    <div class="steps">
+      <div class="step anim-slide-left" data-delay="0">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Tell Us Your Competitors</h3>
+          <p>Share the Shopify store URLs you want to monitor. Your store, your competitors, your suppliers — as many as your plan allows.</p>
+        </div>
+        <div class="step-visual">
+          <div class="step-mock">
+            <div class="sm-input">https://competitor-store.com</div>
+            <div class="sm-btn">ANALYZE</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-connector"><div class="step-line"></div></div>
+      <div class="step anim-slide-right" data-delay="100">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>We Scrape & Analyze</h3>
+          <p>Our intelligence engine scrapes every product, compares prices, detects changes, identifies opportunities, and builds your competitive matrix.</p>
+        </div>
+        <div class="step-visual">
+          <div class="step-mock processing">
+            <div class="sm-bar"><div class="sm-fill"></div></div>
+            <div class="sm-text">Analyzing 847 products...</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-connector"><div class="step-line"></div></div>
+      <div class="step anim-slide-left" data-delay="200">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Get Your Reports</h3>
+          <p>Receive professional Excel reports, Shopify-ready CSV files, and actionable intelligence — delivered to your inbox within 24 hours.</p>
+        </div>
+        <div class="step-visual">
+          <div class="step-mock">
+            <div class="sm-files">
+              <div class="sm-file"><span class="sm-ficon">📊</span> war_room_report.xlsx</div>
+              <div class="sm-file"><span class="sm-ficon">📦</span> shopify_import.csv</div>
+              <div class="sm-file"><span class="sm-ficon">📈</span> price_analysis.xlsx</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES SHOWCASE ── -->
+<section class="section section-services">
+  <div class="container">
+    <div class="section-label anim-slide-up">Service Catalog</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      60+ Services to <span class="gradient-text">Replace Your VA</span>
+    </h2>
+    <div class="services-scroll">
+      <div class="services-track">
+        <div class="service-pill">Product Scraping</div>
+        <div class="service-pill">Price Monitoring</div>
+        <div class="service-pill">Competitor Analysis</div>
+        <div class="service-pill">CSV Import Files</div>
+        <div class="service-pill">Store Audit</div>
+        <div class="service-pill">Discount Tracking</div>
+        <div class="service-pill">New Product Alerts</div>
+        <div class="service-pill">Market Research</div>
+        <div class="service-pill">Brand Analysis</div>
+        <div class="service-pill">Category Intel</div>
+        <div class="service-pill">Vendor Cleanup</div>
+        <div class="service-pill">Duplicate Finder</div>
+        <div class="service-pill">Bestseller Detection</div>
+        <div class="service-pill">Price Comparison</div>
+        <div class="service-pill">Supplier Discovery</div>
+        <div class="service-pill">Product Gap Report</div>
+        <div class="service-pill">Trending Products</div>
+        <div class="service-pill">Bulk Upload CSV</div>
+        <div class="service-pill">SEO Optimization</div>
+        <div class="service-pill">Weekly Digest</div>
+        <!-- Duplicate for seamless scroll -->
+        <div class="service-pill">Product Scraping</div>
+        <div class="service-pill">Price Monitoring</div>
+        <div class="service-pill">Competitor Analysis</div>
+        <div class="service-pill">CSV Import Files</div>
+        <div class="service-pill">Store Audit</div>
+        <div class="service-pill">Discount Tracking</div>
+        <div class="service-pill">New Product Alerts</div>
+        <div class="service-pill">Market Research</div>
+        <div class="service-pill">Brand Analysis</div>
+        <div class="service-pill">Category Intel</div>
+        <div class="service-pill">Vendor Cleanup</div>
+        <div class="service-pill">Duplicate Finder</div>
+        <div class="service-pill">Bestseller Detection</div>
+        <div class="service-pill">Price Comparison</div>
+        <div class="service-pill">Supplier Discovery</div>
+        <div class="service-pill">Product Gap Report</div>
+        <div class="service-pill">Trending Products</div>
+        <div class="service-pill">Bulk Upload CSV</div>
+        <div class="service-pill">SEO Optimization</div>
+        <div class="service-pill">Weekly Digest</div>
+      </div>
+    </div>
+    <div class="services-categories">
+      <div class="svc-cat anim-slide-up" data-delay="0">
+        <div class="svc-cat-num">15+</div>
+        <div class="svc-cat-name">Product Intelligence</div>
+        <div class="svc-cat-desc">Scraping, gap analysis, trending detection, duplicate finder, bestseller ranking</div>
+      </div>
+      <div class="svc-cat anim-slide-up" data-delay="100">
+        <div class="svc-cat-num">10+</div>
+        <div class="svc-cat-name">Pricing Intelligence</div>
+        <div class="svc-cat-desc">Price monitoring, sale tracking, margin calculator, MAP violation detection</div>
+      </div>
+      <div class="svc-cat anim-slide-up" data-delay="200">
+        <div class="svc-cat-num">12+</div>
+        <div class="svc-cat-name">Store Intelligence</div>
+        <div class="svc-cat-desc">Full store audits, tech stack, app detection, conversion optimization</div>
+      </div>
+      <div class="svc-cat anim-slide-up" data-delay="300">
+        <div class="svc-cat-num">10+</div>
+        <div class="svc-cat-name">Market Research</div>
+        <div class="svc-cat-desc">Niche discovery, category trends, brand analysis, regional markets</div>
+      </div>
+      <div class="svc-cat anim-slide-up" data-delay="400">
+        <div class="svc-cat-num">8+</div>
+        <div class="svc-cat-name">Catalog Management</div>
+        <div class="svc-cat-desc">Bulk uploads, price updates, vendor cleanup, collection planning</div>
+      </div>
+      <div class="svc-cat anim-slide-up" data-delay="500">
+        <div class="svc-cat-num">6+</div>
+        <div class="svc-cat-name">Ongoing Monitoring</div>
+        <div class="svc-cat-desc">Weekly digests, price alerts, stock alerts, monthly strategy reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section section-pricing" id="pricing">
+  <div class="container">
+    <div class="section-label anim-slide-up">Pricing</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      Choose Your <span class="gradient-text">Battle Plan</span>
+    </h2>
+    <p class="section-sub anim-slide-up" data-delay="150">Start with a free 3-day trial. No credit card required.</p>
+
+    <div class="pricing-grid">
+
+      <!-- SCOUT -->
+      <div class="pricing-card anim-slide-up" data-delay="100">
+        <div class="pricing-tier">Scout</div>
+        <div class="pricing-desc">For new store owners exploring the market</div>
+        <div class="pricing-price">
+          <span class="pricing-currency">$</span>
+          <span class="pricing-amount">29</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> 3 store scrapes/month</li>
+          <li><span class="pf-check">&#10003;</span> Up to 200 products/store</li>
+          <li><span class="pf-check">&#10003;</span> Shopify-ready CSV export</li>
+          <li><span class="pf-check">&#10003;</span> Excel product reports</li>
+          <li><span class="pf-check">&#10003;</span> 2 Store Intel audits</li>
+          <li><span class="pf-check">&#10003;</span> Sale & discount reports</li>
+          <li><span class="pf-check">&#10003;</span> 48-hour delivery</li>
+          <li class="pf-disabled"><span class="pf-x">&#10005;</span> War Room intelligence</li>
+          <li class="pf-disabled"><span class="pf-x">&#10005;</span> Weekly monitoring</li>
+          <li class="pf-disabled"><span class="pf-x">&#10005;</span> Priority support</li>
+        </ul>
+        <a href="#contact" class="btn-pricing">Start Free Trial</a>
+      </div>
+
+      <!-- OPERATOR -->
+      <div class="pricing-card popular anim-slide-up" data-delay="200">
+        <div class="pricing-popular-badge">Most Popular</div>
+        <div class="pricing-tier">Operator</div>
+        <div class="pricing-desc">For serious store owners who need an edge</div>
+        <div class="pricing-price">
+          <span class="pricing-currency">$</span>
+          <span class="pricing-amount">79</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> 10 store scrapes/month</li>
+          <li><span class="pf-check">&#10003;</span> Unlimited products/store</li>
+          <li><span class="pf-check">&#10003;</span> Shopify-ready CSV export</li>
+          <li><span class="pf-check">&#10003;</span> Professional Excel reports</li>
+          <li><span class="pf-check">&#10003;</span> 5 Store Intel audits</li>
+          <li><span class="pf-check">&#10003;</span> Full War Room intelligence</li>
+          <li><span class="pf-check">&#10003;</span> Price monitoring (3 stores)</li>
+          <li><span class="pf-check">&#10003;</span> Weekly competitor digest</li>
+          <li><span class="pf-check">&#10003;</span> New/removed product alerts</li>
+          <li><span class="pf-check">&#10003;</span> 24-hour delivery</li>
+        </ul>
+        <a href="#contact" class="btn-pricing btn-pricing-pop">Start Free Trial</a>
+      </div>
+
+      <!-- COMMANDER -->
+      <div class="pricing-card anim-slide-up" data-delay="300">
+        <div class="pricing-tier">Commander</div>
+        <div class="pricing-desc">Full intelligence operation for market leaders</div>
+        <div class="pricing-price">
+          <span class="pricing-currency">$</span>
+          <span class="pricing-amount">199</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="pf-check">&#10003;</span> Unlimited store scrapes</li>
+          <li><span class="pf-check">&#10003;</span> Unlimited products</li>
+          <li><span class="pf-check">&#10003;</span> Everything in Operator</li>
+          <li><span class="pf-check">&#10003;</span> Daily price monitoring</li>
+          <li><span class="pf-check">&#10003;</span> 10+ store monitoring</li>
+          <li><span class="pf-check">&#10003;</span> Monthly strategy report</li>
+          <li><span class="pf-check">&#10003;</span> Supplier discovery</li>
+          <li><span class="pf-check">&#10003;</span> Vendor cleanup service</li>
+          <li><span class="pf-check">&#10003;</span> White-label reports</li>
+          <li><span class="pf-check">&#10003;</span> Same-day priority delivery</li>
+        </ul>
+        <a href="#contact" class="btn-pricing">Start Free Trial</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section section-faq" id="faq">
+  <div class="container container-narrow">
+    <div class="section-label anim-slide-up">FAQ</div>
+    <h2 class="section-title anim-slide-up" data-delay="100">
+      Frequently Asked <span class="gradient-text">Questions</span>
+    </h2>
+    <div class="faq-list">
+      <div class="faq-item anim-slide-up" data-delay="0">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>What Shopify stores can you scrape?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Any public Shopify store. If the store has a /products.json endpoint (which 99% of Shopify stores do), we can scrape it. This includes stores on custom domains, .myshopify.com domains, and international stores with multiple regions.</p></div>
+      </div>
+      <div class="faq-item anim-slide-up" data-delay="50">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>What's included in the free trial?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>You get 3 days of access with: 1 competitor store scrape (up to 50 products), a basic CSV export, and 1 Store Intel report. This lets you see the quality of our data before committing.</p></div>
+      </div>
+      <div class="faq-item anim-slide-up" data-delay="100">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>How fast do I get my reports?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Scout plan: within 48 hours. Operator plan: within 24 hours. Commander plan: same-day delivery for most requests. Complex multi-store War Room reports may take up to 24 hours.</p></div>
+      </div>
+      <div class="faq-item anim-slide-up" data-delay="150">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I import the CSV directly into my Shopify store?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Yes! Our CSV exports follow Shopify's official 2024+ bulk import format exactly. All 37 columns are properly formatted — just go to Shopify Admin → Products → Import and upload the file.</p></div>
+      </div>
+      <div class="faq-item anim-slide-up" data-delay="200">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Is this legal?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Yes. We only scrape publicly available data from public-facing store pages. This is the same information any customer can see when browsing the store. We don't access private APIs, admin panels, or protected data.</p></div>
+      </div>
+      <div class="faq-item anim-slide-up" data-delay="250">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>What's the difference between this and a Shopify spy tool?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Spy tools give you raw data and leave you to figure it out. We deliver actionable intelligence — professional reports with analysis, opportunities highlighted, and Shopify-ready files. Think of us as your competitive intelligence team, not just a data dump.</p></div>
+      </div>
+      <div class="faq-item anim-slide-up" data-delay="300">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I cancel anytime?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><p>Absolutely. No contracts, no commitments. Cancel anytime from your account. You'll keep access until the end of your billing period.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="section section-cta" id="contact">
+  <div class="cta-bg"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <h2 class="cta-title anim-slide-up">
+      Ready to See What Your<br>Competitors Are Hiding?
+    </h2>
+    <p class="cta-sub anim-slide-up" data-delay="100">Start your free 3-day trial. Get your first competitor report today.</p>
+    <form class="cta-form anim-slide-up" data-delay="200" id="cta-form" onsubmit="handleSubmit(event)">
+      <div class="cta-inputs">
+        <input type="email" placeholder="Your email address" required id="cta-email" class="cta-input">
+        <input type="url" placeholder="Competitor store URL (optional)" id="cta-url" class="cta-input">
+      </div>
+      <button type="submit" class="btn-primary btn-glow btn-lg">
+        <span>Start Free Trial</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <p class="cta-note">Free 3-day trial — No credit card required</p>
+    </form>
+    <div class="cta-success" id="cta-success" style="display:none;">
+      <div class="cta-success-icon">✓</div>
+      <h3>You're In!</h3>
+      <p>Check your email — we'll send your first report within 24 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:12px;">
+          <div class="logo-icon">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" fill="url(#lg2)"/><path d="M10 16l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F8EF7"/></linearGradient></defs></svg>
+          </div>
+          <span>JeonScraper</span>
+        </div>
+        <p>Shopify competitive intelligence delivered as a service. Know more. Sell more.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Service</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="mailto:hello@jeonscraper.com">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 JeonScraper. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

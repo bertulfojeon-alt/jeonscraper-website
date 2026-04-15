@@ -48,47 +48,48 @@ const observer = new IntersectionObserver((entries) => {
 animElements.forEach(el => observer.observe(el));
 
 // ── ANIMATED COUNTERS ──
-const counterElements = document.querySelectorAll('[data-count]');
-let countersAnimated = false;
-
+// Animate any [data-count] element when it scrolls into view
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting && !countersAnimated) {
-      countersAnimated = true;
-      animateCounters();
+    if (entry.isIntersecting && !entry.target._counted) {
+      entry.target._counted = true;
+      animateCounter(entry.target);
       counterObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.5 });
 
-counterElements.forEach(el => counterObserver.observe(el));
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-function animateCounters() {
-  counterElements.forEach(el => {
-    const target = parseInt(el.dataset.count);
-    const duration = 2000;
-    const start = performance.now();
-    const suffix = el.closest('.hero-stat')?.querySelector('.hero-stat-label')?.textContent.includes('%') ? '%' : '+';
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const duration = 2000;
+  const start = performance.now();
+  // Detect suffix based on context
+  const isHeroStat = !!el.closest('.hero-stat');
+  const isSvcCard = !!el.closest('.svc-card');
+  const heroLabel = el.closest('.hero-stat')?.querySelector('.hero-stat-label')?.textContent || '';
+  const suffix = heroLabel.includes('%') ? '%' : '+';
 
-    function update(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * target);
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
 
-      if (target >= 1000) {
-        el.textContent = current.toLocaleString() + (progress >= 1 ? '+' : '');
-      } else if (suffix === '%') {
-        el.textContent = current + '%';
-      } else {
-        el.textContent = current.toLocaleString() + (progress >= 1 ? '+' : '');
-      }
-
-      if (progress < 1) requestAnimationFrame(update);
+    if (isSvcCard) {
+      el.textContent = current + (progress >= 1 ? '+' : '');
+    } else if (target >= 1000) {
+      el.textContent = current.toLocaleString() + (progress >= 1 ? '+' : '');
+    } else if (suffix === '%') {
+      el.textContent = current + '%';
+    } else {
+      el.textContent = current.toLocaleString() + (progress >= 1 ? '+' : '');
     }
-    requestAnimationFrame(update);
-  });
+
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
 }
 
 // ── HERO PARTICLES ──
@@ -330,10 +331,117 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     card.style.background = `radial-gradient(circle 200px at ${x}px ${y}px, rgba(124,58,237,0.06), var(--surface) 70%)`;
   });
   card.addEventListener('mouseleave', () => {
-    if (!card.classList.contains('popular')) {
-      card.style.background = '';
-    } else {
-      card.style.background = '';
-    }
+    card.style.background = '';
   });
 });
+
+// ══════════════════════════════════════════════════════════════════════════════
+//  AURORA — Rainbow Smoke Mouse Follower
+// ══════════════════════════════════════════════════════════════════════════════
+(function() {
+  const aurora = document.getElementById('aurora');
+  if (!aurora) return;
+
+  const orbs = [
+    document.getElementById('aurora-1'),
+    document.getElementById('aurora-2'),
+    document.getElementById('aurora-3'),
+    document.getElementById('aurora-4')
+  ];
+
+  // Each orb trails at a different speed (lower = more lag = more smoke trail)
+  const speeds = [0.06, 0.04, 0.025, 0.015];
+  // Offset from cursor so orbs spread out like smoke
+  const offsets = [
+    { x: 0, y: 0 },
+    { x: 60, y: -40 },
+    { x: -50, y: 50 },
+    { x: 40, y: 60 }
+  ];
+
+  // Current positions
+  const pos = orbs.map(() => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 }));
+  // Target position (mouse)
+  let mx = window.innerWidth / 2;
+  let my = window.innerHeight / 2;
+  let mouseActive = false;
+  let fadeTimer = null;
+
+  // Rainbow hue rotation for each orb
+  const hueBase = [270, 220, 330, 160]; // purple, blue, pink, green
+  let hueShift = 0;
+
+  // Activate aurora on first mouse move
+  function onFirstMove() {
+    aurora.classList.add('active');
+  }
+
+  window.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+
+    if (!mouseActive) {
+      mouseActive = true;
+      aurora.classList.add('tracking');
+      onFirstMove();
+    }
+
+    // Reset idle timer — return to drift after 3s of no mouse
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => {
+      mouseActive = false;
+      aurora.classList.remove('tracking');
+    }, 3000);
+  }, { passive: true });
+
+  // Also track scroll offset for orb positions
+  let scrollY = window.scrollY;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+  // Rainbow hue slowly cycles
+  function tick() {
+    hueShift += 0.3;
+
+    for (let i = 0; i < orbs.length; i++) {
+      if (!orbs[i]) continue;
+
+      if (mouseActive) {
+        // Lerp toward mouse + offset
+        const tx = mx + offsets[i].x;
+        const ty = my + offsets[i].y + scrollY;
+        pos[i].x += (tx - pos[i].x) * speeds[i];
+        pos[i].y += (ty - pos[i].y) * speeds[i];
+      }
+
+      // Update position — center the orb on its position
+      const ox = pos[i].x - (orbs[i].offsetWidth / 2);
+      const oy = pos[i].y - scrollY - (orbs[i].offsetHeight / 2);
+      orbs[i].style.transform = `translate(${ox}px, ${oy}px)`;
+
+      // Rainbow hue shift
+      const hue = (hueBase[i] + hueShift) % 360;
+      const alpha = [0.35, 0.3, 0.28, 0.25][i];
+      orbs[i].style.background = `radial-gradient(circle, hsla(${hue},80%,60%,${alpha}) 0%, hsla(${hue},80%,60%,0) 70%)`;
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+
+  // On touch devices, track touch instead
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    mx = t.clientX;
+    my = t.clientY;
+    if (!mouseActive) {
+      mouseActive = true;
+      aurora.classList.add('tracking', 'active');
+    }
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => {
+      mouseActive = false;
+      aurora.classList.remove('tracking');
+    }, 3000);
+  }, { passive: true });
+})();

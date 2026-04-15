@@ -336,9 +336,9 @@ document.querySelectorAll('.pricing-card').forEach(card => {
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
-//  AURORA — Flowing Rainbow Smoke Tendrils
-//  Multiple ribbon trails with curl noise, drawn as thick flowing curves
-//  with vivid saturated colors and glow — like the AutomatezAI reference
+//  AURORA — Liquid Vape Smoke
+//  Soft, billowy smoke blobs emitted ONLY on mouse movement.
+//  When mouse stops, smoke lingers and slowly fades. No idle animation.
 // ══════════════════════════════════════════════════════════════════════════════
 (function() {
   const container = document.getElementById('aurora');
@@ -362,7 +362,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
   resize();
   window.addEventListener('resize', resize);
 
-  // ── Noise ──
+  // ── Noise (for organic drift) ──
   const P = new Uint8Array(512);
   const G = [[1,1],[-1,1],[1,-1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];
   for (let i = 0; i < 256; i++) P[i] = i;
@@ -382,165 +382,172 @@ document.querySelectorAll('.pricing-card').forEach(card => {
            (dot(aa, xf, yf) + u * (dot(ba, xf - 1, yf) - dot(aa, xf, yf))));
   }
 
-  function curl(x, y, t) {
-    const e = 0.01;
-    return {
-      x: (noise(x, y + e + t) - noise(x, y - e + t)) / (2 * e),
-      y: -(noise(x + e, y + t) - noise(x - e, y + t)) / (2 * e)
-    };
-  }
-
-  // ── Mouse ──
-  let mx = W / 2, my = H / 2, pmx = mx, pmy = my;
-  let mouseSpeed = 0, mouseActive = false, fadeTimer = null;
+  // ── Mouse tracking ──
+  let mx = -9999, my = -9999, pmx = -9999, pmy = -9999;
+  let mouseSpeed = 0;
+  let isMoving = false;
   let time = 0;
+  let hueOffset = 0;
 
   function onMove(x, y) {
     pmx = mx; pmy = my;
     mx = x; my = y;
+    if (pmx === -9999) { pmx = mx; pmy = my; }
     mouseSpeed = Math.hypot(mx - pmx, my - pmy);
-    mouseActive = true;
-    clearTimeout(fadeTimer);
-    fadeTimer = setTimeout(() => { mouseActive = false; }, 3000);
+    isMoving = mouseSpeed > 1.5;
   }
   window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY), { passive: true });
   window.addEventListener('touchmove', e => { const t = e.touches[0]; onMove(t.clientX, t.clientY); }, { passive: true });
 
-  // ── Ribbon Tendril ──
-  // Each tendril is a chain of points that trails the mouse with noise displacement
-  const NUM_TENDRILS = 8;
-  const TRAIL_LEN = 80;
+  // ── Smoke Puffs ──
+  // Each puff is a large, soft, blurred circle that expands and fades
+  const puffs = [];
+  const MAX_PUFFS = 60;
 
-  class Tendril {
-    constructor(index) {
-      this.index = index;
-      this.points = [];
-      for (let i = 0; i < TRAIL_LEN; i++) {
-        this.points.push({ x: W / 2, y: H / 2 });
-      }
-      // Each tendril has its own speed, offset, color, noise params
-      this.lag = 0.15 + index * 0.04; // how quickly head follows mouse
-      this.offsetAngle = (index / NUM_TENDRILS) * Math.PI * 2;
-      this.offsetRadius = 20 + index * 12;
-      this.noiseScale = 0.0015 + index * 0.0003;
-      this.noiseAmp = 60 + index * 15;
-      this.noiseSpeed = 0.2 + index * 0.05;
-      this.hue = (index / NUM_TENDRILS) * 360;
-      this.maxWidth = 18 + Math.random() * 20;
-      this.sat = 85 + Math.random() * 15;
-      this.light = 55 + Math.random() * 15;
+  class Puff {
+    constructor(x, y, vx, vy, hue) {
+      this.x = x;
+      this.y = y;
+      this.vx = vx;
+      this.vy = vy;
+      this.radius = 20 + Math.random() * 30;
+      this.maxRadius = 100 + Math.random() * 120;
+      this.life = 1.0;
+      this.decay = 0.004 + Math.random() * 0.003; // slow fade
+      this.hue = hue;
+      this.sat = 70 + Math.random() * 30;
+      this.light = 40 + Math.random() * 25;
+      this.noiseSeed = Math.random() * 100;
     }
 
     update() {
-      // Head follows mouse with offset
-      const angle = this.offsetAngle + time * 0.3;
-      const tx = mx + Math.cos(angle) * this.offsetRadius;
-      const ty = my + Math.sin(angle) * this.offsetRadius;
+      // Gentle noise-driven drift (organic, not straight)
+      const nx = noise(this.x * 0.002 + this.noiseSeed, time * 0.15);
+      const ny = noise(this.y * 0.002 + this.noiseSeed + 50, time * 0.15);
+      this.vx += nx * 0.15;
+      this.vy += ny * 0.15;
 
-      const head = this.points[0];
-      head.x += (tx - head.x) * this.lag;
-      head.y += (ty - head.y) * this.lag;
+      // Slow upward drift (smoke rises)
+      this.vy -= 0.08;
 
-      // Each subsequent point follows the one before it + curl noise
-      for (let i = 1; i < TRAIL_LEN; i++) {
-        const prev = this.points[i - 1];
-        const pt = this.points[i];
-        const followSpeed = 0.35 - (i / TRAIL_LEN) * 0.15;
+      // Damping
+      this.vx *= 0.985;
+      this.vy *= 0.985;
 
-        // Curl noise displacement
-        const c = curl(
-          pt.x * this.noiseScale,
-          pt.y * this.noiseScale,
-          time * this.noiseSpeed + this.index
-        );
+      this.x += this.vx;
+      this.y += this.vy;
 
-        pt.x += (prev.x - pt.x) * followSpeed + c.x * this.noiseAmp * 0.04;
-        pt.y += (prev.y - pt.y) * followSpeed + c.y * this.noiseAmp * 0.04;
+      // Expand
+      const growRate = (this.maxRadius - this.radius) * 0.015;
+      this.radius += growRate;
 
-        // Slight upward drift
-        pt.y -= 0.15;
-      }
+      // Fade
+      this.life -= this.decay;
     }
 
     draw() {
-      if (this.points.length < 4) return;
+      if (this.life <= 0) return;
+
+      // Soft alpha — cubic falloff for smooth fade
+      const alpha = this.life * this.life * this.life * 0.35;
+      if (alpha < 0.005) return;
+
+      const r = this.radius;
 
       ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalCompositeOperation = 'screen';
+      ctx.globalAlpha = alpha;
 
-      // Draw the tendril as a series of line segments with varying width and alpha
-      for (let i = 1; i < this.points.length - 1; i++) {
-        const t = i / this.points.length;
-        const alpha = (1 - t) * (1 - t) * 0.7; // quadratic fade along tail
-        if (alpha < 0.01) continue;
+      // Main soft blob
+      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r);
+      grad.addColorStop(0, `hsla(${this.hue}, ${this.sat}%, ${this.light}%, 0.8)`);
+      grad.addColorStop(0.25, `hsla(${this.hue + 15}, ${this.sat}%, ${this.light}%, 0.5)`);
+      grad.addColorStop(0.5, `hsla(${this.hue + 30}, ${this.sat - 10}%, ${this.light}%, 0.2)`);
+      grad.addColorStop(0.75, `hsla(${this.hue + 40}, ${this.sat - 20}%, ${this.light - 5}%, 0.05)`);
+      grad.addColorStop(1, 'transparent');
 
-        const width = this.maxWidth * (1 - t * t) * (mouseActive ? 1 : 0.5);
-        if (width < 0.5) continue;
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+      ctx.fill();
 
-        const prev = this.points[i - 1];
-        const curr = this.points[i];
-        const next = this.points[i + 1];
+      // Inner bright core (smaller, brighter)
+      const coreR = r * 0.3;
+      const core = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, coreR);
+      core.addColorStop(0, `hsla(${this.hue}, 100%, ${this.light + 20}%, 0.6)`);
+      core.addColorStop(0.5, `hsla(${this.hue + 10}, ${this.sat}%, ${this.light + 10}%, 0.2)`);
+      core.addColorStop(1, 'transparent');
 
-        // Hue shifts along the length for rainbow effect
-        const hue = (this.hue + t * 80 + time * 20) % 360;
-
-        ctx.beginPath();
-        ctx.moveTo(prev.x, prev.y);
-        // Smooth quadratic curve through points
-        const cpx = curr.x;
-        const cpy = curr.y;
-        ctx.quadraticCurveTo(cpx, cpy, (curr.x + next.x) / 2, (curr.y + next.y) / 2);
-
-        ctx.strokeStyle = `hsla(${hue}, ${this.sat}%, ${this.light}%, ${alpha})`;
-        ctx.lineWidth = width;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.stroke();
-      }
-
-      // Glow pass — draw again thicker and more transparent for the soft glow
-      for (let i = 1; i < this.points.length - 1; i++) {
-        const t = i / this.points.length;
-        const alpha = (1 - t) * (1 - t) * 0.15;
-        if (alpha < 0.005) continue;
-
-        const width = this.maxWidth * 3 * (1 - t * t) * (mouseActive ? 1 : 0.4);
-        if (width < 1) continue;
-
-        const prev = this.points[i - 1];
-        const curr = this.points[i];
-        const next = this.points[i + 1];
-        const hue = (this.hue + t * 80 + time * 20) % 360;
-
-        ctx.beginPath();
-        ctx.moveTo(prev.x, prev.y);
-        ctx.quadraticCurveTo(curr.x, curr.y, (curr.x + next.x) / 2, (curr.y + next.y) / 2);
-        ctx.strokeStyle = `hsla(${hue}, ${this.sat}%, ${this.light + 10}%, ${alpha})`;
-        ctx.lineWidth = width;
-        ctx.lineCap = 'round';
-        ctx.stroke();
-      }
+      ctx.fillStyle = core;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, coreR, 0, Math.PI * 2);
+      ctx.fill();
 
       ctx.restore();
     }
   }
 
-  const tendrils = [];
-  for (let i = 0; i < NUM_TENDRILS; i++) tendrils.push(new Tendril(i));
+  // Emit smoke puffs at mouse position during movement
+  function emit() {
+    if (!isMoving) return;
+
+    // Direction of mouse movement
+    const dx = mx - pmx;
+    const dy = my - pmy;
+
+    // Emit 2-4 puffs per frame while moving
+    const count = Math.min(Math.floor(mouseSpeed * 0.15) + 1, 4);
+
+    for (let i = 0; i < count; i++) {
+      // Spawn along the path between prev and current mouse
+      const t = Math.random();
+      const spawnX = pmx + dx * t + (Math.random() - 0.5) * 20;
+      const spawnY = pmy + dy * t + (Math.random() - 0.5) * 20;
+
+      // Initial velocity — slight spread perpendicular to movement + some forward momentum
+      const spread = (Math.random() - 0.5) * 2;
+      const vx = dx * 0.05 + spread * (-dy / (mouseSpeed + 1)) * 2;
+      const vy = dy * 0.05 + spread * (dx / (mouseSpeed + 1)) * 2;
+
+      const hue = hueOffset + Math.random() * 80;
+
+      if (puffs.length < MAX_PUFFS) {
+        puffs.push(new Puff(spawnX, spawnY, vx, vy, hue));
+      } else {
+        // Recycle dead puff
+        const idx = puffs.findIndex(p => p.life <= 0);
+        if (idx >= 0) {
+          puffs[idx] = new Puff(spawnX, spawnY, vx, vy, hue);
+        }
+      }
+    }
+  }
 
   // ── Render ──
   function render() {
-    time += 0.008;
+    time += 0.01;
+    hueOffset += 0.5;
 
-    // Semi-transparent fade for trails
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = 'rgba(7, 9, 13, 0.08)';
-    ctx.fillRect(0, 0, W, H);
+    // Clear canvas fully each frame (no trail persistence — puffs handle their own fade)
+    ctx.clearRect(0, 0, W, H);
 
-    // Update and draw all tendrils
-    for (const t of tendrils) {
-      t.update();
-      t.draw();
+    // Emit new puffs if mouse is moving
+    emit();
+
+    // Reset moving flag (will be set true again on next mousemove)
+    isMoving = false;
+
+    // Update and draw all puffs
+    for (let i = 0; i < puffs.length; i++) {
+      puffs[i].update();
+      puffs[i].draw();
+    }
+
+    // Periodic cleanup
+    if (puffs.length > 20 && time % 2 < 0.02) {
+      for (let i = puffs.length - 1; i >= 0; i--) {
+        if (puffs[i].life <= 0) puffs.splice(i, 1);
+      }
     }
 
     requestAnimationFrame(render);

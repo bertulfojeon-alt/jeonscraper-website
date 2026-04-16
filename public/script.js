@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════════════
-   JEONSCRAPER — Landing Page Interactions (Redesign)
+   JEONSCRAPER — Landing Page Interactions (Redesign v2)
    ══════════════════════════════════════════════════════════════════════════════ */
 
 // ── NAVBAR SCROLL ──
@@ -31,12 +31,10 @@ const navLinkMap = {
   'pricing': document.getElementById('nav-link-pricing'),
   'faq': document.getElementById('nav-link-faq'),
 };
-
 const sectionIds = ['features', 'showcase', 'pricing', 'faq'];
-const sectionObserver = new IntersectionObserver((entries) => {
+const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    const id = entry.target.id;
-    const link = navLinkMap[id];
+    const link = navLinkMap[entry.target.id];
     if (link) {
       if (entry.isIntersecting) {
         Object.values(navLinkMap).forEach(l => { if (l) l.classList.remove('active'); });
@@ -45,16 +43,11 @@ const sectionObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' });
-
-sectionIds.forEach(id => {
-  const el = document.getElementById(id);
-  if (el) sectionObserver.observe(el);
-});
+sectionIds.forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
 
 // ── ROTATING WORD (cycles every 2s) ──
 const rwItems = document.querySelectorAll('.rw-item');
 let rwCurrent = 0;
-
 if (rwItems.length > 1) {
   setInterval(() => {
     const prev = rwCurrent;
@@ -62,47 +55,48 @@ if (rwItems.length > 1) {
     rwItems[prev].classList.remove('active');
     rwItems[prev].classList.add('exit-up');
     rwItems[rwCurrent].classList.add('active');
-    setTimeout(() => {
-      rwItems[prev].classList.remove('exit-up');
-    }, 500);
+    setTimeout(() => { rwItems[prev].classList.remove('exit-up'); }, 500);
   }, 2000);
 }
 
-// ── SCROLL ANIMATIONS (Intersection Observer) ──
-const animElements = document.querySelectorAll('.anim-fade, .anim-slide-up, .anim-slide-left, .anim-slide-right, .anim-scale, .anim-pop');
+// ══════════════════════════════════════════════════════════════════════════════
+// SCROLL ANIMATIONS — REPLAY every time a section scrolls into view
+// ══════════════════════════════════════════════════════════════════════════════
 
-const observer = new IntersectionObserver((entries) => {
+const animSelectors = '.anim-fade, .anim-slide-up, .anim-slide-left, .anim-slide-right, .anim-scale, .anim-pop';
+
+// Observe each snap-section. When it enters view → add visible to its children.
+// When it leaves → remove visible so animations replay next time.
+const allSections = document.querySelectorAll('.snap-section');
+
+const sectionAnimObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
+    const section = entry.target;
+    const animEls = section.querySelectorAll(animSelectors);
+
     if (entry.isIntersecting) {
-      const delay = parseInt(entry.target.dataset.delay || 0);
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, delay);
-      observer.unobserve(entry.target);
+      animEls.forEach(el => {
+        const delay = parseInt(el.dataset.delay || 0);
+        setTimeout(() => { el.classList.add('visible'); }, delay);
+      });
+      // Re-trigger counters in this section
+      section.querySelectorAll('[data-count]').forEach(el => {
+        el._counted = false;
+        animateCounter(el);
+      });
+    } else {
+      // Remove visible so animation replays on re-entry
+      animEls.forEach(el => { el.classList.remove('visible'); });
     }
   });
-}, {
-  threshold: 0.15,
-  rootMargin: '0px 0px -40px 0px'
-});
+}, { threshold: 0.15 });
 
-animElements.forEach(el => observer.observe(el));
+allSections.forEach(s => sectionAnimObserver.observe(s));
 
 // ── ANIMATED COUNTERS ──
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target._counted) {
-      entry.target._counted = true;
-      animateCounter(entry.target);
-      counterObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
 function animateCounter(el) {
   const target = parseInt(el.dataset.count);
+  if (isNaN(target)) return;
   const duration = 2000;
   const start = performance.now();
   const isSvcCard = !!el.closest('.svc-card');
@@ -124,7 +118,6 @@ function animateCounter(el) {
     } else {
       el.textContent = current.toLocaleString() + (progress >= 1 ? '+' : '');
     }
-
     if (progress < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
@@ -134,7 +127,7 @@ function animateCounter(el) {
 document.querySelectorAll('.feat-card').forEach(card => {
   card.addEventListener('mouseenter', () => {
     card.classList.remove('pop-replay');
-    void card.offsetHeight; // force reflow
+    void card.offsetHeight;
     card.classList.add('pop-replay');
   });
   card.addEventListener('animationend', () => {
@@ -142,8 +135,9 @@ document.querySelectorAll('.feat-card').forEach(card => {
   });
 });
 
-// ── COMPARE SECTION — SEQUENTIAL ANIMATION ──
-// VA pops up first → items 1 by 1 → JeonScraper pops up → items 1 by 1 → VS electric pop
+// ══════════════════════════════════════════════════════════════════════════════
+// COMPARE SECTION — SEQUENTIAL ANIMATION (replays on re-entry)
+// ══════════════════════════════════════════════════════════════════════════════
 const compareSection = document.getElementById('compare');
 if (compareSection) {
   const cmpVa = compareSection.querySelector('.cmp-va');
@@ -153,30 +147,27 @@ if (compareSection) {
   const cmpObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Step 1: VA column appears
-        setTimeout(() => {
-          if (cmpVa) cmpVa.classList.add('visible');
-        }, 200);
-
-        // Step 2: JeonScraper column appears
-        setTimeout(() => {
-          if (cmpJeon) cmpJeon.classList.add('visible');
-        }, 1200);
-
-        // Step 3: VS badge appears with electric effect
-        setTimeout(() => {
-          if (cmpVs) cmpVs.classList.add('visible');
-        }, 2200);
-
-        cmpObserver.unobserve(entry.target);
+        // Reset first
+        [cmpVa, cmpJeon, cmpVs].forEach(el => { if (el) el.classList.remove('visible'); });
+        // Sequential reveal
+        setTimeout(() => { if (cmpVa) cmpVa.classList.add('visible'); }, 200);
+        setTimeout(() => { if (cmpJeon) cmpJeon.classList.add('visible'); }, 1200);
+        setTimeout(() => { if (cmpVs) cmpVs.classList.add('visible'); }, 2200);
+      } else {
+        // Reset on leave so it replays
+        [cmpVa, cmpJeon, cmpVs].forEach(el => { if (el) el.classList.remove('visible'); });
       }
     });
   }, { threshold: 0.25 });
-
   cmpObserver.observe(compareSection);
 }
 
-// ── SHOWCASE TABS ──
+// ══════════════════════════════════════════════════════════════════════════════
+// SHOWCASE — SCROLL-LOCKED TAB SWITCHING
+// Page freezes while in showcase. Scroll only changes tabs.
+// Exits to next/prev section only at last/first tab.
+// ══════════════════════════════════════════════════════════════════════════════
+
 const showcaseDescs = [
   { title: 'Briefing Dashboard', desc: 'Your mission command center. See total products, average prices, stock rates, product overlap percentage, and opportunity count across all stores at a glance.' },
   { title: 'Product Matrix', desc: 'Every product mapped across every store. See who sells what, at what price, and with what action tags — ORDER OPPORTUNITY, PRICE ADVANTAGE, PRICE RISK, MY EXCLUSIVE, COMPETITOR EXCLUSIVE.' },
@@ -188,7 +179,8 @@ const showcaseDescs = [
 
 let showcaseCurrentTab = 0;
 const showcaseTabCount = showcaseDescs.length;
-let showcaseScrollLocked = false;
+let showcaseLocked = false;
+let showcaseReleasePending = false;
 
 window.switchShowcase = function(idx) {
   showcaseCurrentTab = idx;
@@ -213,14 +205,10 @@ window.switchShowcase = function(idx) {
 
 function restartAnimations(panel) {
   panel.querySelectorAll('.sa-row-anim').forEach(el => {
-    el.style.animation = 'none';
-    el.offsetHeight;
-    el.style.animation = '';
+    el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
   });
   panel.querySelectorAll('.sa-gap-fill, .sa-hbar-fill').forEach(el => {
-    el.style.animation = 'none';
-    el.offsetHeight;
-    el.style.animation = '';
+    el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
   });
 }
 
@@ -233,7 +221,6 @@ function animateSaCounters(panel) {
     const prefix = el.closest('.sa-stat')?.querySelector('.sa-stat-prefix') ? '$' : '';
     const lbl = el.closest('.sa-stat')?.querySelector('.sa-stat-lbl')?.textContent || '';
     const suffix = lbl.includes('%') ? '%' : '';
-
     function tick(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
@@ -246,73 +233,114 @@ function animateSaCounters(panel) {
   });
 }
 
-// ── SHOWCASE SCROLL-DRIVEN TAB SWITCHING ──
-// When the showcase section is in view, scroll up/down switches tabs.
-// Only when on last tab + scroll down does it leave to next section.
-// Only when on first tab + scroll up does it leave to prev section.
-const showcaseViewer = document.getElementById('showcase-scroll-container') || document.getElementById('showcase-viewer');
 const showcaseEl = document.getElementById('showcase');
 
 if (showcaseEl) {
-  let showcaseInView = false;
   let lastWheelTime = 0;
 
+  // Lock/unlock page scroll
+  function lockPageScroll() {
+    if (!showcaseLocked) {
+      showcaseLocked = true;
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function unlockPageScroll() {
+    if (showcaseLocked) {
+      showcaseLocked = false;
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Observe when showcase enters/leaves viewport
   const showcaseViewObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      showcaseInView = entry.isIntersecting;
-      // Trigger first tab animations on first view
-      if (entry.isIntersecting && !showcaseEl._triggered) {
-        showcaseEl._triggered = true;
-        const activePanel = document.querySelector('.sc-anim.active');
-        if (activePanel) {
-          restartAnimations(activePanel);
-          animateSaCounters(activePanel);
-        }
+      if (entry.isIntersecting) {
+        // Snap to showcase section top and lock
+        lockPageScroll();
+        // Reset to first tab
+        switchShowcase(0);
+        showcaseReleasePending = false;
+      } else {
+        unlockPageScroll();
       }
     });
-  }, { threshold: 0.5 });
-
+  }, { threshold: 0.6 });
   showcaseViewObserver.observe(showcaseEl);
 
-  // Wheel event for scroll-driven tab switching
+  // Wheel handler — only switches tabs, page stays frozen
   window.addEventListener('wheel', (e) => {
-    if (!showcaseInView) return;
+    if (!showcaseLocked) return;
+
+    e.preventDefault();
+    e.stopPropagation();
 
     const now = Date.now();
-    if (now - lastWheelTime < 600) return; // debounce
+    if (now - lastWheelTime < 500) return; // debounce
 
-    const direction = e.deltaY > 0 ? 1 : -1; // 1=down, -1=up
+    const direction = e.deltaY > 0 ? 1 : -1;
 
-    if (direction === 1 && showcaseCurrentTab < showcaseTabCount - 1) {
-      // Scroll down → next tab
-      e.preventDefault();
-      lastWheelTime = now;
-      switchShowcase(showcaseCurrentTab + 1);
-    } else if (direction === -1 && showcaseCurrentTab > 0) {
-      // Scroll up → previous tab
-      e.preventDefault();
-      lastWheelTime = now;
-      switchShowcase(showcaseCurrentTab - 1);
+    if (direction === 1) {
+      if (showcaseCurrentTab < showcaseTabCount - 1) {
+        lastWheelTime = now;
+        switchShowcase(showcaseCurrentTab + 1);
+      } else {
+        // At last tab — unlock and scroll to next section
+        unlockPageScroll();
+        const nextSection = showcaseEl.nextElementSibling;
+        if (nextSection) {
+          nextSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      if (showcaseCurrentTab > 0) {
+        lastWheelTime = now;
+        switchShowcase(showcaseCurrentTab - 1);
+      } else {
+        // At first tab — unlock and scroll to prev section
+        unlockPageScroll();
+        const prevSection = showcaseEl.previousElementSibling;
+        if (prevSection) {
+          prevSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }
-    // If at first tab + scroll up OR last tab + scroll down: let normal scroll happen
   }, { passive: false });
 
-  // Touch swipe for mobile
+  // Touch support for mobile
   let touchStartY = 0;
   showcaseEl.addEventListener('touchstart', (e) => {
-    if (showcaseInView) touchStartY = e.touches[0].clientY;
+    touchStartY = e.touches[0].clientY;
   }, { passive: true });
 
+  showcaseEl.addEventListener('touchmove', (e) => {
+    if (showcaseLocked) e.preventDefault();
+  }, { passive: false });
+
   showcaseEl.addEventListener('touchend', (e) => {
-    if (!showcaseInView) return;
+    if (!showcaseLocked) return;
     const diff = touchStartY - e.changedTouches[0].clientY;
     if (Math.abs(diff) < 40) return;
 
     const direction = diff > 0 ? 1 : -1;
-    if (direction === 1 && showcaseCurrentTab < showcaseTabCount - 1) {
-      switchShowcase(showcaseCurrentTab + 1);
-    } else if (direction === -1 && showcaseCurrentTab > 0) {
-      switchShowcase(showcaseCurrentTab - 1);
+    if (direction === 1) {
+      if (showcaseCurrentTab < showcaseTabCount - 1) {
+        switchShowcase(showcaseCurrentTab + 1);
+      } else {
+        unlockPageScroll();
+        const next = showcaseEl.nextElementSibling;
+        if (next) next.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      if (showcaseCurrentTab > 0) {
+        switchShowcase(showcaseCurrentTab - 1);
+      } else {
+        unlockPageScroll();
+        const prev = showcaseEl.previousElementSibling;
+        if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }, { passive: true });
 }
@@ -356,7 +384,16 @@ document.querySelectorAll('.pricing-card').forEach(card => {
     const y = e.clientY - rect.top;
     card.style.background = `radial-gradient(circle 200px at ${x}px ${y}px, rgba(124,58,237,0.06), var(--surface) 70%)`;
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.background = '';
-  });
+  card.addEventListener('mouseleave', () => { card.style.background = ''; });
 });
+
+// ── SCROLL-TO-TOP BUTTON ──
+const scrollTopBtn = document.getElementById('scroll-top-btn');
+if (scrollTopBtn) {
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('show', window.scrollY > window.innerHeight);
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}

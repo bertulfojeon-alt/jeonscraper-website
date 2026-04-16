@@ -365,6 +365,10 @@ img { max-width: 100%; }
 .btn-secondary:hover { color: var(--text); border-color: var(--text3); transform: translateY(-2px); }
 
 /* Hero Stats */
+.hero-avatars {
+  height: 36px; width: auto; border-radius: 100px;
+  object-fit: cover;
+}
 .hero-stats {
   display: flex; align-items: center; gap: 24px; justify-content: flex-start;
 }

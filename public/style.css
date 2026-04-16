@@ -440,6 +440,11 @@ img { max-width: 100%; }
 }
 .prob-card:hover::before { opacity: 1; }
 .prob-icon { font-size: 40px; margin-bottom: 16px; }
+.prob-icon-art {
+  width: 100%; height: 100px; margin-bottom: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.prob-icon-art svg { width: 100%; max-width: 160px; height: auto; }
 .prob-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
 .prob-card ul { list-style: none; }
 .prob-card ul li {

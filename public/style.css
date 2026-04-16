@@ -450,17 +450,17 @@ img { max-width: 100%; }
 
 /* ── HOVER: Entire card scales + lifts ── */
 .prob-card:hover {
-  transform: translateY(-8px) scale(1.05);
-  border-color: rgba(124,58,237,0.25);
-  background: linear-gradient(160deg, rgba(38,52,78,0.92), rgba(24,35,52,0.96));
+  transform: translateY(-10px) scale(1.08);
+  border-color: rgba(124,58,237,0.4);
+  background: linear-gradient(160deg, rgba(38,52,78,0.95), rgba(24,35,52,0.98));
   box-shadow:
     0 4px 12px rgba(0,0,0,0.15),
-    0 20px 48px rgba(0,0,0,0.3),
-    0 0 0 1px rgba(124,58,237,0.12),
-    0 0 48px rgba(124,58,237,0.08);
+    0 24px 56px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(124,58,237,0.25),
+    0 0 60px rgba(124,58,237,0.1);
   z-index: 10;
 }
-.prob-card:hover::before { opacity: 1; left: 5%; right: 5%; }
+.prob-card:hover::before { opacity: 1; left: 0; right: 0; }
 .prob-card:hover::after { opacity: 1; }
 
 /* ── HOVER: Icon — micro-parallax (moves MORE than text = depth) ── */
@@ -474,17 +474,17 @@ img { max-width: 100%; }
   transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), filter 0.28s ease;
 }
 .prob-card:hover .prob-icon-art svg {
-  transform: scale(1.15) translateY(-8px) rotate(-2deg);
+  transform: scale(1.08) translateY(-4px) rotate(-2deg);
   filter: drop-shadow(0 6px 18px rgba(124,58,237,0.25));
 }
 
 /* ── HOVER: Text — subtle parallax lift ── */
 .prob-card:hover h3 {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   color: #fff;
 }
 .prob-card:hover ul {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 .prob-card:hover ul li {
   color: var(--text);

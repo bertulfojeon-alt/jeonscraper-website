@@ -463,6 +463,15 @@ img { max-width: 100%; }
 .prob-card:hover::before { opacity: 1; left: 0; right: 0; }
 .prob-card:hover::after { opacity: 1; }
 
+/* Override anim-slide-up.visible transform so hover scale actually works */
+.prob-card.anim-slide-up.visible:hover {
+  transform: translateY(-10px) scale(1.08) !important;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.28s ease,
+    background 0.28s ease !important;
+}
+
 /* ── HOVER: Icon — micro-parallax (moves MORE than text = depth) ── */
 .prob-icon { font-size: 40px; margin-bottom: 16px; }
 .prob-icon-art {

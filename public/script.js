@@ -391,7 +391,7 @@ document.querySelectorAll('.pricing-card').forEach(card => {
 window.openDemoModal = function() {
   const modal = document.getElementById('demo-modal');
   const iframe = document.getElementById('demo-iframe');
-  iframe.src = 'https://www.youtube.com/embed/19mm12X6670?autoplay=1&rel=0';
+  iframe.src = 'https://www.youtube.com/embed/1FdZEFXxMY8?autoplay=1&rel=0';
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 };

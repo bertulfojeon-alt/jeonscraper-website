@@ -174,24 +174,35 @@ img { max-width: 100%; }
 @keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 .hero-title {
-  font-size: clamp(38px, 5.5vw, 64px); font-weight: 900; line-height: 1.08;
+  font-size: clamp(38px, 5.5vw, 64px); font-weight: 900; line-height: 1.15;
   letter-spacing: -0.03em; margin-bottom: 20px;
+}
+.hero-line {
+  display: block;
   white-space: nowrap;
+}
+.hero-line-rotating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.2em;
 }
 
 /* ── ROTATING WORD ── */
 .rotating-word {
   display: inline-block;
   position: relative;
-  height: 1.1em;
+  height: 1.2em;
   overflow: hidden;
   vertical-align: bottom;
-  min-width: 200px;
+  min-width: 260px;
+  text-align: center;
 }
 .rw-item {
   display: block;
   position: absolute;
   left: 0; right: 0;
+  text-align: center;
   opacity: 0;
   transform: translateY(100%);
   transition: opacity 0.5s ease, transform 0.5s ease;

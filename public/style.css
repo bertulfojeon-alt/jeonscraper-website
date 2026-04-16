@@ -208,128 +208,38 @@ img { max-width: 100%; }
   font-size: 13px; color: var(--text2); font-weight: 500;
 }
 
-/* ── HERO DASHBOARD IMAGE (FULL LAPTOP) ── */
-.hero-dashboard-wrapper {
-  position: relative; width: 100%; max-width: 720px;
-  perspective: 1400px;
+/* ── HERO HOLOGRAPHIC VIDEO ── */
+.hero-holo-wrapper {
+  position: relative; width: 100%; max-width: 700px;
+}
+.hero-holo-video {
+  width: 100%; display: block; border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  animation: heroHoloEntry 1.2s cubic-bezier(0.16,1,0.3,1) 0.5s both;
+}
+.hero-holo-video.loaded { opacity: 1; }
+
+@keyframes heroHoloEntry {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Laptop shell */
-.hero-laptop {
-  transform: perspective(1400px) rotateY(-6deg) rotateX(4deg);
-  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), filter 0.6s ease;
-  animation: heroImgEntry 1.2s cubic-bezier(0.16,1,0.3,1) 0.5s both;
-  filter: drop-shadow(0 25px 60px rgba(0,0,0,0.5)) drop-shadow(0 0 40px rgba(124,58,237,0.15));
-}
-.hero-laptop:hover {
-  transform: perspective(1400px) rotateY(-2deg) rotateX(1deg) scale(1.03);
-  filter: drop-shadow(0 35px 80px rgba(0,0,0,0.5)) drop-shadow(0 0 60px rgba(124,58,237,0.25));
-}
-
-/* Screen lid */
-.hero-laptop-screen {
-  background: #1a1a1e;
-  border-radius: 14px 14px 0 0;
-  padding: 12px 12px 10px 12px;
-  border: 2px solid #303038;
-  border-bottom: none;
-  position: relative;
-}
-.hero-laptop-screen::before {
-  content: '';
-  position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #2a2a30; box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
-}
-.hero-dashboard-img {
-  width: 100%; display: block;
-  border-radius: 4px;
-}
-
-/* Hinge */
-.hero-laptop-base {
-  background: linear-gradient(180deg, #303038 0%, #252529 50%, #303038 100%);
-  height: 10px;
-  border-left: 2px solid #303038;
-  border-right: 2px solid #303038;
-  position: relative;
-}
-
-/* Keyboard deck */
-.hero-laptop-keyboard {
-  background: linear-gradient(180deg, #1e1e24 0%, #16161a 100%);
-  border: 2px solid #303038;
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  padding: 10px 20px 8px 20px;
-  position: relative;
-}
-
-/* Keyboard grid */
-.hero-laptop-keys {
-  display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px;
-}
-.hero-laptop-key-row {
-  display: flex; gap: 3px; justify-content: center;
-}
-.hero-laptop-key {
-  width: 16px; height: 10px; border-radius: 2px;
-  background: linear-gradient(180deg, #2a2a30 0%, #222228 100%);
-  border: 1px solid #3a3a42;
-}
-.hero-laptop-key.wide { width: 36px; }
-.hero-laptop-key.space { width: 80px; }
-
-/* Trackpad */
-.hero-laptop-trackpad {
-  width: 80px; height: 48px; margin: 0 auto;
-  border-radius: 6px;
-  background: linear-gradient(180deg, #222228 0%, #1c1c22 100%);
-  border: 1px solid #3a3a42;
-}
-
-/* Notch at very bottom */
-.hero-laptop-notch {
-  position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
-  width: 40px; height: 3px; border-radius: 0 0 3px 3px;
-  background: #3a3a42;
-}
-
-@keyframes heroImgEntry {
-  from {
-    opacity: 0;
-    transform: perspective(1400px) rotateY(-15deg) rotateX(5deg) translateX(80px) scale(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(1400px) rotateY(-8deg) rotateX(3deg) translateX(0) scale(1);
-  }
-}
-
-/* Glow effects behind dashboard */
-.hero-dashboard-glow {
+/* Glow effects behind video */
+.hero-holo-glow {
   position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-  background: radial-gradient(ellipse at center, rgba(124,58,237,0.35) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(124,58,237,0.3) 0%, transparent 65%);
   filter: blur(70px); z-index: -1; pointer-events: none;
-  animation: dashGlow 4s ease-in-out infinite alternate;
+  animation: holoGlow 4s ease-in-out infinite alternate;
 }
-.hero-dashboard-glow-2 {
-  background: radial-gradient(ellipse at 70% 30%, rgba(79,142,247,0.3) 0%, transparent 60%);
+.hero-holo-glow-2 {
+  background: radial-gradient(ellipse at 60% 40%, rgba(79,142,247,0.25) 0%, transparent 60%);
   filter: blur(80px); top: -10%; left: 10%; width: 80%; height: 80%;
   animation-delay: 2s;
 }
-.hero-dashboard-glow-bottom {
-  background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.5) 0%, rgba(79,142,247,0.3) 30%, transparent 70%);
-  filter: blur(60px); top: auto; bottom: -30%; left: -10%; width: 120%; height: 70%;
-  animation: dashGlowBottom 5s ease-in-out infinite alternate;
-}
-@keyframes dashGlow {
-  from { opacity: 0.6; transform: scale(1); }
-  to { opacity: 1; transform: scale(1.08); }
-}
-@keyframes dashGlowBottom {
-  from { opacity: 0.4; transform: scale(1) translateY(0); }
-  to { opacity: 0.8; transform: scale(1.1) translateY(-10px); }
+@keyframes holoGlow {
+  from { opacity: 0.5; transform: scale(1); }
+  to { opacity: 0.9; transform: scale(1.1); }
 }
 
 /* ── ROTATING WORD ── */
@@ -1156,11 +1066,7 @@ img { max-width: 100%; }
   .hero-left { flex: 0 0 46%; }
   .hero-split { gap: 24px; }
   .hero-title { font-size: clamp(24px, 3vw, 34px); }
-  .hero-dashboard-wrapper { max-width: 520px; }
-  .hero-laptop-key { width: 12px; height: 8px; }
-  .hero-laptop-key.wide { width: 28px; }
-  .hero-laptop-key.space { width: 60px; }
-  .hero-laptop-trackpad { width: 60px; height: 36px; }
+  .hero-holo-wrapper { max-width: 480px; }
   .pricing-card.popular { transform: none; }
   .pricing-card.popular:hover { transform: translateY(-6px); }
   .svc-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1195,14 +1101,7 @@ img { max-width: 100%; }
   .hero-stat-val { font-size: 22px; }
   .hero-trust, .hero-social-proof, .hero-used-by { text-align: center; }
   .hero-sub-line, .hero-sub-line2 { margin-left: auto; margin-right: auto; }
-  .hero-dashboard-wrapper { max-width: 100%; width: 100%; }
-  .hero-laptop { transform: none; }
-  .hero-laptop:hover { transform: scale(1.02); }
-  .hero-laptop-keyboard { padding: 8px 14px 6px; }
-  .hero-laptop-key { width: 11px; height: 7px; }
-  .hero-laptop-key.wide { width: 24px; }
-  .hero-laptop-key.space { width: 50px; }
-  .hero-laptop-trackpad { width: 50px; height: 30px; }
+  .hero-holo-wrapper { max-width: 100%; }
   .sc-info { flex-direction: column; padding: 16px 20px; }
   .showcase-tabs { gap: 4px; }
   .sc-tab { padding: 8px 14px; font-size: 11px; }

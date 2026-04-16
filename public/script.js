@@ -387,6 +387,49 @@ document.querySelectorAll('.pricing-card').forEach(card => {
   card.addEventListener('mouseleave', () => { card.style.background = ''; });
 });
 
+// ── HERO HOLOGRAPHIC VIDEO (PING-PONG LOOP) ──
+const holoVideo = document.getElementById('hero-holo-video');
+if (holoVideo) {
+  // Fade in once loaded
+  holoVideo.addEventListener('canplay', () => {
+    holoVideo.classList.add('loaded');
+  }, { once: true });
+
+  let holoForward = true;
+  const STEP = 1 / 30; // ~30fps seek step for reverse
+
+  holoVideo.addEventListener('ended', () => {
+    holoForward = false;
+    reversePlay();
+  });
+
+  function reversePlay() {
+    if (holoForward) return;
+    const t = holoVideo.currentTime - STEP;
+    if (t <= 0) {
+      holoVideo.currentTime = 0;
+      holoForward = true;
+      holoVideo.play();
+      return;
+    }
+    holoVideo.currentTime = t;
+    requestAnimationFrame(reversePlay);
+  }
+
+  // Start playing when hero section is visible
+  const heroEl = document.getElementById('hero');
+  const holoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        holoVideo.play().catch(() => {});
+      } else {
+        holoVideo.pause();
+      }
+    });
+  }, { threshold: 0.3 });
+  if (heroEl) holoObserver.observe(heroEl);
+}
+
 // ── DEMO VIDEO MODAL ──
 window.openDemoModal = function() {
   const modal = document.getElementById('demo-modal');

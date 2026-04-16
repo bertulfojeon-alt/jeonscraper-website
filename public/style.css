@@ -429,17 +429,23 @@ img { max-width: 100%; }
   backdrop-filter: blur(8px);
 }
 .prob-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--purple), var(--blue));
-  opacity: 0; transition: opacity 0.4s ease;
+  content: ''; position: absolute; inset: -1px; border-radius: inherit;
+  background: linear-gradient(135deg, var(--purple), var(--blue), var(--green), var(--pink));
+  z-index: -1; opacity: 0; transition: opacity 0.4s ease;
+}
+.prob-card::after {
+  content: ''; position: absolute; inset: 1px; border-radius: inherit;
+  background: linear-gradient(160deg, rgba(30,40,60,0.95), rgba(20,28,42,0.98));
+  z-index: -1; opacity: 0; transition: opacity 0.4s ease;
 }
 .prob-card:hover {
   transform: scale(1.15);
-  border-color: rgba(124,58,237,0.3);
+  border-color: transparent;
   box-shadow: 0 12px 50px rgba(124,58,237,0.2), 0 0 80px rgba(124,58,237,0.1);
   z-index: 2;
 }
 .prob-card:hover::before { opacity: 1; }
+.prob-card:hover::after { opacity: 1; }
 .prob-icon { font-size: 40px; margin-bottom: 16px; }
 .prob-icon-art {
   width: 100%; height: 100px; margin-bottom: 18px;
@@ -447,13 +453,18 @@ img { max-width: 100%; }
 }
 .prob-icon-art svg { width: 100%; max-width: 160px; height: auto; }
 
-/* ── SVG hover: whole illustration lifts + glows ── */
+/* ── SVG glow on card hover ── */
 .prob-svg {
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: filter 0.4s ease;
 }
 .prob-card:hover .prob-svg {
-  transform: scale(1.1) translateY(-4px);
-  filter: drop-shadow(0 4px 16px rgba(124,58,237,0.25));
+  filter: drop-shadow(0 4px 16px rgba(124,58,237,0.3));
+}
+.prob-card:hover h3 {
+  color: var(--purple-light);
+}
+.prob-card:hover ul li {
+  color: var(--text);
 }
 
 /* ── Card 1: Product Scraping ── */
@@ -574,11 +585,12 @@ img { max-width: 100%; }
   0%, 100% { opacity: 0; transform: translateX(0); }
   50% { opacity: 0.5; transform: translateX(3px); }
 }
-.prob-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.prob-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; transition: color 0.4s ease; }
 .prob-card ul { list-style: none; }
 .prob-card ul li {
   font-size: 13px; color: var(--text2); padding: 4px 0;
   display: flex; align-items: center; gap: 8px;
+  transition: color 0.4s ease;
 }
 .prob-card ul li::before {
   content: '•'; color: var(--text3); flex-shrink: 0; font-size: 10px;

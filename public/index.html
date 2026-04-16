@@ -26,10 +26,10 @@
       <span>JeonScraper</span>
     </a>
     <div class="nav-links" id="nav-links">
-      <a href="#features">Features</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
+      <a href="#features" id="nav-link-features">Features</a>
+      <a href="#showcase" id="nav-link-showcase">Showcase</a>
+      <a href="#pricing" id="nav-link-pricing">Pricing</a>
+      <a href="#faq" id="nav-link-faq">FAQ</a>
     </div>
     <div class="nav-actions">
       <a href="#pricing" class="btn-nav-cta">Start Free Trial</a>
@@ -41,31 +41,26 @@
 </nav>
 
 <!-- ── HERO ── -->
-<section class="hero" id="hero">
-  <div class="hero-particles" id="hero-particles"></div>
-  <div class="hero-gradient"></div>
-
-  <!-- Floating glass pills (decorative) -->
-  <div class="glass-pill gp-1"></div>
-  <div class="glass-pill gp-2"></div>
-  <div class="glass-pill gp-3"></div>
-  <div class="glass-pill gp-4"></div>
-  <div class="glass-pill gp-5"></div>
-
+<section class="snap-section hero" id="hero">
   <div class="hero-content">
     <div class="hero-badge anim-fade" data-delay="0">
       <span class="badge-dot"></span>
       Trusted by 50+ Shopify Store Owners
     </div>
     <h1 class="hero-title anim-fade" data-delay="100">
-      Know What Your<br>
-      <span class="gradient-text">Competitors Sell</span><br>
+      Know What Your Competitors<br>
+      <span class="rotating-word">
+        <span class="rw-item active"><span class="gradient-text">SELL</span></span>
+        <span class="rw-item"><span class="gradient-text">PRICE</span></span>
+        <span class="rw-item"><span class="gradient-text">STOCK</span></span>
+        <span class="rw-item"><span class="gradient-text">LAUNCH</span></span>
+        <span class="rw-item"><span class="gradient-text">SOURCE</span></span>
+        <span class="rw-item"><span class="gradient-text">PLAN</span></span>
+      </span><br>
       Before They Do
     </h1>
-    <p class="hero-sub anim-fade" data-delay="200">
-      Get professional competitive intelligence reports delivered to your inbox.<br>
-      Product scrapes, price monitoring, market analysis — all done for you.
-    </p>
+    <p class="hero-sub-line anim-fade" data-delay="200">Get professional competitive intelligence reports delivered to your inbox.</p>
+    <p class="hero-sub-line2 anim-fade" data-delay="250">Product scrapes, price monitoring, market analysis — all done for you.</p>
     <div class="hero-ctas anim-fade" data-delay="300">
       <a href="#pricing" class="btn-primary btn-glow">
         <span>Start Free Trial</span>
@@ -92,86 +87,63 @@
       </div>
     </div>
   </div>
-  <div class="hero-visual anim-fade" data-delay="300">
-    <div class="hero-carousel" id="hero-carousel">
-      <div class="hc-window">
-        <div class="hc-track" id="hc-track">
-          <div class="hc-slide">
-            <img src="img/warroom-briefing.png" alt="War Room Briefing — competitive intelligence dashboard">
-          </div>
-          <div class="hc-slide">
-            <img src="img/warroom-matrix.png" alt="Product Matrix — cross-store product comparison">
-          </div>
-          <div class="hc-slide">
-            <img src="img/warroom-price.png" alt="Price Intel — price gap and margin analysis">
-          </div>
-          <div class="hc-slide">
-            <img src="img/warroom-opportunities.png" alt="Opportunities — actionable intelligence">
-          </div>
-          <div class="hc-slide">
-            <img src="img/scrape-page.png" alt="Scrape page — enter any Shopify store URL">
-          </div>
-        </div>
-      </div>
-      <div class="hc-controls">
-        <button class="hc-btn" onclick="heroCarousel(-1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="hc-dots" id="hc-dots">
-          <button class="hc-dot active" onclick="heroGoTo(0)"></button>
-          <button class="hc-dot" onclick="heroGoTo(1)"></button>
-          <button class="hc-dot" onclick="heroGoTo(2)"></button>
-          <button class="hc-dot" onclick="heroGoTo(3)"></button>
-          <button class="hc-dot" onclick="heroGoTo(4)"></button>
-        </div>
-        <button class="hc-btn" onclick="heroCarousel(1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-      <div class="hc-label" id="hc-label">War Room — Briefing Dashboard</div>
-    </div>
-  </div>
   <div class="scroll-indicator">
     <div class="scroll-mouse"><div class="scroll-dot"></div></div>
     <span>Scroll to explore</span>
   </div>
 </section>
 
-<!-- ── PAIN POINTS ── -->
-<section class="section section-problems" id="problems">
+<!-- ── THE PROBLEM ── -->
+<section class="snap-section section" id="problems">
   <div class="container">
     <div class="section-label anim-slide-up">The Problem</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       Flying Blind Against<br><span class="gradient-text">Your Competitors</span>
     </h2>
-    <p class="section-sub anim-slide-up" data-delay="150">Discover the intelligence gaps you can't afford to ignore</p>
-    <div class="problems-grid">
-      <div class="problem-card anim-slide-up" data-delay="100">
-        <div class="problem-icon">🔍</div>
-        <h3>Hours of Manual Research</h3>
-        <p>Checking competitor stores one by one, copy-pasting prices into spreadsheets. Your VA takes days for what we do in minutes.</p>
+    <p class="section-sub anim-slide-up" data-delay="150">Discover the Intelligence Gaps You Can't Afford to Ignore</p>
+    <div class="prob-grid">
+      <div class="prob-card anim-slide-up" data-delay="100">
+        <div class="prob-icon">🔍</div>
+        <h3>Product Scraping</h3>
+        <ul>
+          <li>Real-time Product &amp; Price Alerts</li>
+          <li>Automated Catalog Monitoring</li>
+          <li>Track Product Life Cycles</li>
+        </ul>
       </div>
-      <div class="problem-card anim-slide-up" data-delay="200">
-        <div class="problem-icon">💸</div>
-        <h3>Losing Sales to Wrong Pricing</h3>
-        <p>You don't know when competitors drop prices. By the time you notice, customers already left for cheaper options.</p>
+      <div class="prob-card anim-slide-up" data-delay="200">
+        <div class="prob-icon">💰</div>
+        <h3>Losing Sales</h3>
+        <ul>
+          <li>Global Price Tracking</li>
+          <li>Dynamic Pricing Optimizations</li>
+          <li>Convert More Visitors</li>
+        </ul>
       </div>
-      <div class="problem-card anim-slide-up" data-delay="300">
-        <div class="problem-icon">🕳️</div>
-        <h3>Missing Product Opportunities</h3>
-        <p>Competitors sell products you don't even know about. Every day without that data is revenue left on the table.</p>
+      <div class="prob-card anim-slide-up" data-delay="300">
+        <div class="prob-icon">🗺️</div>
+        <h3>Missing Opportunities</h3>
+        <ul>
+          <li>Uncover Product Gaps</li>
+          <li>Spot Market Trends</li>
+          <li>Explore Emerging Categories</li>
+        </ul>
       </div>
-      <div class="problem-card anim-slide-up" data-delay="400">
-        <div class="problem-icon">📊</div>
-        <h3>No Market Intelligence</h3>
-        <p>No idea which brands are trending, which categories are growing, or what your competitors are doing differently.</p>
+      <div class="prob-card anim-slide-up" data-delay="400">
+        <div class="prob-icon">🌐</div>
+        <h3>Global Market Intelligence</h3>
+        <ul>
+          <li>Comprehensive Market Analysis</li>
+          <li>Real-time Alerts &amp; Benchmarking</li>
+          <li>Marketing Campaign Analytics</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── FEATURES ── -->
-<section class="section section-features" id="features">
+<section class="snap-section section" id="features">
   <div class="container">
     <div class="section-label anim-slide-up">What You Get</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
@@ -180,16 +152,8 @@
     <div class="features-grid">
 
       <!-- PRODUCT SCRAPING -->
-      <div class="feature-card anim-scale" data-delay="0">
+      <div class="feat-card anim-pop" data-delay="0">
         <div class="feature-glow"></div>
-        <div class="feat-mini" data-feat="scrape">
-          <div class="fm-scrape">
-            <div class="fm-scrape-item" style="--d:0"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$29.99</div></div></div>
-            <div class="fm-scrape-item" style="--d:1"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$49.95</div></div></div>
-            <div class="fm-scrape-item" style="--d:2"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$18.50</div></div></div>
-            <div class="fm-scrape-item" style="--d:3"><div class="fm-prod-img"></div><div class="fm-prod-info"><div class="fm-prod-name"></div><div class="fm-prod-price">$64.00</div></div></div>
-          </div>
-        </div>
         <h3>Product Scraping</h3>
         <p>Full product catalogs from any Shopify store — names, prices, images, variants, vendors, tags. Delivered as Shopify-ready CSV or professional Excel reports.</p>
         <ul class="feature-list">
@@ -200,22 +164,8 @@
       </div>
 
       <!-- WAR ROOM -->
-      <div class="feature-card anim-scale" data-delay="100">
+      <div class="feat-card anim-pop" data-delay="100">
         <div class="feature-glow"></div>
-        <div class="feat-mini" data-feat="warroom">
-          <div class="fm-warroom">
-            <div class="fm-wr-stats">
-              <div class="fm-wr-stat"><div class="fm-wr-val" data-v="3">0</div><div class="fm-wr-lbl">Stores</div></div>
-              <div class="fm-wr-stat purple"><div class="fm-wr-val" data-v="847">0</div><div class="fm-wr-lbl">Products</div></div>
-              <div class="fm-wr-stat teal"><div class="fm-wr-val" data-v="23">0</div><div class="fm-wr-lbl">Overlap %</div></div>
-            </div>
-            <div class="fm-wr-bars">
-              <div class="fm-wr-bar" style="--w:75%;--c:var(--green)"><span>My Store</span></div>
-              <div class="fm-wr-bar" style="--w:62%;--c:var(--pink)"><span>Competitor</span></div>
-              <div class="fm-wr-bar" style="--w:48%;--c:var(--blue)"><span>Supplier</span></div>
-            </div>
-          </div>
-        </div>
         <h3>War Room Intelligence</h3>
         <p>Military-grade competitive analysis. Compare your store against competitors and suppliers. Find pricing gaps, product overlaps, and sourcing opportunities.</p>
         <ul class="feature-list">
@@ -226,43 +176,21 @@
       </div>
 
       <!-- PRICE MONITORING -->
-      <div class="feature-card anim-scale" data-delay="200">
+      <div class="feat-card anim-pop" data-delay="200">
         <div class="feature-glow"></div>
-        <div class="feat-mini" data-feat="price">
-          <div class="fm-price">
-            <svg class="fm-chart" viewBox="0 0 200 80" preserveAspectRatio="none">
-              <polyline class="fm-chart-line green-line" points="0,60 30,55 60,40 90,45 120,30 150,28 180,25 200,20"/>
-              <polyline class="fm-chart-line pink-line" points="0,50 30,48 60,55 90,35 120,50 150,42 180,38 200,45"/>
-            </svg>
-            <div class="fm-price-legend">
-              <span class="fm-pl-item green">● My Store</span>
-              <span class="fm-pl-item pink">● Competitor</span>
-            </div>
-            <div class="fm-price-alert">▼ -12% Price Drop Detected</div>
-          </div>
-        </div>
         <h3>Price Monitoring</h3>
         <p>Weekly or daily price tracking across competitors. Get alerted when prices change, products go on sale, or new discounts appear.</p>
         <ul class="feature-list">
           <li>Price change alerts</li>
-          <li>Discount & sale tracking</li>
+          <li>Discount &amp; sale tracking</li>
           <li>Historical price data</li>
         </ul>
       </div>
 
       <!-- NEW & REMOVED -->
-      <div class="feature-card anim-scale" data-delay="0">
+      <div class="feat-card anim-pop" data-delay="0">
         <div class="feature-glow"></div>
-        <div class="feat-mini" data-feat="diff">
-          <div class="fm-diff">
-            <div class="fm-diff-row new" style="--d:0"><span class="fm-diff-badge new">+NEW</span><span class="fm-diff-name"></span></div>
-            <div class="fm-diff-row new" style="--d:1"><span class="fm-diff-badge new">+NEW</span><span class="fm-diff-name"></span></div>
-            <div class="fm-diff-row removed" style="--d:2"><span class="fm-diff-badge removed">-GONE</span><span class="fm-diff-name"></span></div>
-            <div class="fm-diff-row price" style="--d:3"><span class="fm-diff-badge price">▲ +8%</span><span class="fm-diff-name"></span></div>
-            <div class="fm-diff-row price-down" style="--d:4"><span class="fm-diff-badge price-down">▼ -15%</span><span class="fm-diff-name"></span></div>
-          </div>
-        </div>
-        <h3>New & Removed Detection</h3>
+        <h3>New &amp; Removed Detection</h3>
         <p>Know when competitors add new products or discontinue old ones. Stay ahead of market trends before they become obvious.</p>
         <ul class="feature-list">
           <li>New product alerts</li>
@@ -272,52 +200,25 @@
       </div>
 
       <!-- STORE INTEL -->
-      <div class="feature-card anim-scale" data-delay="100">
+      <div class="feat-card anim-pop" data-delay="100">
         <div class="feature-glow"></div>
-        <div class="feat-mini" data-feat="intel">
-          <div class="fm-intel">
-            <div class="fm-intel-center">
-              <div class="fm-intel-ring"></div>
-              <div class="fm-intel-icon">🏪</div>
-            </div>
-            <div class="fm-intel-tag" style="--a:0deg;--r:52px;--d:0">🎨 Theme</div>
-            <div class="fm-intel-tag" style="--a:60deg;--r:52px;--d:1">🧩 Apps</div>
-            <div class="fm-intel-tag" style="--a:120deg;--r:52px;--d:2">📡 Pixels</div>
-            <div class="fm-intel-tag" style="--a:180deg;--r:52px;--d:3">💳 Payments</div>
-            <div class="fm-intel-tag" style="--a:240deg;--r:52px;--d:4">💬 Chat</div>
-            <div class="fm-intel-tag" style="--a:300deg;--r:52px;--d:5">📱 Social</div>
-          </div>
-        </div>
         <h3>Store Intelligence</h3>
         <p>Full audit of any Shopify store — theme, apps, tracking pixels, payment methods, social links, chat widgets, and 15+ feature detections.</p>
         <ul class="feature-list">
-          <li>App & theme detection</li>
+          <li>App &amp; theme detection</li>
           <li>Tech stack analysis</li>
           <li>Feature gap finder</li>
         </ul>
       </div>
 
       <!-- MARKET RESEARCH -->
-      <div class="feature-card anim-scale" data-delay="200">
+      <div class="feat-card anim-pop" data-delay="200">
         <div class="feature-glow"></div>
-        <div class="feat-mini" data-feat="market">
-          <div class="fm-market">
-            <div class="fm-market-cats">
-              <div class="fm-cat-bar" style="--w:85%;--d:0"><span>Apparel</span><span>85%</span></div>
-              <div class="fm-cat-bar" style="--w:62%;--d:1"><span>Accessories</span><span>62%</span></div>
-              <div class="fm-cat-bar" style="--w:44%;--d:2"><span>Footwear</span><span>44%</span></div>
-              <div class="fm-cat-bar" style="--w:31%;--d:3"><span>Home</span><span>31%</span></div>
-            </div>
-            <div class="fm-market-trend">
-              <span class="fm-trend-badge">🔥 Trending: +24 new products this week</span>
-            </div>
-          </div>
-        </div>
         <h3>Market Research</h3>
         <p>Understand your entire niche. Trending products, category gaps, brand analysis, vendor cleanup, and bestseller detection across the market.</p>
         <ul class="feature-list">
           <li>Trending products report</li>
-          <li>Category & brand analysis</li>
+          <li>Category &amp; brand analysis</li>
           <li>Vendor normalization</li>
         </ul>
       </div>
@@ -327,7 +228,7 @@
 </section>
 
 <!-- ── SHOWCASE ── -->
-<section class="section section-showcase" id="showcase">
+<section class="snap-section section" id="showcase">
   <div class="container">
     <div class="section-label anim-slide-up">Service Catalog</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
@@ -344,7 +245,7 @@
       <button class="sc-tab" onclick="switchShowcase(5)">Opportunities</button>
     </div>
 
-    <div class="showcase-viewer anim-scale" data-delay="250" id="showcase-viewer">
+    <div class="showcase-viewer anim-scale" data-delay="250" id="showcase-viewer" id="showcase-scroll-container">
       <div class="sc-screen" id="sc-screen">
 
         <!-- TAB 0: BRIEFING -->
@@ -464,43 +365,39 @@
   </div>
 </section>
 
-<!-- ── COMPARISON ── -->
-<section class="section section-compare">
+<!-- ── WHY SWITCH / COMPARISON ── -->
+<section class="snap-section section section-compare" id="compare">
   <div class="container">
     <div class="section-label anim-slide-up">Why Switch</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
-      <span class="gradient-text">Traditional VA</span> vs JeonScraper
+      Traditional VA vs <span class="gradient-text">JeonScraper</span>
     </h2>
-    <div class="compare-card anim-slide-up" data-delay="200">
-      <div class="compare-grid">
-        <div class="compare-col">
-          <div class="compare-label bad">Traditional VA</div>
-          <div class="compare-item"><span class="x-mark">✕</span> 2-5 days for 500 products</div>
-          <div class="compare-item"><span class="x-mark">✕</span> Human errors & missed products</div>
-          <div class="compare-item"><span class="x-mark">✕</span> $500-2,000/month</div>
-          <div class="compare-item"><span class="x-mark">✕</span> Can monitor 1-2 competitors</div>
-          <div class="compare-item"><span class="x-mark">✕</span> Basic spreadsheet reports</div>
-          <div class="compare-item"><span class="x-mark">✕</span> Transfers 10+ stores simultaneously</div>
-        </div>
-        <div class="compare-divider">
-          <div class="compare-vs-badge">VS</div>
-        </div>
-        <div class="compare-col">
-          <div class="compare-label good">JeonScraper</div>
-          <div class="compare-item"><span class="check-mark">✓</span> Same-day delivery</div>
-          <div class="compare-item"><span class="check-mark">✓</span> 100% data accuracy</div>
-          <div class="compare-item"><span class="check-mark">✓</span> Starting at $29/month</div>
-          <div class="compare-item"><span class="check-mark">✓</span> Monitor 10+ stores simultaneously</div>
-          <div class="compare-item"><span class="check-mark">✓</span> Professional War Room reports</div>
-          <div class="compare-item"><span class="check-mark">✓</span> Prefilled War Room reports</div>
-        </div>
+    <div class="cmp-wrapper anim-slide-up" data-delay="200">
+      <div class="cmp-col cmp-va">
+        <div class="cmp-col-label">Traditional VA</div>
+        <div class="cmp-item"><span class="x-mark">✕</span> 2-5 days for 500 products</div>
+        <div class="cmp-item"><span class="x-mark">✕</span> Human errors &amp; missed products</div>
+        <div class="cmp-item"><span class="x-mark">✕</span> $500-2,000/month</div>
+        <div class="cmp-item"><span class="x-mark">✕</span> Can monitor 1-2 competitors</div>
+        <div class="cmp-item"><span class="x-mark">✕</span> Basic spreadsheet reports</div>
+        <div class="cmp-item"><span class="x-mark">✕</span> Transfers 10+ stores simultaneously</div>
+      </div>
+      <div class="cmp-vs">VS</div>
+      <div class="cmp-col cmp-jeon">
+        <div class="cmp-col-label">JeonScraper</div>
+        <div class="cmp-item"><span class="check-mark">✓</span> Same-day delivery</div>
+        <div class="cmp-item"><span class="check-mark">✓</span> 100% data accuracy</div>
+        <div class="cmp-item"><span class="check-mark">✓</span> Starting at $29/month</div>
+        <div class="cmp-item"><span class="check-mark">✓</span> Monitor 10+ stores simultaneously</div>
+        <div class="cmp-item"><span class="check-mark">✓</span> Professional War Room reports</div>
+        <div class="cmp-item"><span class="check-mark">✓</span> Prefilled War Room reports</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── HOW IT WORKS ── -->
-<section class="section section-how" id="how-it-works">
+<section class="snap-section section" id="how-it-works">
   <div class="container">
     <div class="section-label anim-slide-up">Simple Process</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
@@ -511,11 +408,13 @@
         <div class="step-num">01</div>
         <div class="step-content">
           <h3>Tell Us Your Competitors</h3>
-          <p>Share the Shopify store URLs you want to monitor. Your store, your competitors, your suppliers — as many as your plan allows.</p>
+          <p>Share the Shopify store URLs you want to monitor — your competitors, plus optionally your own store and supplier stores for War Room analysis.</p>
         </div>
         <div class="step-visual">
           <div class="step-mock">
             <div class="sm-input">https://competitor-store.com</div>
+            <div class="sm-input sm-input-opt">https://your-store.com (optional)</div>
+            <div class="sm-input sm-input-opt">https://supplier-store.com (optional)</div>
             <div class="sm-btn">ANALYZE</div>
           </div>
         </div>
@@ -524,7 +423,7 @@
       <div class="step anim-slide-right" data-delay="100">
         <div class="step-num">02</div>
         <div class="step-content">
-          <h3>We Scrape & Analyze</h3>
+          <h3>We Scrape &amp; Analyze</h3>
           <p>Our intelligence engine scrapes every product, compares prices, detects changes, identifies opportunities, and builds your competitive matrix.</p>
         </div>
         <div class="step-visual">
@@ -555,8 +454,8 @@
   </div>
 </section>
 
-<!-- ── SERVICES — THE PROVEN ALTERNATIVE ── -->
-<section class="section section-services" id="services">
+<!-- ── SERVICES ── -->
+<section class="snap-section section" id="services">
   <div class="container">
     <div class="section-label anim-slide-up">Service Catalog</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
@@ -617,7 +516,7 @@
 </section>
 
 <!-- ── PRICING ── -->
-<section class="section section-pricing" id="pricing">
+<section class="snap-section section" id="pricing">
   <div class="container">
     <div class="section-label anim-slide-up">Pricing</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
@@ -642,7 +541,7 @@
           <li><span class="pf-check">&#10003;</span> Shopify-ready CSV export</li>
           <li><span class="pf-check">&#10003;</span> Excel product reports</li>
           <li><span class="pf-check">&#10003;</span> 2 Store Intel audits</li>
-          <li><span class="pf-check">&#10003;</span> Sale & discount reports</li>
+          <li><span class="pf-check">&#10003;</span> Sale &amp; discount reports</li>
           <li><span class="pf-check">&#10003;</span> 48-hour delivery</li>
           <li class="pf-disabled"><span class="pf-x">&#10005;</span> War Room intelligence</li>
           <li class="pf-disabled"><span class="pf-x">&#10005;</span> Weekly monitoring</li>
@@ -705,7 +604,7 @@
 </section>
 
 <!-- ── FAQ ── -->
-<section class="section section-faq" id="faq">
+<section class="snap-section section" id="faq">
   <div class="container container-narrow">
     <div class="section-label anim-slide-up">FAQ</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
@@ -766,7 +665,7 @@
 </section>
 
 <!-- ── FINAL CTA ── -->
-<section class="section section-cta" id="contact">
+<section class="snap-section section" id="contact">
   <div class="cta-bg"></div>
   <div class="container" style="position:relative;z-index:2;">
     <h2 class="cta-title anim-slide-up">
@@ -777,6 +676,8 @@
       <div class="cta-inputs">
         <input type="email" placeholder="Your email address" required id="cta-email" class="cta-input">
         <input type="url" placeholder="Competitor store URL (optional)" id="cta-url" class="cta-input">
+        <input type="url" placeholder="Your own shop URL (optional)" id="cta-shop" class="cta-input">
+        <input type="url" placeholder="Supplier store URL (optional)" id="cta-supplier" class="cta-input">
       </div>
       <button type="submit" class="btn-primary btn-glow btn-lg">
         <span>Start Free Trial</span>

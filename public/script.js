@@ -2,6 +2,12 @@
    JEONSCRAPER — Landing Page Interactions (Redesign v2)
    ══════════════════════════════════════════════════════════════════════════════ */
 
+// ── FORCE SCROLL TO TOP ON PAGE LOAD / REFRESH ──
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo({ top: 0, behavior: 'instant' });
+
 // ── NAVBAR SCROLL ──
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {

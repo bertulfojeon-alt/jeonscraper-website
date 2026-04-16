@@ -427,44 +427,43 @@ img { max-width: 100%; }
   border: 1px solid rgba(255,255,255,0.06);
   position: relative;
   backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: probCardIdle 6s ease-in-out infinite;
-}
-/* Subtle idle float — barely perceptible */
-@keyframes probCardIdle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+  transform: translateY(0) scale(1);
+  transition:
+    transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.28s ease,
+    background 0.28s ease;
 }
 /* Top-edge gradient accent — hidden at rest */
 .prob-card::before {
-  content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.4), rgba(79,142,247,0.4), transparent);
-  opacity: 0; transition: opacity 0.3s ease, left 0.3s ease, right 0.3s ease;
+  content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.5), rgba(79,142,247,0.5), transparent);
+  opacity: 0; transition: opacity 0.28s ease, left 0.28s ease, right 0.28s ease;
+  z-index: 1;
 }
 /* Inner ambient glow — hidden at rest */
 .prob-card::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.08) 0%, transparent 70%);
-  opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 65%);
+  opacity: 0; transition: opacity 0.28s ease; pointer-events: none;
 }
 
-/* ── HOVER: Card Container ── */
+/* ── HOVER: Entire card scales + lifts ── */
 .prob-card:hover {
-  transform: scale(1.04) translateY(-6px);
-  border-color: rgba(124,58,237,0.2);
-  background: linear-gradient(160deg, rgba(35,48,70,0.9), rgba(22,32,48,0.95));
+  transform: translateY(-8px) scale(1.05);
+  border-color: rgba(124,58,237,0.25);
+  background: linear-gradient(160deg, rgba(38,52,78,0.92), rgba(24,35,52,0.96));
   box-shadow:
-    0 4px 16px rgba(0,0,0,0.2),
-    0 16px 48px rgba(0,0,0,0.25),
-    0 0 0 1px rgba(124,58,237,0.1),
-    0 0 40px rgba(124,58,237,0.06);
+    0 4px 12px rgba(0,0,0,0.15),
+    0 20px 48px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(124,58,237,0.12),
+    0 0 48px rgba(124,58,237,0.08);
   z-index: 10;
-  animation: none;
 }
-.prob-card:hover::before { opacity: 1; left: 10%; right: 10%; }
+.prob-card:hover::before { opacity: 1; left: 5%; right: 5%; }
 .prob-card:hover::after { opacity: 1; }
 
-/* ── HOVER: Icon — micro-parallax (moves faster than text) ── */
+/* ── HOVER: Icon — micro-parallax (moves MORE than text = depth) ── */
 .prob-icon { font-size: 40px; margin-bottom: 16px; }
 .prob-icon-art {
   width: 100%; height: 100px; margin-bottom: 18px;
@@ -472,14 +471,14 @@ img { max-width: 100%; }
 }
 .prob-icon-art svg {
   width: 100%; max-width: 160px; height: auto;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), filter 0.28s ease;
 }
 .prob-card:hover .prob-icon-art svg {
-  transform: scale(1.12) translateY(-6px);
-  filter: drop-shadow(0 4px 12px rgba(124,58,237,0.2));
+  transform: scale(1.15) translateY(-8px) rotate(-2deg);
+  filter: drop-shadow(0 6px 18px rgba(124,58,237,0.25));
 }
 
-/* ── HOVER: Text — subtle lift with parallax offset ── */
+/* ── HOVER: Text — subtle parallax lift ── */
 .prob-card:hover h3 {
   transform: translateY(-3px);
   color: #fff;
@@ -490,10 +489,6 @@ img { max-width: 100%; }
 .prob-card:hover ul li {
   color: var(--text);
 }
-/* Stagger idle float so cards don't sync */
-.prob-card:nth-child(2) { animation-delay: 1.5s; }
-.prob-card:nth-child(3) { animation-delay: 3s; }
-.prob-card:nth-child(4) { animation-delay: 4.5s; }
 
 /* ── Card 1: Product Scraping ── */
 /* Grid boxes fade-pulse */

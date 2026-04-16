@@ -387,6 +387,30 @@ document.querySelectorAll('.pricing-card').forEach(card => {
   card.addEventListener('mouseleave', () => { card.style.background = ''; });
 });
 
+// ── DEMO VIDEO MODAL ──
+window.openDemoModal = function() {
+  const modal = document.getElementById('demo-modal');
+  const iframe = document.getElementById('demo-iframe');
+  iframe.src = 'https://www.youtube.com/embed/19mm12X6670?autoplay=1&rel=0';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeDemoModal = function(e) {
+  if (e && e.target !== e.currentTarget && !e.target.classList.contains('demo-modal-close')) return;
+  const modal = document.getElementById('demo-modal');
+  const iframe = document.getElementById('demo-iframe');
+  iframe.src = '';
+  modal.classList.remove('active');
+  if (!showcaseLocked) {
+    document.body.style.overflow = '';
+  }
+};
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDemoModal();
+});
+
 // ── SCROLL-TO-TOP BUTTON ──
 const scrollTopBtn = document.getElementById('scroll-top-btn');
 if (scrollTopBtn) {

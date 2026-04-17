@@ -417,28 +417,31 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeDemoModal();
 });
 
-// ── FEATURES TAB SWITCHER ──
+// ── FEATURES SCROLL-LOCK (same pattern as Showcase) ──
 let featCurrentTab = 0;
-let featAutoTimer = null;
-const FEAT_TAB_DURATION = 4000;
+const featTabCount = 6;
+let featLocked = false;
+let lastFeatWheelTime = 0;
 
-window.switchFeatTab = function(idx, userInitiated = false) {
-  const tabs = document.querySelectorAll('.feat-tab');
+window.switchFeatTab = function(idx) {
+  const tabs   = document.querySelectorAll('.feat-tab');
   const panels = document.querySelectorAll('.fp-item');
   if (!tabs.length || !panels.length) return;
 
-  // Exit current panel
+  // Mark current as exit
   panels[featCurrentTab]?.classList.add('exit');
   setTimeout(() => panels[featCurrentTab]?.classList.remove('exit'), 400);
 
-  // Update tabs
-  tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+  // Update active tab + progress bar (restart animation by re-adding class)
+  tabs.forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
 
-  // Activate new panel — re-insert it to restart CSS animations
+  // Activate new panel (reflow restarts CSS animations inside)
   panels.forEach((p, i) => {
     if (i === idx) {
       p.classList.remove('active');
-      void p.offsetWidth; // reflow to restart animations
+      void p.offsetWidth;
       p.classList.add('active');
     } else {
       p.classList.remove('active');
@@ -446,43 +449,111 @@ window.switchFeatTab = function(idx, userInitiated = false) {
   });
 
   featCurrentTab = idx;
-
-  // Reset auto-advance timer
-  if (userInitiated) {
-    clearInterval(featAutoTimer);
-    featAutoTimer = setTimeout(startFeatAutoAdvance, FEAT_TAB_DURATION * 2);
-  }
 };
 
-function startFeatAutoAdvance() {
-  clearInterval(featAutoTimer);
-  featAutoTimer = setInterval(() => {
-    const tabs = document.querySelectorAll('.feat-tab');
-    if (!tabs.length) return;
-    const next = (featCurrentTab + 1) % tabs.length;
-    switchFeatTab(next, false);
-  }, FEAT_TAB_DURATION);
-}
+const featEl = document.getElementById('features');
 
-// Bind click with userInitiated flag
-document.querySelectorAll('.feat-tab').forEach((tab, i) => {
-  tab.addEventListener('click', () => switchFeatTab(i, true));
-});
+if (featEl) {
+  function lockFeatScroll() {
+    if (!featLocked) {
+      featLocked = true;
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function unlockFeatScroll() {
+    if (featLocked) {
+      featLocked = false;
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+  }
 
-// Start auto-advance only when features section is visible
-const featSection = document.getElementById('features');
-if (featSection) {
-  const featObserver = new IntersectionObserver((entries) => {
+  // Lock when section enters, unlock when it leaves
+  const featViewObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        switchFeatTab(0, false);
-        startFeatAutoAdvance();
+        lockFeatScroll();
+        switchFeatTab(0);
       } else {
-        clearInterval(featAutoTimer);
+        unlockFeatScroll();
       }
     });
-  }, { threshold: 0.4 });
-  featObserver.observe(featSection);
+  }, { threshold: 0.6 });
+  featViewObserver.observe(featEl);
+
+  // Wheel — switches tabs, page stays frozen
+  window.addEventListener('wheel', (e) => {
+    if (!featLocked) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const now = Date.now();
+    if (now - lastFeatWheelTime < 500) return;
+
+    const direction = e.deltaY > 0 ? 1 : -1;
+
+    if (direction === 1) {
+      if (featCurrentTab < featTabCount - 1) {
+        lastFeatWheelTime = now;
+        switchFeatTab(featCurrentTab + 1);
+      } else {
+        unlockFeatScroll();
+        const next = featEl.nextElementSibling;
+        if (next) next.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      if (featCurrentTab > 0) {
+        lastFeatWheelTime = now;
+        switchFeatTab(featCurrentTab - 1);
+      } else {
+        unlockFeatScroll();
+        const prev = featEl.previousElementSibling;
+        if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, { passive: false });
+
+  // Touch support
+  let featTouchStartY = 0;
+  featEl.addEventListener('touchstart', (e) => {
+    featTouchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  featEl.addEventListener('touchmove', (e) => {
+    if (featLocked) e.preventDefault();
+  }, { passive: false });
+
+  featEl.addEventListener('touchend', (e) => {
+    if (!featLocked) return;
+    const diff = featTouchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) < 40) return;
+
+    const direction = diff > 0 ? 1 : -1;
+    if (direction === 1) {
+      if (featCurrentTab < featTabCount - 1) {
+        switchFeatTab(featCurrentTab + 1);
+      } else {
+        unlockFeatScroll();
+        const next = featEl.nextElementSibling;
+        if (next) next.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      if (featCurrentTab > 0) {
+        switchFeatTab(featCurrentTab - 1);
+      } else {
+        unlockFeatScroll();
+        const prev = featEl.previousElementSibling;
+        if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, { passive: true });
+
+  // Tab clicks still work (won't affect lock)
+  document.querySelectorAll('.feat-tab').forEach((tab, i) => {
+    tab.addEventListener('click', () => switchFeatTab(i));
+  });
 }
 
 // ── SCROLL-TO-TOP BUTTON ──

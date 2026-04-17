@@ -417,6 +417,74 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeDemoModal();
 });
 
+// ── FEATURES TAB SWITCHER ──
+let featCurrentTab = 0;
+let featAutoTimer = null;
+const FEAT_TAB_DURATION = 4000;
+
+window.switchFeatTab = function(idx, userInitiated = false) {
+  const tabs = document.querySelectorAll('.feat-tab');
+  const panels = document.querySelectorAll('.fp-item');
+  if (!tabs.length || !panels.length) return;
+
+  // Exit current panel
+  panels[featCurrentTab]?.classList.add('exit');
+  setTimeout(() => panels[featCurrentTab]?.classList.remove('exit'), 400);
+
+  // Update tabs
+  tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+
+  // Activate new panel — re-insert it to restart CSS animations
+  panels.forEach((p, i) => {
+    if (i === idx) {
+      p.classList.remove('active');
+      void p.offsetWidth; // reflow to restart animations
+      p.classList.add('active');
+    } else {
+      p.classList.remove('active');
+    }
+  });
+
+  featCurrentTab = idx;
+
+  // Reset auto-advance timer
+  if (userInitiated) {
+    clearInterval(featAutoTimer);
+    featAutoTimer = setTimeout(startFeatAutoAdvance, FEAT_TAB_DURATION * 2);
+  }
+};
+
+function startFeatAutoAdvance() {
+  clearInterval(featAutoTimer);
+  featAutoTimer = setInterval(() => {
+    const tabs = document.querySelectorAll('.feat-tab');
+    if (!tabs.length) return;
+    const next = (featCurrentTab + 1) % tabs.length;
+    switchFeatTab(next, false);
+  }, FEAT_TAB_DURATION);
+}
+
+// Bind click with userInitiated flag
+document.querySelectorAll('.feat-tab').forEach((tab, i) => {
+  tab.addEventListener('click', () => switchFeatTab(i, true));
+});
+
+// Start auto-advance only when features section is visible
+const featSection = document.getElementById('features');
+if (featSection) {
+  const featObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        switchFeatTab(0, false);
+        startFeatAutoAdvance();
+      } else {
+        clearInterval(featAutoTimer);
+      }
+    });
+  }, { threshold: 0.4 });
+  featObserver.observe(featSection);
+}
+
 // ── SCROLL-TO-TOP BUTTON ──
 const scrollTopBtn = document.getElementById('scroll-top-btn');
 if (scrollTopBtn) {

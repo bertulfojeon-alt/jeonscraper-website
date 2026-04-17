@@ -651,37 +651,37 @@ img { max-width: 100%; }
 .feat-container {
   display: flex; flex-direction: column;
   width: 100%; height: 100%;
-  padding: 52px 24px 16px;
+  padding: 36px 24px 12px;
   max-width: 1200px; margin: 0 auto;
   box-sizing: border-box;
   min-height: 0;
 }
 
-.feat-header { text-align: center; margin-bottom: 12px; flex-shrink: 0; }
+.feat-header { text-align: center; margin-bottom: 8px; flex-shrink: 0; }
 
-/* Smaller title so it doesn't dominate the layout */
-#features .section-label { margin-bottom: 4px; }
+/* Compact title — must not take up much vertical space */
+#features .section-label { margin-bottom: 2px; font-size: 11px; }
 #features .section-title {
-  font-size: clamp(18px, 2.4vw, 30px);
+  font-size: clamp(16px, 2vw, 24px);
   margin-bottom: 0;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 /* Split layout — fills all remaining height */
 .feat-split {
-  display: flex; gap: 20px;
+  display: flex; gap: 16px;
   align-items: stretch;
   flex: 1; min-height: 0;
 }
 
 /* ── LEFT: Tab list ── */
 .feat-tabs {
-  flex: 0 0 290px; display: flex; flex-direction: column; gap: 5px;
+  flex: 0 0 270px; display: flex; flex-direction: column; gap: 4px;
   overflow: hidden;
 }
 .feat-tab {
   display: flex; align-items: center; gap: 10px;
-  padding: 0 14px; border-radius: 12px;
+  padding: 0 12px; border-radius: 10px;
   border: 1px solid transparent;
   cursor: pointer; position: relative;
   flex: 1; /* equal height for all 6 tabs */

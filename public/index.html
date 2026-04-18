@@ -26,8 +26,11 @@
       <span>JeonScraper</span>
     </a>
     <div class="nav-links" id="nav-links">
-      <a href="#features" id="nav-link-features">Features</a>
-      <a href="#showcase" id="nav-link-showcase">Showcase</a>
+      <a href="#problems" id="nav-link-problems">Problem</a>
+      <a href="#features" id="nav-link-features">Solution</a>
+      <a href="#showcase" id="nav-link-showcase">Service</a>
+      <a href="#compare" id="nav-link-compare">Why Switch</a>
+      <a href="#how-it-works" id="nav-link-how-it-works">How it Works</a>
       <a href="#pricing" id="nav-link-pricing">Pricing</a>
       <a href="#faq" id="nav-link-faq">FAQ</a>
     </div>
@@ -118,7 +121,6 @@
 <!-- ── THE PROBLEM ── -->
 <section class="snap-section section" id="problems">
   <div class="container">
-    <div class="section-label anim-slide-up">The Problem</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       Flying Blind Against<br><span class="gradient-text">Your Competitors</span>
     </h2>
@@ -265,7 +267,6 @@
 <section class="snap-section section" id="features">
   <div class="container feat-container">
     <div class="feat-header">
-      <div class="section-label anim-slide-up">What You Get</div>
       <h2 class="section-title anim-slide-up" data-delay="100" style="margin-bottom:0">
         Everything You Need to <span class="gradient-text">Dominate Your Niche</span>
       </h2>
@@ -277,57 +278,113 @@
       <div class="feat-tabs">
 
         <div class="feat-tab active" onclick="switchFeatTab(0)">
-          <div class="ft-icon">⚔️</div>
+          <div class="ft-icon-box ft-ib-purple">
+            <svg class="icon-swords" width="22" height="22" viewBox="0 0 24 24">
+              <!-- Sword 1: tip upper-left, pommel lower-right -->
+              <g transform="rotate(45,12,12)" fill="currentColor">
+                <polygon points="12,1 9.5,8 10.5,13 13.5,13 14.5,8"/>
+                <rect x="6.5" y="13" width="11" height="2.5" rx="0.8"/>
+                <rect x="10.5" y="15.5" width="3" height="5.5" rx="1"/>
+                <circle cx="12" cy="22.5" r="2.2"/>
+              </g>
+              <!-- Sword 2: tip upper-right, pommel lower-left -->
+              <g transform="rotate(-45,12,12)" fill="currentColor">
+                <polygon points="12,1 9.5,8 10.5,13 13.5,13 14.5,8"/>
+                <rect x="6.5" y="13" width="11" height="2.5" rx="0.8"/>
+                <rect x="10.5" y="15.5" width="3" height="5.5" rx="1"/>
+                <circle cx="12" cy="22.5" r="2.2"/>
+              </g>
+            </svg>
+          </div>
           <div class="ft-body">
             <div class="ft-title">War Room Intelligence</div>
             <div class="ft-desc">Military-grade competitive analysis across all dimensions</div>
           </div>
-          <div class="ft-arrow">→</div>
+          <svg class="ft-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>
 
         <div class="feat-tab" onclick="switchFeatTab(1)">
-          <div class="ft-icon">🗂️</div>
+          <div class="ft-icon-box ft-ib-orange">
+            <svg class="icon-bag" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+              <line x1="9" y1="15" x2="9" y2="18" stroke-width="2"/>
+              <line x1="12" y1="14" x2="12" y2="19" stroke-width="2.5"/>
+              <line x1="15" y1="15" x2="15" y2="18" stroke-width="2"/>
+            </svg>
+          </div>
           <div class="ft-body">
             <div class="ft-title">Product Scraping</div>
             <div class="ft-desc">Full catalogs, variants, CSV &amp; Excel export</div>
           </div>
-          <div class="ft-arrow">→</div>
+          <svg class="ft-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>
 
         <div class="feat-tab" onclick="switchFeatTab(2)">
-          <div class="ft-icon">📈</div>
+          <div class="ft-icon-box ft-ib-purple">
+            <svg class="icon-chart" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 20h20"/>
+              <line class="bar-1" x1="5" y1="20" x2="5" y2="14"/>
+              <line class="bar-2" x1="11" y1="20" x2="11" y2="8"/>
+              <line class="bar-3" x1="17" y1="20" x2="17" y2="11"/>
+              <polyline points="5,14 11,8 17,11 21,4" stroke-width="1.2" stroke-dasharray="2.5 1.5"/>
+              <circle cx="21" cy="4" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <div class="ft-body">
             <div class="ft-title">Price Monitoring</div>
             <div class="ft-desc">Daily alerts when competitors change prices</div>
           </div>
-          <div class="ft-arrow">→</div>
+          <svg class="ft-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>
 
         <div class="feat-tab" onclick="switchFeatTab(3)">
-          <div class="ft-icon">🔔</div>
+          <div class="ft-icon-box ft-ib-yellow">
+            <svg class="icon-alert" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 01-3.46 0"/>
+              <circle cx="18" cy="4" r="3" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <div class="ft-body">
             <div class="ft-title">New &amp; Removed Detection</div>
             <div class="ft-desc">Know before anyone else when products appear or vanish</div>
           </div>
-          <div class="ft-arrow">→</div>
+          <svg class="ft-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>
 
         <div class="feat-tab" onclick="switchFeatTab(4)">
-          <div class="ft-icon">🔍</div>
+          <div class="ft-icon-box ft-ib-purple">
+            <svg class="icon-search" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7.5"/>
+              <line x1="20.5" y1="20.5" x2="16" y2="16" stroke-width="2.2"/>
+              <line x1="8" y1="9" x2="14" y2="9" stroke-width="1.3"/>
+              <line x1="8" y1="11.5" x2="14" y2="11.5" stroke-width="1.3"/>
+              <line x1="8" y1="14" x2="11.5" y2="14" stroke-width="1.3"/>
+            </svg>
+          </div>
           <div class="ft-body">
             <div class="ft-title">Store Intelligence</div>
             <div class="ft-desc">Apps, themes, tech stack &amp; 15+ feature detections</div>
           </div>
-          <div class="ft-arrow">→</div>
+          <svg class="ft-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>
 
         <div class="feat-tab" onclick="switchFeatTab(5)">
-          <div class="ft-icon">🌐</div>
+          <div class="ft-icon-box ft-ib-blue">
+            <svg class="icon-globe" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+              <path d="M12 5a3 3 0 100 6 3 3 0 000-6z" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <div class="ft-body">
             <div class="ft-title">Market Research</div>
             <div class="ft-desc">Category gaps, brand intel, trending products</div>
           </div>
-          <div class="ft-arrow">→</div>
+          <svg class="ft-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>
 
       </div><!-- /feat-tabs -->
@@ -336,30 +393,30 @@
       <div class="feat-panel">
 
         <!-- Panel 0: War Room -->
-        <div class="fp-item active" id="fp-0">
+        <div class="fp-item" id="fp-0">
           <div class="fp-chrome">
             <div class="fp-chrome-dots"><span></span><span></span><span></span></div>
             <div class="fp-chrome-title">War Room — Briefing Dashboard</div>
           </div>
           <div class="fp-body">
             <div class="fp-stat-row">
-              <div class="fp-stat"><div class="fp-sv">847</div><div class="fp-sl">Products</div></div>
-              <div class="fp-stat"><div class="fp-sv fp-sv-purple">23</div><div class="fp-sl">Opportunities</div></div>
-              <div class="fp-stat"><div class="fp-sv fp-sv-red">11</div><div class="fp-sl">Price Risks</div></div>
-              <div class="fp-stat"><div class="fp-sv">$34</div><div class="fp-sl">Avg Gap</div></div>
+              <div class="fp-stat fp-stat-anim" style="--d:0"><div class="fp-sv" data-count="847">0</div><div class="fp-sl">Products</div></div>
+              <div class="fp-stat fp-stat-anim" style="--d:1"><div class="fp-sv fp-sv-purple" data-count="23">0</div><div class="fp-sl">Opportunities</div></div>
+              <div class="fp-stat fp-stat-anim" style="--d:2"><div class="fp-sv fp-sv-red" data-count="11">0</div><div class="fp-sl">Price Risks</div></div>
+              <div class="fp-stat fp-stat-anim" style="--d:3"><div class="fp-sv" data-count="34" data-prefix="$">$0</div><div class="fp-sl">Avg Gap</div></div>
             </div>
             <div class="fp-table">
-              <div class="fp-thead"><span>Product</span><span>My Price</span><span>Competitor</span><span>Action</span></div>
-              <div class="fp-trow"><span>Nike Air Max 270</span><span>$149</span><span>$189</span><span class="fp-tag fp-tag-green">ORDER</span></div>
-              <div class="fp-trow"><span>Adidas Ultra Boost</span><span>$210</span><span>$179</span><span class="fp-tag fp-tag-red">RISK</span></div>
-              <div class="fp-trow"><span>Jordan Retro 1</span><span>$220</span><span>—</span><span class="fp-tag fp-tag-blue">EXCLUSIVE</span></div>
-              <div class="fp-trow"><span>Yeezy Slide</span><span>—</span><span>$95</span><span class="fp-tag fp-tag-orange">UNTAPPED</span></div>
+              <div class="fp-thead fp-row-anim" style="--d:4"><span>Product</span><span>My Price</span><span>Competitor</span><span>Action</span></div>
+              <div class="fp-trow fp-row-anim" style="--d:5"><span>Nike Air Max 270</span><span>$149</span><span>$189</span><span class="fp-tag fp-tag-green">ORDER</span></div>
+              <div class="fp-trow fp-row-anim" style="--d:6"><span>Adidas Ultra Boost</span><span>$210</span><span>$179</span><span class="fp-tag fp-tag-red">RISK</span></div>
+              <div class="fp-trow fp-row-anim" style="--d:7"><span>Jordan Retro 1</span><span>$220</span><span>—</span><span class="fp-tag fp-tag-blue">EXCLUSIVE</span></div>
+              <div class="fp-trow fp-row-anim" style="--d:8"><span>Yeezy Slide</span><span>—</span><span>$95</span><span class="fp-tag fp-tag-orange">UNTAPPED</span></div>
             </div>
             <div class="fp-tags-row">
-              <span class="fp-pill">Product Matrix</span>
-              <span class="fp-pill">Price Intel</span>
-              <span class="fp-pill">Category Intel</span>
-              <span class="fp-pill fp-pill-purple">6 Intel Tabs</span>
+              <span class="fp-pill fp-pill-anim" style="--d:0">Product Matrix</span>
+              <span class="fp-pill fp-pill-anim" style="--d:1">Price Intel</span>
+              <span class="fp-pill fp-pill-anim" style="--d:2">Category Intel</span>
+              <span class="fp-pill fp-pill-purple fp-pill-anim" style="--d:3">6 Intel Tabs</span>
             </div>
           </div>
         </div>
@@ -368,35 +425,112 @@
         <div class="fp-item" id="fp-1">
           <div class="fp-chrome">
             <div class="fp-chrome-dots"><span></span><span></span><span></span></div>
-            <div class="fp-chrome-title">Product Scraper — 3 Stores</div>
+            <div class="fp-chrome-title">Results — competitor-store.com</div>
           </div>
-          <div class="fp-body">
-            <div class="fp-scrape-stores">
-              <div class="fp-store-row">
-                <div class="fp-store-name">competitor-store.com</div>
-                <div class="fp-store-bar"><div class="fp-store-fill" style="width:92%"></div></div>
-                <div class="fp-store-count">1,247 products</div>
+          <div class="fp-body fp-body-results">
+            <!-- Stats bar -->
+            <div class="fp-rh fp-row-anim" style="--d:0">
+              <div class="fp-rh-stats">
+                <span class="fp-rh-chip">1 Store</span>
+                <span class="fp-rh-chip purple" data-count="1247" data-suffix=" Products">0 Products</span>
+                <span class="fp-rh-chip green">1,189 In Stock</span>
               </div>
-              <div class="fp-store-row">
-                <div class="fp-store-name">my-store.myshopify.com</div>
-                <div class="fp-store-bar"><div class="fp-store-fill fp-fill-blue" style="width:68%"></div></div>
-                <div class="fp-store-count">843 products</div>
-              </div>
-              <div class="fp-store-row">
-                <div class="fp-store-name">supplier-store.com</div>
-                <div class="fp-store-bar"><div class="fp-store-fill fp-fill-pink" style="width:44%"></div></div>
-                <div class="fp-store-count">562 products</div>
+              <div class="fp-rh-views">
+                <span class="fp-rh-vbtn on">🖼</span>
+                <span class="fp-rh-vbtn">⠿</span>
               </div>
             </div>
-            <div class="fp-export-row">
-              <div class="fp-export-file"><span>📊</span> war_room_report.xlsx</div>
-              <div class="fp-export-file"><span>📦</span> shopify_import.csv</div>
-              <div class="fp-export-file"><span>📈</span> price_analysis.xlsx</div>
+            <!-- Filters bar -->
+            <div class="fp-rh-filters fp-row-anim" style="--d:1">
+              <div class="fp-rh-input">search products…</div>
+              <div class="fp-rh-sel">all vendors</div>
+              <div class="fp-rh-sel">all categories</div>
+              <div class="fp-rh-sel">price ↕</div>
             </div>
-            <div class="fp-tags-row">
-              <span class="fp-pill">Unlimited Products</span>
-              <span class="fp-pill">CSV Import Ready</span>
-              <span class="fp-pill fp-pill-purple">Multi-Store</span>
+            <!-- Product card grid -->
+            <div class="fp-card-grid">
+              <div class="fp-pcard fp-stat-anim" style="--d:1">
+                <div class="fp-pc-img"><svg viewBox="0 0 100 80"><rect width="100" height="80" rx="6" fill="rgba(124,58,237,0.12)"/><path d="M25 62l18-24 12 15 12-18 18 27H12z" fill="rgba(124,58,237,0.3)"/><circle cx="72" cy="22" r="6" fill="rgba(124,58,237,0.4)"/></svg><div class="fp-pc-dots"><span class="on"></span><span></span><span></span></div></div>
+                <div class="fp-pc-info">
+                  <div class="fp-pc-name">Nike Air Max 270</div>
+                  <div class="fp-pc-price">$149.00</div>
+                  <span class="fp-pc-badge in">In Stock</span>
+                </div>
+              </div>
+              <div class="fp-pcard fp-pcard-open fp-stat-anim" style="--d:2">
+                <div class="fp-pc-img"><svg viewBox="0 0 100 80"><rect width="100" height="80" rx="6" fill="rgba(79,142,247,0.12)"/><path d="M25 62l18-24 12 15 12-18 18 27H12z" fill="rgba(79,142,247,0.3)"/><circle cx="72" cy="22" r="6" fill="rgba(79,142,247,0.4)"/></svg><div class="fp-pc-dots"><span class="on"></span><span></span></div></div>
+                <div class="fp-pc-info">
+                  <div class="fp-pc-name">Adidas Ultra Boost 22</div>
+                  <div class="fp-pc-price">$189.00 <span class="fp-pc-cmp">$210.00</span></div>
+                  <span class="fp-pc-badge in">In Stock</span>
+                </div>
+              </div>
+              <div class="fp-pcard fp-stat-anim" style="--d:3">
+                <div class="fp-pc-img"><svg viewBox="0 0 100 80"><rect width="100" height="80" rx="6" fill="rgba(236,72,153,0.12)"/><path d="M25 62l18-24 12 15 12-18 18 27H12z" fill="rgba(236,72,153,0.3)"/><circle cx="72" cy="22" r="6" fill="rgba(236,72,153,0.4)"/></svg><div class="fp-pc-dots"><span class="on"></span><span></span><span></span><span></span></div></div>
+                <div class="fp-pc-info">
+                  <div class="fp-pc-name">Jordan Retro 1 High OG</div>
+                  <div class="fp-pc-price">$220.00</div>
+                  <span class="fp-pc-badge in">In Stock</span>
+                </div>
+              </div>
+              <div class="fp-pcard fp-stat-anim" style="--d:4">
+                <div class="fp-pc-img"><svg viewBox="0 0 100 80"><rect width="100" height="80" rx="6" fill="rgba(34,197,94,0.12)"/><path d="M25 62l18-24 12 15 12-18 18 27H12z" fill="rgba(34,197,94,0.3)"/><circle cx="72" cy="22" r="6" fill="rgba(34,197,94,0.4)"/></svg><div class="fp-pc-dots"><span class="on"></span><span></span></div></div>
+                <div class="fp-pc-info">
+                  <div class="fp-pc-name">New Balance 550</div>
+                  <div class="fp-pc-price">$109.00</div>
+                  <span class="fp-pc-badge out">Sold Out</span>
+                </div>
+              </div>
+              <div class="fp-pcard fp-stat-anim" style="--d:5">
+                <div class="fp-pc-img"><svg viewBox="0 0 100 80"><rect width="100" height="80" rx="6" fill="rgba(251,146,60,0.12)"/><path d="M25 62l18-24 12 15 12-18 18 27H12z" fill="rgba(251,146,60,0.3)"/><circle cx="72" cy="22" r="6" fill="rgba(251,146,60,0.4)"/></svg><div class="fp-pc-dots"><span class="on"></span><span></span><span></span></div></div>
+                <div class="fp-pc-info">
+                  <div class="fp-pc-name">Yeezy Slide Pure</div>
+                  <div class="fp-pc-price">$95.00</div>
+                  <span class="fp-pc-badge in">In Stock</span>
+                </div>
+              </div>
+              <div class="fp-pcard fp-stat-anim" style="--d:6">
+                <div class="fp-pc-img"><svg viewBox="0 0 100 80"><rect width="100" height="80" rx="6" fill="rgba(6,182,212,0.12)"/><path d="M25 62l18-24 12 15 12-18 18 27H12z" fill="rgba(6,182,212,0.3)"/><circle cx="72" cy="22" r="6" fill="rgba(6,182,212,0.4)"/></svg><div class="fp-pc-dots"><span class="on"></span><span></span></div></div>
+                <div class="fp-pc-info">
+                  <div class="fp-pc-name">Puma RS-X Reinvention</div>
+                  <div class="fp-pc-price">$110.00 <span class="fp-pc-cmp">$130.00</span></div>
+                  <span class="fp-pc-badge in">In Stock</span>
+                </div>
+              </div>
+            </div>
+            <!-- Modal overlay (product detail) -->
+            <div class="fp-modal fp-modal-anim">
+              <div class="fp-modal-head">
+                <span class="fp-modal-title">Adidas Ultra Boost 22</span>
+                <span class="fp-modal-x">✕</span>
+              </div>
+              <div class="fp-modal-body">
+                <div class="fp-modal-left">
+                  <div class="fp-modal-img"><svg viewBox="0 0 130 100"><rect width="130" height="100" rx="8" fill="rgba(79,142,247,0.1)"/><path d="M30 78l22-30 16 20 16-24 24 34H16z" fill="rgba(79,142,247,0.25)"/><circle cx="96" cy="28" r="8" fill="rgba(79,142,247,0.35)"/></svg></div>
+                  <div class="fp-modal-thumbs">
+                    <div class="fp-mthumb on"><svg viewBox="0 0 30 30"><rect width="30" height="30" rx="4" fill="rgba(79,142,247,0.15)"/></svg></div>
+                    <div class="fp-mthumb"><svg viewBox="0 0 30 30"><rect width="30" height="30" rx="4" fill="rgba(79,142,247,0.08)"/></svg></div>
+                    <div class="fp-mthumb"><svg viewBox="0 0 30 30"><rect width="30" height="30" rx="4" fill="rgba(79,142,247,0.08)"/></svg></div>
+                  </div>
+                </div>
+                <div class="fp-modal-right">
+                  <div class="fp-modal-price">$189.00</div>
+                  <div class="fp-modal-orig">$210.00</div>
+                  <span class="fp-pc-badge in" style="margin:4px 0">In Stock</span>
+                  <div class="fp-modal-meta">Vendor: <strong>Adidas</strong></div>
+                  <div class="fp-modal-meta">Type: <strong>Running</strong></div>
+                  <div class="fp-modal-meta">Images: <strong>3</strong></div>
+                  <div class="fp-modal-desc">Responsive Boost midsole returns energy with every stride. Primeknit+ adaptive upper…</div>
+                  <div class="fp-modal-vars-title">Variants (4)</div>
+                  <div class="fp-modal-vtable">
+                    <div class="fp-vt-head"><span>Option</span><span>Price</span><span>Status</span></div>
+                    <div class="fp-vt-row"><span>US 8 / Black</span><span>$189</span><span class="green">●</span></div>
+                    <div class="fp-vt-row"><span>US 9 / Black</span><span>$189</span><span class="green">●</span></div>
+                    <div class="fp-vt-row"><span>US 10 / White</span><span>$189</span><span class="green">●</span></div>
+                    <div class="fp-vt-row"><span>US 11 / White</span><span>$189</span><span class="red">●</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -408,7 +542,7 @@
             <div class="fp-chrome-title">Price Monitor — Last 30 Days</div>
           </div>
           <div class="fp-body">
-            <div class="fp-price-chart">
+            <div class="fp-price-chart fp-row-anim" style="--d:0">
               <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
                 <defs>
                   <linearGradient id="pcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c3aed" stop-opacity="0.3"/><stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/></linearGradient>
@@ -423,14 +557,14 @@
               </svg>
             </div>
             <div class="fp-alert-list">
-              <div class="fp-alert fp-alert-red">↓ Nike Air Max dropped $20 · competitor-store.com</div>
-              <div class="fp-alert fp-alert-green">↑ Adidas raised prices +$15 · rival-shop.com</div>
-              <div class="fp-alert fp-alert-yellow">⚡ Sale detected: 40% off Jordan line</div>
+              <div class="fp-alert fp-alert-red fp-row-anim" style="--d:3">↓ Nike Air Max dropped $20 · competitor-store.com</div>
+              <div class="fp-alert fp-alert-green fp-row-anim" style="--d:4">↑ Adidas raised prices +$15 · rival-shop.com</div>
+              <div class="fp-alert fp-alert-yellow fp-row-anim" style="--d:5">⚡ Sale detected: 40% off Jordan line</div>
             </div>
             <div class="fp-tags-row">
-              <span class="fp-pill">Change Alerts</span>
-              <span class="fp-pill">Sale Tracking</span>
-              <span class="fp-pill fp-pill-purple">Historical Data</span>
+              <span class="fp-pill fp-pill-anim" style="--d:0">Change Alerts</span>
+              <span class="fp-pill fp-pill-anim" style="--d:1">Sale Tracking</span>
+              <span class="fp-pill fp-pill-purple fp-pill-anim" style="--d:2">Historical Data</span>
             </div>
           </div>
         </div>
@@ -443,15 +577,15 @@
           </div>
           <div class="fp-body">
             <div class="fp-feed">
-              <div class="fp-feed-item fp-feed-new"><div class="fp-feed-dot fp-dot-green"></div><div class="fp-feed-info"><div class="fp-feed-action">NEW PRODUCT</div><div class="fp-feed-name">Nike Dunk Low — Panda Colorway</div><div class="fp-feed-meta">competitor-store.com · $110 · 2h ago</div></div></div>
-              <div class="fp-feed-item fp-feed-removed"><div class="fp-feed-dot fp-dot-red"></div><div class="fp-feed-info"><div class="fp-feed-action">REMOVED</div><div class="fp-feed-name">Jordan Legacy 312 Low</div><div class="fp-feed-meta">rival-shop.com · was $130 · 5h ago</div></div></div>
-              <div class="fp-feed-item fp-feed-new"><div class="fp-feed-dot fp-dot-green"></div><div class="fp-feed-info"><div class="fp-feed-action">NEW PRODUCT</div><div class="fp-feed-name">Yeezy Slide — Pure</div><div class="fp-feed-meta">sneaker-world.com · $95 · 8h ago</div></div></div>
-              <div class="fp-feed-item fp-feed-removed"><div class="fp-feed-dot fp-dot-red"></div><div class="fp-feed-info"><div class="fp-feed-action">REMOVED</div><div class="fp-feed-name">New Balance 550 — White/Green</div><div class="fp-feed-meta">competitor-store.com · was $120 · 1d ago</div></div></div>
+              <div class="fp-feed-item fp-feed-new fp-row-anim" style="--d:0"><div class="fp-feed-dot fp-dot-green"></div><div class="fp-feed-info"><div class="fp-feed-action">NEW PRODUCT</div><div class="fp-feed-name">Nike Dunk Low — Panda Colorway</div><div class="fp-feed-meta">competitor-store.com · $110 · 2h ago</div></div></div>
+              <div class="fp-feed-item fp-feed-removed fp-row-anim" style="--d:1"><div class="fp-feed-dot fp-dot-red"></div><div class="fp-feed-info"><div class="fp-feed-action">REMOVED</div><div class="fp-feed-name">Jordan Legacy 312 Low</div><div class="fp-feed-meta">rival-shop.com · was $130 · 5h ago</div></div></div>
+              <div class="fp-feed-item fp-feed-new fp-row-anim" style="--d:2"><div class="fp-feed-dot fp-dot-green"></div><div class="fp-feed-info"><div class="fp-feed-action">NEW PRODUCT</div><div class="fp-feed-name">Yeezy Slide — Pure</div><div class="fp-feed-meta">sneaker-world.com · $95 · 8h ago</div></div></div>
+              <div class="fp-feed-item fp-feed-removed fp-row-anim" style="--d:3"><div class="fp-feed-dot fp-dot-red"></div><div class="fp-feed-info"><div class="fp-feed-action">REMOVED</div><div class="fp-feed-name">New Balance 550 — White/Green</div><div class="fp-feed-meta">competitor-store.com · was $120 · 1d ago</div></div></div>
             </div>
             <div class="fp-tags-row">
-              <span class="fp-pill">Daily Scan</span>
-              <span class="fp-pill">Trend Radar</span>
-              <span class="fp-pill fp-pill-purple">Instant Alerts</span>
+              <span class="fp-pill fp-pill-anim" style="--d:0">Daily Scan</span>
+              <span class="fp-pill fp-pill-anim" style="--d:1">Trend Radar</span>
+              <span class="fp-pill fp-pill-purple fp-pill-anim" style="--d:2">Instant Alerts</span>
             </div>
           </div>
         </div>
@@ -464,21 +598,21 @@
           </div>
           <div class="fp-body">
             <div class="fp-audit-grid">
-              <div class="fp-audit-item fp-audit-yes"><div class="fp-ai-check">✓</div><div>Klaviyo</div></div>
-              <div class="fp-audit-item fp-audit-yes"><div class="fp-ai-check">✓</div><div>ReCharge</div></div>
-              <div class="fp-audit-item fp-audit-yes"><div class="fp-ai-check">✓</div><div>Gorgias</div></div>
-              <div class="fp-audit-item fp-audit-yes"><div class="fp-ai-check">✓</div><div>Yotpo</div></div>
-              <div class="fp-audit-item fp-audit-no"><div class="fp-ai-x">✗</div><div>Judge.me</div></div>
-              <div class="fp-audit-item fp-audit-no"><div class="fp-ai-x">✗</div><div>Loox</div></div>
-              <div class="fp-audit-item fp-audit-yes"><div class="fp-ai-check">✓</div><div>TikTok Pixel</div></div>
-              <div class="fp-audit-item fp-audit-yes"><div class="fp-ai-check">✓</div><div>Meta Pixel</div></div>
-              <div class="fp-audit-item fp-audit-no"><div class="fp-ai-x">✗</div><div>GA4</div></div>
+              <div class="fp-audit-item fp-audit-yes fp-row-anim" style="--d:0"><div class="fp-ai-check">✓</div><div>Klaviyo</div></div>
+              <div class="fp-audit-item fp-audit-yes fp-row-anim" style="--d:1"><div class="fp-ai-check">✓</div><div>ReCharge</div></div>
+              <div class="fp-audit-item fp-audit-yes fp-row-anim" style="--d:2"><div class="fp-ai-check">✓</div><div>Gorgias</div></div>
+              <div class="fp-audit-item fp-audit-yes fp-row-anim" style="--d:3"><div class="fp-ai-check">✓</div><div>Yotpo</div></div>
+              <div class="fp-audit-item fp-audit-no fp-row-anim" style="--d:4"><div class="fp-ai-x">✗</div><div>Judge.me</div></div>
+              <div class="fp-audit-item fp-audit-no fp-row-anim" style="--d:5"><div class="fp-ai-x">✗</div><div>Loox</div></div>
+              <div class="fp-audit-item fp-audit-yes fp-row-anim" style="--d:6"><div class="fp-ai-check">✓</div><div>TikTok Pixel</div></div>
+              <div class="fp-audit-item fp-audit-yes fp-row-anim" style="--d:7"><div class="fp-ai-check">✓</div><div>Meta Pixel</div></div>
+              <div class="fp-audit-item fp-audit-no fp-row-anim" style="--d:8"><div class="fp-ai-x">✗</div><div>GA4</div></div>
             </div>
-            <div class="fp-audit-theme">Theme: <strong>Dawn 12.0</strong> &nbsp;·&nbsp; Shopify Plus &nbsp;·&nbsp; 4 active apps not detected on your store</div>
+            <div class="fp-audit-theme fp-row-anim" style="--d:10">Theme: <strong>Dawn 12.0</strong> &nbsp;·&nbsp; Shopify Plus &nbsp;·&nbsp; 4 active apps not detected on your store</div>
             <div class="fp-tags-row">
-              <span class="fp-pill">App Detection</span>
-              <span class="fp-pill">Tech Stack</span>
-              <span class="fp-pill fp-pill-purple">15+ Signals</span>
+              <span class="fp-pill fp-pill-anim" style="--d:0">App Detection</span>
+              <span class="fp-pill fp-pill-anim" style="--d:1">Tech Stack</span>
+              <span class="fp-pill fp-pill-purple fp-pill-anim" style="--d:2">15+ Signals</span>
             </div>
           </div>
         </div>
@@ -491,21 +625,21 @@
           </div>
           <div class="fp-body">
             <div class="fp-cat-bars">
-              <div class="fp-cat-row"><span>Sneakers</span><div class="fp-cat-bar"><div class="fp-cat-fill" style="width:82%"></div></div><span>82%</span></div>
-              <div class="fp-cat-row"><span>Running</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-cf-blue" style="width:65%"></div></div><span>65%</span></div>
-              <div class="fp-cat-row"><span>Basketball</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-cf-pink" style="width:48%"></div></div><span>48%</span></div>
-              <div class="fp-cat-row"><span>Sandals</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-cf-green" style="width:31%"></div></div><span>31%</span></div>
+              <div class="fp-cat-row fp-row-anim" style="--d:0"><span>Sneakers</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-bar-anim" style="--w:82%;--d:0"></div></div><span>82%</span></div>
+              <div class="fp-cat-row fp-row-anim" style="--d:1"><span>Running</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-cf-blue fp-bar-anim" style="--w:65%;--d:1"></div></div><span>65%</span></div>
+              <div class="fp-cat-row fp-row-anim" style="--d:2"><span>Basketball</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-cf-pink fp-bar-anim" style="--w:48%;--d:2"></div></div><span>48%</span></div>
+              <div class="fp-cat-row fp-row-anim" style="--d:3"><span>Sandals</span><div class="fp-cat-bar"><div class="fp-cat-fill fp-cf-green fp-bar-anim" style="--w:31%;--d:3"></div></div><span>31%</span></div>
             </div>
             <div class="fp-brand-row">
-              <div class="fp-brand-chip">Nike <span class="fp-bc-count">6 stores</span></div>
-              <div class="fp-brand-chip">Adidas <span class="fp-bc-count">5 stores</span></div>
-              <div class="fp-brand-chip fp-bc-excl">Jordan <span class="fp-bc-count">YOU ONLY</span></div>
-              <div class="fp-brand-chip">New Balance <span class="fp-bc-count">3 stores</span></div>
+              <div class="fp-brand-chip fp-row-anim" style="--d:5">Nike <span class="fp-bc-count">6 stores</span></div>
+              <div class="fp-brand-chip fp-row-anim" style="--d:6">Adidas <span class="fp-bc-count">5 stores</span></div>
+              <div class="fp-brand-chip fp-bc-excl fp-row-anim" style="--d:7">Jordan <span class="fp-bc-count">YOU ONLY</span></div>
+              <div class="fp-brand-chip fp-row-anim" style="--d:8">New Balance <span class="fp-bc-count">3 stores</span></div>
             </div>
             <div class="fp-tags-row">
-              <span class="fp-pill">Category Gaps</span>
-              <span class="fp-pill">Brand Intel</span>
-              <span class="fp-pill fp-pill-purple">Trending Products</span>
+              <span class="fp-pill fp-pill-anim" style="--d:0">Category Gaps</span>
+              <span class="fp-pill fp-pill-anim" style="--d:1">Brand Intel</span>
+              <span class="fp-pill fp-pill-purple fp-pill-anim" style="--d:2">Trending Products</span>
             </div>
           </div>
         </div>
@@ -516,147 +650,9 @@
   </div>
 </section>
 
-      <!-- FEATURED: WAR ROOM — large card col-span-2 -->
-      <div class="bento-card bento-featured anim-pop" data-delay="0">
-        <div class="bento-glow bento-glow-purple"></div>
-        <div class="bento-content">
-          <div class="bento-icon">⚔️</div>
-          <div class="bento-badge">Featured</div>
-          <h3 class="bento-title">War Room <span class="gradient-text">Intelligence</span></h3>
-          <p class="bento-desc">Military-grade competitive analysis. Compare your store against competitors and suppliers across every dimension — pricing, products, categories, brands.</p>
-          <div class="bento-tags">
-            <span class="bento-tag">Product Matrix</span>
-            <span class="bento-tag">Price Gap Detection</span>
-            <span class="bento-tag">Order Opportunities</span>
-            <span class="bento-tag bento-tag-purple">6 Intel Tabs</span>
-          </div>
-        </div>
-        <div class="bento-preview bento-preview-warroom">
-          <div class="bw-header">
-            <div class="bw-dot bw-dot-green"></div>
-            <div class="bw-dot bw-dot-yellow"></div>
-            <div class="bw-dot bw-dot-red"></div>
-            <span class="bw-title">War Room — Briefing</span>
-          </div>
-          <div class="bw-stats">
-            <div class="bw-stat"><div class="bw-stat-val">847</div><div class="bw-stat-lbl">Products</div></div>
-            <div class="bw-stat"><div class="bw-stat-val">$34</div><div class="bw-stat-lbl">Avg Gap</div></div>
-            <div class="bw-stat"><div class="bw-stat-val bw-stat-green">23</div><div class="bw-stat-lbl">Opportunities</div></div>
-            <div class="bw-stat"><div class="bw-stat-val bw-stat-red">11</div><div class="bw-stat-lbl">Price Risks</div></div>
-          </div>
-          <div class="bw-rows">
-            <div class="bw-row"><span class="bw-tag bw-tag-green">ORDER</span><span class="bw-prod">Nike Air Max 270</span><span class="bw-price">$149</span></div>
-            <div class="bw-row"><span class="bw-tag bw-tag-red">RISK</span><span class="bw-prod">Adidas Ultra Boost</span><span class="bw-price">$189</span></div>
-            <div class="bw-row"><span class="bw-tag bw-tag-blue">EXCL</span><span class="bw-prod">Jordan Retro 1</span><span class="bw-price">$220</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCT SCRAPING — medium -->
-      <div class="bento-card anim-pop" data-delay="80">
-        <div class="bento-glow bento-glow-blue"></div>
-        <div class="bento-icon">🗂️</div>
-        <h3 class="bento-title">Product <span class="gradient-text">Scraping</span></h3>
-        <p class="bento-desc">Full catalogs from any Shopify store. Names, prices, images, variants, vendors, tags — delivered as Shopify-ready CSV or Excel.</p>
-        <div class="bento-tags">
-          <span class="bento-tag">Unlimited Products</span>
-          <span class="bento-tag">CSV Import Ready</span>
-          <span class="bento-tag">Multi-Store</span>
-        </div>
-        <div class="bento-preview-mini">
-          <div class="bpm-row"><div class="bpm-dot bpm-purple"></div><div class="bpm-bar" style="width:90%"></div><div class="bpm-val">1,247</div></div>
-          <div class="bpm-row"><div class="bpm-dot bpm-blue"></div><div class="bpm-bar" style="width:68%"></div><div class="bpm-val">843</div></div>
-          <div class="bpm-row"><div class="bpm-dot bpm-pink"></div><div class="bpm-bar" style="width:45%"></div><div class="bpm-val">562</div></div>
-        </div>
-      </div>
-
-      <!-- PRICE MONITORING — small -->
-      <div class="bento-card bento-small anim-pop" data-delay="120">
-        <div class="bento-glow bento-glow-pink"></div>
-        <div class="bento-icon">📈</div>
-        <h3 class="bento-title">Price <span class="gradient-text">Monitoring</span></h3>
-        <p class="bento-desc">Daily price tracking with instant change alerts across all competitors.</p>
-        <div class="bento-tags">
-          <span class="bento-tag">Change Alerts</span>
-          <span class="bento-tag">Sale Tracking</span>
-        </div>
-        <div class="bento-sparkline">
-          <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,32 20,28 40,30 60,18 80,22 100,10 120,14" stroke="url(#spGrad)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs><linearGradient id="spGrad" x1="0" y1="0" x2="120" y2="0"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4f8ef7"/></linearGradient></defs>
-          </svg>
-        </div>
-      </div>
-
-      <!-- NEW & REMOVED — small -->
-      <div class="bento-card bento-small anim-pop" data-delay="160">
-        <div class="bento-glow bento-glow-green"></div>
-        <div class="bento-icon">🔔</div>
-        <h3 class="bento-title">New &amp; Removed <span class="gradient-text">Detection</span></h3>
-        <p class="bento-desc">Know the moment competitors add or drop products — before anyone else.</p>
-        <div class="bento-tags">
-          <span class="bento-tag">New Alerts</span>
-          <span class="bento-tag">Trend Radar</span>
-        </div>
-        <div class="bento-pill-list">
-          <div class="bpl-item bpl-green"><span>+</span> Nike Dunk Low</div>
-          <div class="bpl-item bpl-red"><span>−</span> Jordan Legacy</div>
-          <div class="bpl-item bpl-green"><span>+</span> Yeezy Slide</div>
-        </div>
-      </div>
-
-      <!-- STORE INTELLIGENCE — medium -->
-      <div class="bento-card anim-pop" data-delay="200">
-        <div class="bento-glow bento-glow-purple"></div>
-        <div class="bento-icon">🔍</div>
-        <h3 class="bento-title">Store <span class="gradient-text">Intelligence</span></h3>
-        <p class="bento-desc">Full audit of any Shopify store — theme, apps, pixels, payment methods, and 15+ feature detections in one report.</p>
-        <div class="bento-tags">
-          <span class="bento-tag">App Detection</span>
-          <span class="bento-tag">Tech Stack</span>
-          <span class="bento-tag">Feature Gaps</span>
-        </div>
-        <div class="bento-stack-grid">
-          <div class="bsg-item">Klaviyo</div>
-          <div class="bsg-item">ReCharge</div>
-          <div class="bsg-item">Yotpo</div>
-          <div class="bsg-item">Gorgias</div>
-          <div class="bsg-item">Judge.me</div>
-          <div class="bsg-item">Loox</div>
-        </div>
-      </div>
-
-      <!-- MARKET RESEARCH — medium -->
-      <div class="bento-card anim-pop" data-delay="240">
-        <div class="bento-glow bento-glow-blue"></div>
-        <div class="bento-icon">🌐</div>
-        <h3 class="bento-title">Market <span class="gradient-text">Research</span></h3>
-        <p class="bento-desc">Understand your entire niche. Trending products, category gaps, brand analysis, and bestseller detection across the market.</p>
-        <div class="bento-tags">
-          <span class="bento-tag">Trending Products</span>
-          <span class="bento-tag">Category Gaps</span>
-          <span class="bento-tag">Brand Intel</span>
-        </div>
-        <div class="bento-donut-row">
-          <div class="bento-donut">
-            <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="rgba(124,58,237,0.15)" stroke-width="8"/><circle cx="30" cy="30" r="22" fill="none" stroke="url(#dg1)" stroke-width="8" stroke-dasharray="83 55" stroke-dashoffset="22" stroke-linecap="round"/><defs><linearGradient id="dg1" x1="0" y1="0" x2="60" y2="60"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4f8ef7"/></linearGradient></defs></svg>
-            <span>Footwear<br>60%</span>
-          </div>
-          <div class="bento-donut">
-            <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="rgba(79,142,247,0.15)" stroke-width="8"/><circle cx="30" cy="30" r="22" fill="none" stroke="url(#dg2)" stroke-width="8" stroke-dasharray="55 83" stroke-dashoffset="22" stroke-linecap="round"/><defs><linearGradient id="dg2" x1="0" y1="0" x2="60" y2="60"><stop offset="0%" stop-color="#4f8ef7"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs></svg>
-            <span>Apparel<br>40%</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ── SHOWCASE ── -->
 <section class="snap-section section" id="showcase">
   <div class="container">
-    <div class="section-label anim-slide-up">Service Catalog</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       Your Mission Command Center:<br><span class="gradient-text">Live Briefing Dashboard</span>
     </h2>
@@ -794,7 +790,6 @@
 <!-- ── WHY SWITCH / COMPARISON ── -->
 <section class="snap-section section section-compare" id="compare">
   <div class="container">
-    <div class="section-label anim-slide-up">Why Switch</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       Traditional VA vs <span class="gradient-text">JeonScraper</span>
     </h2>
@@ -825,7 +820,6 @@
 <!-- ── HOW IT WORKS ── -->
 <section class="snap-section section" id="how-it-works">
   <div class="container">
-    <div class="section-label anim-slide-up">Simple Process</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       How It <span class="gradient-text">Works</span>
     </h2>
@@ -881,70 +875,10 @@
 </section>
 
 <!-- ── SERVICES ── -->
-<section class="snap-section section" id="services">
-  <div class="container">
-    <div class="section-label anim-slide-up">Service Catalog</div>
-    <h2 class="section-title anim-slide-up" data-delay="100">
-      The Proven Alternative to<br><span class="gradient-text">Hiring a VA</span>
-    </h2>
-    <p class="section-sub anim-slide-up" data-delay="150">60+ services across 6 categories — everything a Shopify VA does, but faster, cheaper, and more accurate.</p>
-
-    <div class="svc-grid">
-      <div class="svc-card anim-scale" data-delay="0">
-        <div class="svc-card-num" data-count="15">0</div>
-        <div class="svc-card-name">Product Scraping</div>
-        <div class="svc-card-desc">Full catalogs, variants, images, tags, CSV files, Shopify-ready imports</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="50">
-        <div class="svc-card-num" data-count="10">0</div>
-        <div class="svc-card-name">Pricing Intelligence</div>
-        <div class="svc-card-desc">Price monitoring, sale alerts, margin calculations, competitor pricing</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="100">
-        <div class="svc-card-num" data-count="12">0</div>
-        <div class="svc-card-name">Store Intelligence</div>
-        <div class="svc-card-desc">Full store audits, tech stack, app detection, conversion insights</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="150">
-        <div class="svc-card-num" data-count="10">0</div>
-        <div class="svc-card-name">Market Research</div>
-        <div class="svc-card-desc">Niche discovery, category trends, brand analysis, regional markets</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="200">
-        <div class="svc-card-num" data-count="8">0</div>
-        <div class="svc-card-name">Catalog Management</div>
-        <div class="svc-card-desc">Bulk uploads, vendor cleanup, collection planning, duplicate removal</div>
-      </div>
-    </div>
-    <div class="svc-grid svc-grid-row2">
-      <div class="svc-card anim-scale" data-delay="100">
-        <div class="svc-card-num" data-count="10">0</div>
-        <div class="svc-card-name">Price Intelligence</div>
-        <div class="svc-card-desc">Gap analysis, MAP enforcement, discount calendars, price history</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="150">
-        <div class="svc-card-num" data-count="12">0</div>
-        <div class="svc-card-name">Store Intelligence</div>
-        <div class="svc-card-desc">Theme analysis, pixel tracking, social detection, feature audit</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="200">
-        <div class="svc-card-num" data-count="10">0</div>
-        <div class="svc-card-name">Market Research</div>
-        <div class="svc-card-desc">Trending products, bestseller detection, brand overlap, category gaps</div>
-      </div>
-      <div class="svc-card anim-scale" data-delay="250">
-        <div class="svc-card-num" data-count="6">0</div>
-        <div class="svc-card-name">Ongoing Monitoring</div>
-        <div class="svc-card-desc">Weekly digests, alerts, monthly strategy reviews, watchlist reports</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ── PRICING ── -->
 <section class="snap-section section" id="pricing">
   <div class="container">
-    <div class="section-label anim-slide-up">Pricing</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       Choose Your <span class="gradient-text">Battle Plan</span>
     </h2>
@@ -973,7 +907,7 @@
           <li class="pf-disabled"><span class="pf-x">&#10005;</span> Weekly monitoring</li>
           <li class="pf-disabled"><span class="pf-x">&#10005;</span> Priority support</li>
         </ul>
-        <a href="#contact" class="btn-pricing">Start Free Trial</a>
+        <a href="mailto:hello@jeonscraper.com" class="btn-pricing">Start Free Trial</a>
       </div>
 
       <!-- OPERATOR -->
@@ -998,7 +932,7 @@
           <li><span class="pf-check">&#10003;</span> New/removed product alerts</li>
           <li><span class="pf-check">&#10003;</span> 24-hour delivery</li>
         </ul>
-        <a href="#contact" class="btn-pricing btn-pricing-pop">Start Free Trial</a>
+        <a href="mailto:hello@jeonscraper.com" class="btn-pricing btn-pricing-pop">Start Free Trial</a>
       </div>
 
       <!-- COMMANDER -->
@@ -1022,7 +956,7 @@
           <li><span class="pf-check">&#10003;</span> White-label reports</li>
           <li><span class="pf-check">&#10003;</span> Same-day priority delivery</li>
         </ul>
-        <a href="#contact" class="btn-pricing">Start Free Trial</a>
+        <a href="mailto:hello@jeonscraper.com" class="btn-pricing">Start Free Trial</a>
       </div>
 
     </div>
@@ -1032,7 +966,6 @@
 <!-- ── FAQ ── -->
 <section class="snap-section section" id="faq">
   <div class="container container-narrow">
-    <div class="section-label anim-slide-up">FAQ</div>
     <h2 class="section-title anim-slide-up" data-delay="100">
       Frequently Asked <span class="gradient-text">Questions</span>
     </h2>
@@ -1090,65 +1023,37 @@
   </div>
 </section>
 
-<!-- ── FINAL CTA + FOOTER (combined last section) ── -->
-<section class="snap-section section section-final" id="contact">
-  <div class="cta-bg"></div>
-  <div class="container" style="position:relative;z-index:2;">
-    <h2 class="cta-title anim-slide-up">
-      Ready to See What Your<br>Competitors Are Hiding?
-    </h2>
-    <p class="cta-sub anim-slide-up" data-delay="100">Start your free 3-day trial. Get your first competitor report today.</p>
-    <form class="cta-form anim-slide-up" data-delay="200" id="cta-form" onsubmit="handleSubmit(event)">
-      <div class="cta-inputs">
-        <input type="email" placeholder="Your email address" required id="cta-email" class="cta-input">
-        <input type="url" placeholder="Competitor store URL (optional)" id="cta-url" class="cta-input">
-        <input type="url" placeholder="Your own shop URL (optional)" id="cta-shop" class="cta-input">
-        <input type="url" placeholder="Supplier store URL (optional)" id="cta-supplier" class="cta-input">
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:12px;">
+          <div class="logo-icon">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" fill="url(#lg2)"/><path d="M10 16l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F8EF7"/></linearGradient></defs></svg>
+          </div>
+          <span>JeonScraper</span>
+        </div>
+        <p>Shopify competitive intelligence delivered as a service. Know more. Sell more.</p>
       </div>
-      <button type="submit" class="btn-primary btn-glow btn-lg">
-        <span>Start Free Trial</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-      <p class="cta-note">Free 3-day trial — No credit card required</p>
-    </form>
-    <div class="cta-success" id="cta-success" style="display:none;">
-      <div class="cta-success-icon">✓</div>
-      <h3>You're In!</h3>
-      <p>Check your email — we'll send your first report within 24 hours.</p>
+      <div class="footer-col">
+        <h4>Service</h4>
+        <a href="#features">Solution</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="mailto:hello@jeonscraper.com">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 JeonScraper. All rights reserved.</p>
     </div>
   </div>
-  <!-- Footer inside the last section -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="nav-logo" style="margin-bottom:12px;">
-            <div class="logo-icon">
-              <svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" fill="url(#lg2)"/><path d="M10 16l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7C3AED"/><stop offset="1" stop-color="#4F8EF7"/></linearGradient></defs></svg>
-            </div>
-            <span>JeonScraper</span>
-          </div>
-          <p>Shopify competitive intelligence delivered as a service. Know more. Sell more.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Service</h4>
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="mailto:hello@jeonscraper.com">Contact</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 JeonScraper. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-</section>
+</footer>
 
 <!-- ── SCROLL TO TOP ── -->
 <button class="scroll-top-btn" id="scroll-top-btn" aria-label="Scroll to top">

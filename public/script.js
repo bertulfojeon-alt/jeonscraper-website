@@ -32,12 +32,15 @@ if (burger) {
 
 // ── NAV ACTIVE HIGHLIGHTING ──
 const navLinkMap = {
+  'problems': document.getElementById('nav-link-problems'),
   'features': document.getElementById('nav-link-features'),
   'showcase': document.getElementById('nav-link-showcase'),
+  'compare': document.getElementById('nav-link-compare'),
+  'how-it-works': document.getElementById('nav-link-how-it-works'),
   'pricing': document.getElementById('nav-link-pricing'),
   'faq': document.getElementById('nav-link-faq'),
 };
-const sectionIds = ['features', 'showcase', 'pricing', 'faq'];
+const sectionIds = ['problems', 'features', 'showcase', 'compare', 'how-it-works', 'pricing', 'faq'];
 const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const link = navLinkMap[entry.target.id];
@@ -243,40 +246,54 @@ const showcaseEl = document.getElementById('showcase');
 
 if (showcaseEl) {
   let lastWheelTime = 0;
+  let showcaseExiting = false;
 
-  // Lock/unlock page scroll
   function lockPageScroll() {
-    if (!showcaseLocked) {
+    if (!showcaseLocked && !showcaseExiting) {
       showcaseLocked = true;
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
+      lastWheelTime = Date.now(); // prime throttle so first post-lock wheel event is ignored
     }
   }
   function unlockPageScroll() {
-    if (showcaseLocked) {
-      showcaseLocked = false;
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
+    showcaseLocked = false;
+  }
+  function exitShowcaseScroll(direction) {
+    if (showcaseExiting) return;
+    showcaseExiting = true;
+    unlockPageScroll();
+    const target = direction > 0
+      ? document.getElementById('compare')
+      : document.getElementById('features');
+    if (target) {
+      document.documentElement.style.scrollSnapType = 'none';
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.documentElement.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        window.scrollTo(0, target.offsetTop);
+        setTimeout(() => {
+          document.documentElement.style.overflow = '';
+          document.documentElement.style.scrollSnapType = '';
+          document.documentElement.style.scrollBehavior = '';
+        }, 400);
+      });
     }
   }
 
-  // Observe when showcase enters/leaves viewport
   const showcaseViewObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Snap to showcase section top and lock
-        lockPageScroll();
-        // Reset to first tab
-        switchShowcase(0);
+        switchShowcase(0); // always reset to tab 0 regardless of exiting state
+        if (!showcaseExiting) lockPageScroll();
         showcaseReleasePending = false;
-      } else {
+      } else if (!entry.isIntersecting) {
         unlockPageScroll();
+        setTimeout(() => { showcaseExiting = false; }, 300);
       }
     });
   }, { threshold: 0.6 });
   showcaseViewObserver.observe(showcaseEl);
 
-  // Wheel handler — only switches tabs, page stays frozen
+  // Wheel handler — throttle applies to ALL events including boundary exits
   window.addEventListener('wheel', (e) => {
     if (!showcaseLocked) return;
 
@@ -284,33 +301,22 @@ if (showcaseEl) {
     e.stopPropagation();
 
     const now = Date.now();
-    if (now - lastWheelTime < 500) return; // debounce
+    if (now - lastWheelTime < 600) return;
+    lastWheelTime = now;
 
     const direction = e.deltaY > 0 ? 1 : -1;
 
     if (direction === 1) {
       if (showcaseCurrentTab < showcaseTabCount - 1) {
-        lastWheelTime = now;
         switchShowcase(showcaseCurrentTab + 1);
       } else {
-        // At last tab — unlock and scroll to next section
-        unlockPageScroll();
-        const nextSection = showcaseEl.nextElementSibling;
-        if (nextSection) {
-          nextSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        exitShowcaseScroll(1);
       }
     } else {
       if (showcaseCurrentTab > 0) {
-        lastWheelTime = now;
         switchShowcase(showcaseCurrentTab - 1);
       } else {
-        // At first tab — unlock and scroll to prev section
-        unlockPageScroll();
-        const prevSection = showcaseEl.previousElementSibling;
-        if (prevSection) {
-          prevSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        exitShowcaseScroll(-1);
       }
     }
   }, { passive: false });
@@ -335,17 +341,13 @@ if (showcaseEl) {
       if (showcaseCurrentTab < showcaseTabCount - 1) {
         switchShowcase(showcaseCurrentTab + 1);
       } else {
-        unlockPageScroll();
-        const next = showcaseEl.nextElementSibling;
-        if (next) next.scrollIntoView({ behavior: 'smooth' });
+        exitShowcaseScroll(1);
       }
     } else {
       if (showcaseCurrentTab > 0) {
         switchShowcase(showcaseCurrentTab - 1);
       } else {
-        unlockPageScroll();
-        const prev = showcaseEl.previousElementSibling;
-        if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+        exitShowcaseScroll(-1);
       }
     }
   }, { passive: true });
@@ -357,16 +359,6 @@ window.toggleFaq = function(btn) {
   const wasOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
-};
-
-// ── FORM SUBMIT ──
-window.handleSubmit = function(e) {
-  e.preventDefault();
-  const email = document.getElementById('cta-email').value;
-  const url = document.getElementById('cta-url').value;
-  console.log('Trial signup:', { email, url });
-  document.getElementById('cta-form').style.display = 'none';
-  document.getElementById('cta-success').style.display = 'block';
 };
 
 // ── SMOOTH SCROLL for anchor links ──
@@ -415,6 +407,11 @@ window.closeDemoModal = function(e) {
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeDemoModal();
+  // Block keyboard scrolling while a section is locked
+  if (featLocked || showcaseLocked) {
+    const scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+    if (scrollKeys.includes(e.key)) e.preventDefault();
+  }
 });
 
 // ── FEATURES SCROLL-LOCK (same pattern as Showcase) ──
@@ -422,6 +419,27 @@ let featCurrentTab = 0;
 const featTabCount = 6;
 let featLocked = false;
 let lastFeatWheelTime = 0;
+
+function animateFpStats(panel) {
+  panel.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    if (isNaN(target)) return;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1200;
+    el.textContent = prefix + '0' + suffix;
+    setTimeout(() => {
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = prefix + Math.round(eased * target).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, 300);
+  });
+}
 
 window.switchFeatTab = function(idx) {
   const tabs   = document.querySelectorAll('.feat-tab');
@@ -432,21 +450,38 @@ window.switchFeatTab = function(idx) {
   panels[featCurrentTab]?.classList.add('exit');
   setTimeout(() => panels[featCurrentTab]?.classList.remove('exit'), 400);
 
-  // Update active tab + progress bar (restart animation by re-adding class)
-  tabs.forEach((t, i) => {
-    t.classList.toggle('active', i === idx);
+  // Update active tab — remove first, reflow, re-add to restart icon animations
+  tabs.forEach((t, i) => t.classList.remove('active'));
+  const newTab = tabs[idx];
+  if (newTab) {
+    const iconSvg = newTab.querySelector('.ft-icon-box svg');
+    if (iconSvg) { void iconSvg.getBoundingClientRect(); } // force reflow → restart animation
+    newTab.classList.add('active');
+  }
+
+  // Activate new panel — reset all animations so they replay from start
+  panels.forEach((p, i) => {
+    p.classList.remove('active');
   });
 
-  // Activate new panel (reflow restarts CSS animations inside)
-  panels.forEach((p, i) => {
-    if (i === idx) {
-      p.classList.remove('active');
-      void p.offsetWidth;
-      p.classList.add('active');
-    } else {
-      p.classList.remove('active');
-    }
+  // Force reflow so animation state fully resets before re-adding active
+  void panels[idx].offsetWidth;
+
+  // Reset every animated child: strip animation, reflow, restore
+  const animEls = panels[idx].querySelectorAll('.fp-row-anim, .fp-stat-anim, .fp-pill-anim, .fp-bar-anim, .fp-modal-anim');
+  animEls.forEach(el => { el.style.animation = 'none'; });
+  // Also reset chart & dot animations
+  panels[idx].querySelectorAll('.fp-price-chart path, .fp-price-chart circle, .fp-price-chart text').forEach(el => {
+    el.style.animation = 'none';
   });
+  void panels[idx].offsetWidth;
+  animEls.forEach(el => { el.style.animation = ''; });
+  panels[idx].querySelectorAll('.fp-price-chart path, .fp-price-chart circle, .fp-price-chart text').forEach(el => {
+    el.style.animation = '';
+  });
+
+  panels[idx].classList.add('active');
+  animateFpStats(panels[idx]);
 
   featCurrentTab = idx;
 };
@@ -454,35 +489,68 @@ window.switchFeatTab = function(idx) {
 const featEl = document.getElementById('features');
 
 if (featEl) {
+  let featExiting = false;
+
   function lockFeatScroll() {
-    if (!featLocked) {
+    if (!featLocked && !featExiting) {
       featLocked = true;
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
+      lastFeatWheelTime = Date.now(); // prime throttle so first post-lock wheel event is ignored
     }
   }
   function unlockFeatScroll() {
-    if (featLocked) {
-      featLocked = false;
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
+    featLocked = false;
+  }
+  function exitFeatScroll(direction) {
+    if (featExiting) return;
+    featExiting = true;
+    stopFeatAuto();
+    unlockFeatScroll();
+    const target = direction > 0
+      ? document.getElementById('showcase')
+      : document.getElementById('problems');
+    if (target) {
+      document.documentElement.style.scrollSnapType = 'none';
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.documentElement.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        window.scrollTo(0, target.offsetTop);
+        setTimeout(() => {
+          document.documentElement.style.overflow = '';
+          document.documentElement.style.scrollSnapType = '';
+          document.documentElement.style.scrollBehavior = '';
+        }, 400);
+      });
     }
   }
 
-  // Lock when section enters, unlock when it leaves
+  // Auto-advance timer
+  let featAutoTimer = null;
+  function startFeatAuto() {
+    clearInterval(featAutoTimer);
+    featAutoTimer = setInterval(() => {
+      const next = (featCurrentTab + 1) % featTabCount;
+      switchFeatTab(next);
+    }, 3500);
+  }
+  function stopFeatAuto() { clearInterval(featAutoTimer); }
+
+  // Lock on entry, unlock on leave
   const featViewObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        lockFeatScroll();
-        switchFeatTab(0);
-      } else {
+        switchFeatTab(0); // always reset to tab 0 regardless of exiting state
+        startFeatAuto();
+        if (!featExiting) lockFeatScroll();
+      } else if (!entry.isIntersecting) {
         unlockFeatScroll();
+        stopFeatAuto();
+        setTimeout(() => { featExiting = false; }, 300);
       }
     });
   }, { threshold: 0.6 });
   featViewObserver.observe(featEl);
 
-  // Wheel — switches tabs, page stays frozen
+  // Wheel — always preventDefault while locked, throttle applies to ALL events including boundary
   window.addEventListener('wheel', (e) => {
     if (!featLocked) return;
 
@@ -490,27 +558,24 @@ if (featEl) {
     e.stopPropagation();
 
     const now = Date.now();
-    if (now - lastFeatWheelTime < 500) return;
+    if (now - lastFeatWheelTime < 600) return; // throttle all — prevents instant double-exit
+    lastFeatWheelTime = now;
 
     const direction = e.deltaY > 0 ? 1 : -1;
 
     if (direction === 1) {
       if (featCurrentTab < featTabCount - 1) {
-        lastFeatWheelTime = now;
         switchFeatTab(featCurrentTab + 1);
+        startFeatAuto();
       } else {
-        unlockFeatScroll();
-        const next = featEl.nextElementSibling;
-        if (next) next.scrollIntoView({ behavior: 'smooth' });
+        exitFeatScroll(1);
       }
     } else {
       if (featCurrentTab > 0) {
-        lastFeatWheelTime = now;
         switchFeatTab(featCurrentTab - 1);
+        startFeatAuto();
       } else {
-        unlockFeatScroll();
-        const prev = featEl.previousElementSibling;
-        if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+        exitFeatScroll(-1);
       }
     }
   }, { passive: false });
@@ -535,24 +600,20 @@ if (featEl) {
       if (featCurrentTab < featTabCount - 1) {
         switchFeatTab(featCurrentTab + 1);
       } else {
-        unlockFeatScroll();
-        const next = featEl.nextElementSibling;
-        if (next) next.scrollIntoView({ behavior: 'smooth' });
+        exitFeatScroll(1);
       }
     } else {
       if (featCurrentTab > 0) {
         switchFeatTab(featCurrentTab - 1);
       } else {
-        unlockFeatScroll();
-        const prev = featEl.previousElementSibling;
-        if (prev) prev.scrollIntoView({ behavior: 'smooth' });
+        exitFeatScroll(-1);
       }
     }
   }, { passive: true });
 
-  // Tab clicks still work (won't affect lock)
+  // Tab clicks still work — reset auto timer on click
   document.querySelectorAll('.feat-tab').forEach((tab, i) => {
-    tab.addEventListener('click', () => switchFeatTab(i));
+    tab.addEventListener('click', () => { switchFeatTab(i); startFeatAuto(); });
   });
 }
 

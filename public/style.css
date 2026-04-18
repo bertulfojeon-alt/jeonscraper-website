@@ -87,8 +87,8 @@ img { max-width: 100%; }
 /* Ensure all content sits above fluid */
 .nav, .footer { position: relative; z-index: 1; }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.container-narrow { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(12px, 3vw, 24px); }
+.container-narrow { max-width: 800px; margin: 0 auto; padding: 0 clamp(12px, 3vw, 24px); }
 
 /* ── GRADIENT TEXT ── */
 .gradient-text {
@@ -111,7 +111,7 @@ img { max-width: 100%; }
   border-bottom: 1px solid var(--border);
 }
 .nav-inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  max-width: 1200px; margin: 0 auto; padding: 0 clamp(12px, 3vw, 24px);
   display: flex; align-items: center; gap: 40px;
 }
 .nav-logo {
@@ -407,7 +407,7 @@ img { max-width: 100%; }
   margin-bottom: 12px; text-align: center;
 }
 .section-title {
-  font-size: clamp(30px, 4vw, 48px); font-weight: 800; line-height: 1.15;
+  font-size: clamp(22px, 4vw, 48px); font-weight: 800; line-height: 1.15;
   letter-spacing: -0.02em; text-align: center; margin-bottom: 16px;
 }
 .section-sub {
@@ -1234,20 +1234,66 @@ img { max-width: 100%; }
 }
 .fp-bc-excl .fp-bc-count { color: #a78bfa; }
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE — keep desktop layout, just scale down ── */
 @media (max-width: 900px) {
-  .feat-split { flex-direction: column; height: auto; }
-  .feat-tabs { flex: none; flex-direction: row; flex-wrap: wrap; gap: 8px; }
-  .feat-tab { flex: 1 1 calc(50% - 4px); }
-  .feat-tab.active { transform: none; }
-  .feat-tab:hover { transform: none; }
-  .feat-panel { min-height: 340px; }
+  .feat-tabs { flex: 0 0 220px; gap: 4px; }
+  .feat-tab { padding: 0 10px; border-radius: 10px; }
+  .ft-icon-box { width: 30px; height: 30px; border-radius: 8px; }
+  .ft-title { font-size: 11px; }
+  .ft-desc { font-size: 9px; }
+  .feat-panel { border-radius: 16px; }
+  .fp-modal { overflow-y: auto; }
+  .fp-modal-body { overflow-y: auto; }
 }
 @media (max-width: 540px) {
-  .feat-tabs { flex-direction: column; }
-  .feat-tab { flex: none; }
-  .fp-card-grid { grid-template-columns: repeat(2, 1fr); }
-  .fp-modal-body { grid-template-columns: 90px 1fr; gap: 8px; }
+  .feat-tabs { flex: 0 0 160px; gap: 3px; }
+  .feat-tab { padding: 0 6px; border-radius: 8px; gap: 6px; }
+  .ft-icon-box { width: 24px; height: 24px; border-radius: 6px; }
+  .ft-icon-box svg { width: 12px; height: 12px; }
+  .ft-title { font-size: 9px; }
+  .ft-desc { display: none; }
+  .ft-chevron { display: none; }
+  .feat-panel { border-radius: 12px; }
+  .fp-body { padding: 6px 8px; gap: 4px; }
+  .fp-chrome { padding: 4px 8px; }
+  .fp-chrome-dots span { width: 6px; height: 6px; }
+  .fp-chrome-title { font-size: 8px; }
+  .fp-sv { font-size: 13px; }
+  .fp-sl { font-size: 7px; }
+  .fp-stat { padding: 5px 4px; }
+  .fp-thead { font-size: 7px; padding: 0 4px 3px; }
+  .fp-trow { font-size: 9px; padding: 3px 4px; }
+  .fp-tag { font-size: 7px; padding: 1px 4px; }
+  .fp-pill { font-size: 8px; padding: 2px 6px; }
+  .fp-card-grid { gap: 4px; padding: 4px 6px; }
+  .fp-pc-name { font-size: 7px; }
+  .fp-pc-price { font-size: 8px; }
+  .fp-pc-info { padding: 3px 4px; }
+  .fp-rh { padding: 3px 6px; }
+  .fp-rh-chip { font-size: 7px; padding: 1px 5px; }
+  .fp-rh-filters { padding: 2px 6px; gap: 3px; }
+  .fp-rh-input, .fp-rh-sel { font-size: 7px; padding: 2px 5px; }
+  .fp-modal-body { grid-template-columns: 70px 1fr; gap: 6px; padding: 4px 8px; }
+  .fp-modal-price { font-size: 13px; }
+  .fp-modal-title { font-size: 9px; }
+  .fp-modal-meta { font-size: 8px; }
+  .fp-modal-desc { font-size: 7px; }
+  .fp-modal-vars-title { font-size: 7px; }
+  .fp-vt-head { font-size: 6px; }
+  .fp-vt-row { font-size: 7px; }
+  .fp-mthumb { width: 18px; height: 18px; }
+  .fp-alert { font-size: 9px; padding: 4px 6px; }
+  .fp-feed-item { padding: 5px 6px; gap: 6px; }
+  .fp-feed-action { font-size: 7px; }
+  .fp-feed-name { font-size: 10px; }
+  .fp-feed-meta { font-size: 8px; }
+  .fp-audit-grid { gap: 3px; }
+  .fp-audit-item { font-size: 9px; padding: 3px 5px; gap: 4px; }
+  .fp-cat-row { font-size: 9px; gap: 4px; }
+  .fp-cat-row > span:first-child { min-width: 50px; }
+  .fp-cat-row > span:last-child { min-width: 24px; }
+  .fp-brand-chip { font-size: 8px; padding: 3px 6px; gap: 4px; }
+  .fp-bc-count { font-size: 7px; }
 }
 
 /* ── SHOWCASE ── */
@@ -1563,7 +1609,7 @@ img { max-width: 100%; }
 .faq-a {
   max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
 }
-.faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+.faq-item.open .faq-a { max-height: 600px; padding-bottom: 20px; }
 .faq-a p { font-size: 14px; color: var(--text2); line-height: 1.7; }
 
 /* ── FINAL CTA ── */
@@ -1602,6 +1648,7 @@ img { max-width: 100%; }
 #faq.snap-section {
   min-height: auto;
   scroll-snap-align: start;
+  padding-bottom: 20px;
 }
 
 /* ── FINAL SECTION (CTA + Footer combined) ── */
@@ -1926,18 +1973,18 @@ img { max-width: 100%; }
 @media (max-width: 1024px) {
   .hero-left { flex: 0 0 46%; }
   .hero-split { gap: 24px; }
-  .hero-title { font-size: clamp(24px, 3vw, 34px); }
+  .hero-title { font-size: clamp(20px, 3vw, 34px); }
   .hero-img-wrapper { max-width: 480px; }
   .pricing-card.popular { transform: none; }
   .pricing-card.popular:hover { transform: translateY(-6px); }
   .svc-grid { grid-template-columns: repeat(3, 1fr); }
   .svc-grid.svc-grid-row2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-  .prob-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
   html { scroll-snap-type: y mandatory; }
 
+  /* Nav — burger menu is the only layout change (nav links truly don't fit) */
   .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(7,9,13,0.97); backdrop-filter: blur(20px); flex-direction: column; align-items: center; justify-content: center; gap: 24px; z-index: 99; }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 20px; font-weight: 600; }
@@ -1945,83 +1992,236 @@ img { max-width: 100%; }
   .btn-nav-cta { display: none; }
 
   .snap-section { min-height: 100vh; min-height: 100dvh; }
-  .snap-section { padding-top: 60px; padding-bottom: 30px; }
+  .snap-section { padding-top: 60px; padding-bottom: 24px; }
   .snap-section.hero { padding-top: 0; padding-bottom: 0; }
-  .hero { padding: 80px 20px 30px 20px; gap: 0; }
-  .hero-split { flex-direction: column; gap: 24px; text-align: center; }
-  .hero-left { flex: none; width: 100%; text-align: center; }
-  .hero-right { flex: none; width: 100%; margin-right: 0; justify-content: center; }
-  .hero-line { white-space: normal; }
-  .hero-line-rotating { justify-content: center; }
-  .rotating-word { text-align: center; }
-  .rw-item { text-align: center; }
-  .hero-title { font-size: 26px; }
-  .hero-ctas { justify-content: center; }
-  .hero-stats { justify-content: center; gap: 16px; }
-  .hero-stat-val { font-size: 22px; }
-  .hero-trust, .hero-social-proof, .hero-used-by { text-align: center; }
-  .hero-sub-line, .hero-sub-line2 { margin-left: auto; margin-right: auto; }
+
+  /* Hero — keep side-by-side, just scale down */
+  .hero { padding: 0 clamp(10px, 2vw, 24px); }
+  .hero-split { gap: 16px; }
+  .hero-left { flex: 0 0 48%; }
+  .hero-title { font-size: clamp(16px, 3.2vw, 26px); }
+  .hero-sub-line { font-size: clamp(10px, 1.8vw, 15px); }
+  .hero-sub-line2 { font-size: clamp(9px, 1.6vw, 14px); margin-bottom: 16px; }
+  .hero-badge { font-size: clamp(9px, 1.5vw, 13px); padding: 4px 10px; margin-bottom: 14px; }
+  .hero-ctas { gap: 8px; }
+  .btn-primary { padding: 8px 16px; font-size: clamp(10px, 1.6vw, 15px); }
+  .btn-secondary { padding: 8px 16px; font-size: clamp(10px, 1.6vw, 15px); }
+  .btn-demo { padding: 8px 14px; font-size: clamp(10px, 1.6vw, 15px); }
+  .hero-stats { gap: 12px; }
+  .hero-stat-val { font-size: clamp(16px, 2.5vw, 26px); }
+  .hero-stat-label { font-size: clamp(8px, 1.2vw, 12px); }
+  .hero-stat-divider { height: 28px; }
   .hero-img-wrapper { max-width: 100%; }
-  .sc-info { flex-direction: column; padding: 16px 20px; }
+  .hero-trust { font-size: clamp(9px, 1.4vw, 13px); }
+  .hero-used-by { font-size: clamp(9px, 1.4vw, 13px); }
+
+  .rotating-word { min-width: clamp(100px, 18vw, 200px); }
+  .scroll-indicator { display: none; }
+
+  /* Sections — scale text, keep layouts */
+  .section-sub { font-size: clamp(11px, 1.8vw, 16px); margin-bottom: 20px; }
+
+  /* Problem grid — keep 4 columns */
+  .prob-grid { gap: 8px; }
+  .prob-card { padding: clamp(10px, 2vw, 32px); border-radius: 12px; }
+  .prob-icon-art { height: 60px; margin-bottom: 10px; }
+  .prob-icon-art svg { max-width: 100px; }
+  .prob-card h3 { font-size: clamp(10px, 1.6vw, 17px); margin-bottom: 6px; }
+  .prob-card ul li { font-size: clamp(8px, 1.2vw, 13px); padding: 2px 0; gap: 4px; }
+
+  /* Features — keep side-by-side (tabs left, panel right) */
+  #features.snap-section { padding-top: 50px; }
+  .feat-container { padding: 6px clamp(8px, 1.5vw, 24px) 6px; }
+
+  /* Comparison — keep side-by-side */
+  .cmp-wrapper { padding: clamp(12px, 3vw, 48px); }
+  .cmp-col { padding: 0 clamp(6px, 1.5vw, 24px); }
+  .cmp-col-label { font-size: clamp(9px, 1.4vw, 13px); padding: 6px 12px; margin-bottom: 12px; }
+  .cmp-item { font-size: clamp(10px, 1.5vw, 14px); padding: 8px 0; gap: 6px; }
+  .cmp-vs { width: 40px; }
+  .cmp-vs::after { width: 36px; height: 36px; font-size: 11px; }
+
+  /* Steps — keep horizontal */
+  .step { gap: 16px; padding: clamp(14px, 2.5vw, 32px); }
+  .step-num { font-size: clamp(24px, 4vw, 48px); }
+  .step-content h3 { font-size: clamp(12px, 2vw, 18px); }
+  .step-content p { font-size: clamp(10px, 1.5vw, 14px); }
+  .step-visual { width: clamp(120px, 20vw, 220px); }
+
+  /* Services — keep same column count */
+  .svc-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .svc-grid.svc-grid-row2 { grid-template-columns: repeat(4, 1fr); max-width: 100%; gap: 8px; }
+  .svc-card { padding: clamp(10px, 2vw, 28px) clamp(6px, 1vw, 16px); }
+  .svc-card-num { font-size: clamp(20px, 4vw, 42px); }
+  .svc-card-name { font-size: clamp(9px, 1.4vw, 14px); margin-bottom: 4px; }
+  .svc-card-desc { font-size: clamp(8px, 1.1vw, 11px); }
+
+  /* Pricing — keep 3 columns */
+  .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .pricing-card { padding: clamp(16px, 3vw, 36px); }
+  .pricing-tier { font-size: clamp(14px, 2vw, 20px); }
+  .pricing-desc { font-size: clamp(9px, 1.3vw, 13px); }
+  .pricing-amount { font-size: clamp(28px, 5vw, 56px); }
+  .pricing-currency { font-size: clamp(14px, 2vw, 24px); }
+  .pricing-period { font-size: clamp(10px, 1.3vw, 14px); }
+  .pricing-features li { font-size: clamp(9px, 1.3vw, 13px); padding: 5px 0; gap: 6px; }
+  .btn-pricing { padding: 10px; font-size: clamp(10px, 1.4vw, 14px); }
+
+  /* Footer — keep 3 columns */
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr; gap: clamp(12px, 3vw, 40px); }
+  .footer-brand p { font-size: clamp(10px, 1.3vw, 14px); }
+  .footer-col h4 { font-size: clamp(9px, 1.1vw, 12px); margin-bottom: 10px; }
+  .footer-col a { font-size: clamp(10px, 1.3vw, 14px); }
+
+  /* Showcase — scale, keep structure */
+  .sc-info { padding: clamp(10px, 2vw, 24px) clamp(14px, 2.5vw, 32px); }
+  .sc-info-title { font-size: clamp(11px, 1.8vw, 16px); }
+  .sc-info-desc { font-size: clamp(9px, 1.4vw, 13px); }
+  .sc-info-tag { font-size: clamp(8px, 1vw, 10px); padding: 3px 8px; }
   .showcase-tabs { gap: 4px; }
-  .sc-tab { padding: 8px 14px; font-size: 11px; }
+  .sc-tab { padding: clamp(6px, 1vw, 10px) clamp(10px, 1.8vw, 20px); font-size: clamp(9px, 1.4vw, 13px); }
+  .sc-anim { padding: 12px; min-height: 280px; font-size: 11px; }
+  .sa-topbar { padding: 6px 10px; gap: 8px; }
+  .sa-mission { font-size: clamp(9px, 1.3vw, 12px); }
+  .sa-chip { font-size: 8px; padding: 2px 7px; }
+  .sa-stat { min-width: 55px; padding: 6px 4px; }
+  .sa-stat-val { font-size: clamp(14px, 2.2vw, 20px); }
+  .sa-stat-lbl { font-size: 7px; }
+  .sa-matrix-head, .sa-matrix-row { font-size: 9px; }
+  .sa-brand-header, .sa-brand-row { font-size: 9px; }
+  .sa-pi-header, .sa-pi-row { font-size: 9px; }
+  .sa-hbar span:first-child { width: 40px; font-size: 8px; }
+  .sa-hbar span:last-child { width: 22px; font-size: 8px; }
+  .sa-opp-card { padding: 8px 10px; margin-bottom: 6px; }
+  .sa-opp-badge { font-size: 8px; }
+  .sa-opp-desc { font-size: 9px; }
+  .sa-alert { font-size: 9px; padding: 6px 8px; }
+  .sa-store-card { min-width: 120px; padding: 6px 10px; }
 
-  .section-title { font-size: 26px; }
-  .section-sub { font-size: 14px; margin-bottom: 24px; }
-  .prob-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .prob-card { padding: 20px; }
-  .prob-icon { font-size: 28px; margin-bottom: 10px; }
-  .prob-card h3 { font-size: 15px; }
-  .prob-card ul li { font-size: 12px; }
+  /* CTA */
+  .cta-title { font-size: clamp(20px, 3.5vw, 44px); }
+  .cta-sub { font-size: clamp(12px, 1.8vw, 16px); }
 
-  .cmp-wrapper { flex-direction: column; padding: 24px; }
-  .cmp-vs { width: 100%; height: 60px; }
-  .cmp-vs::before { top: 50%; bottom: auto; left: 0; right: 0; width: 100%; height: 1px; transform: none; }
-  .cmp-col { padding: 0; }
-
-  .step { flex-direction: column; text-align: center; gap: 20px; padding: 24px; }
-  .step-visual { width: 100%; }
-  .step-num { font-size: 36px; }
-
-  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-
-  .svc-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .svc-grid.svc-grid-row2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-  .svc-card { padding: 20px 12px; }
-  .svc-card-num { font-size: 32px; }
-
-  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  /* FAQ */
+  .faq-q { font-size: clamp(12px, 1.8vw, 15px); padding: 14px 0; }
 
   .scroll-top-btn { bottom: 20px; width: 40px; height: 40px; }
+  .demo-modal { width: 95vw; }
+  .demo-modal-close { top: -52px; }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 22px; }
-  .hero-sub-line { font-size: 14px; }
-  .hero-sub-line2 { font-size: 13px; }
-  .hero-stats { flex-direction: column; gap: 12px; }
-  .hero-stat-divider { width: 40px; height: 1px; }
-  .hero-dashboard-wrapper { max-width: 100%; }
-  .hero-ctas { flex-direction: column; align-items: center; }
-  .prob-grid { grid-template-columns: 1fr; }
-  .svc-grid, .svc-grid.svc-grid-row2 { grid-template-columns: 1fr 1fr; }
-  .svc-card-num { font-size: 28px; }
-  .rotating-word { min-width: 120px; }
-  .cta-title { font-size: 24px; }
-  .cta-input { padding: 12px 16px; font-size: 13px; }
+  /* Further scale — still keep same layouts */
+  .hero-split { gap: 10px; }
+  .hero-left { flex: 0 0 50%; }
+  .hero-ctas { gap: 6px; flex-wrap: wrap; }
+  .btn-primary { padding: 6px 12px; font-size: 10px; gap: 4px; }
+  .btn-primary svg { width: 12px; height: 12px; }
+  .btn-secondary { padding: 6px 12px; font-size: 10px; }
+  .btn-demo { padding: 6px 10px; font-size: 10px; gap: 4px; }
+  .btn-demo svg { width: 12px; height: 12px; }
+  .hero-stats { gap: 8px; }
+  .hero-stat-divider { height: 20px; }
+  .hero-avatars { height: 24px; }
+  .hero-social-proof { gap: 6px; }
+  .hero-badge { gap: 4px; }
 
-  .sa-stats, .sa-pi-stats { flex-wrap:wrap; }
-  .sa-stat { min-width:60px; padding:8px 4px; }
-  .sa-stat-val { font-size:16px; }
-  .sa-matrix-head, .sa-matrix-row { grid-template-columns:1.5fr 1fr 1fr 1fr; font-size:9px; }
-  .sa-matrix-head span:last-child, .sa-matrix-row span:last-child { display:none; }
-  .sa-cat-grid { flex-direction:column; }
-  .sa-store-card { min-width:100%; }
-  .sa-chips { flex-wrap:wrap; }
-  .sa-topbar { flex-wrap:wrap; padding:8px 10px; }
-  .sa-brand-header, .sa-brand-row { grid-template-columns:1.5fr 1fr 1fr 1fr; font-size:10px; }
-  .sc-anim { padding:12px; min-height:280px; }
+  /* Prob grid — keep 4 cols, extra small */
+  .prob-grid { gap: 6px; }
+  .prob-card { padding: 8px; border-radius: 10px; }
+  .prob-icon-art { height: 40px; margin-bottom: 6px; }
+  .prob-icon-art svg { max-width: 70px; }
+  .prob-card h3 { font-size: 8px; margin-bottom: 4px; }
+  .prob-card ul { display: none; }
 
+  /* Services — keep 5 + 4 cols */
+  .svc-grid { gap: 4px; }
+  .svc-grid.svc-grid-row2 { gap: 4px; }
+  .svc-card { padding: 8px 4px; border-radius: 10px; }
+  .svc-card-num { font-size: 18px; margin-bottom: 4px; }
+  .svc-card-name { font-size: 8px; margin-bottom: 2px; }
+  .svc-card-desc { display: none; }
+
+  /* Steps — keep horizontal, smaller */
+  .step { padding: 10px; gap: 8px; border-radius: 10px; }
+  .step-visual { width: 90px; }
+  .step-mock { padding: 8px; }
+  .sm-input { font-size: 8px; padding: 4px 6px; margin-bottom: 4px; }
+  .sm-btn { font-size: 8px; padding: 4px; }
+  .sm-text { font-size: 7px; }
+  .sm-file { font-size: 8px; padding: 4px 6px; gap: 4px; }
+
+  /* Comparison — keep side-by-side */
+  .cmp-wrapper { padding: 10px; border-radius: 14px; }
+  .cmp-col { padding: 0 6px; }
+  .cmp-col-label { font-size: 8px; padding: 4px 8px; margin-bottom: 8px; }
+  .cmp-item { font-size: 9px; padding: 5px 0; gap: 4px; }
+  .cmp-vs { width: 30px; }
+  .cmp-vs::after { width: 28px; height: 28px; font-size: 9px; }
+  .x-mark, .check-mark { font-size: 11px; width: 16px; }
+
+  /* Pricing — keep 3 cols */
+  .pricing-grid { gap: 6px; }
+  .pricing-card { padding: 10px; border-radius: 14px; }
+  .pricing-popular-badge { font-size: 8px; padding: 3px 10px; top: -8px; }
+  .pricing-tier { font-size: 12px; }
+  .pricing-desc { font-size: 8px; margin-bottom: 10px; }
+  .pricing-amount { font-size: 22px; }
+  .pricing-currency { font-size: 12px; }
+  .pricing-period { font-size: 8px; }
+  .pricing-price { margin-bottom: 12px; }
+  .pricing-features { margin-bottom: 12px; }
+  .pricing-features li { font-size: 8px; padding: 3px 0; gap: 4px; }
+  .pf-check, .pf-x { font-size: 10px; }
+  .btn-pricing { padding: 6px; font-size: 9px; }
+
+  /* Footer — keep 3 cols */
+  .footer-grid { gap: 10px; }
+  .footer-brand p { font-size: 9px; }
+  .footer-col h4 { font-size: 8px; margin-bottom: 6px; }
+  .footer-col a { font-size: 9px; padding: 2px 0; }
+  .footer-bottom p { font-size: 10px; }
+
+  /* Showcase */
+  .sc-anim { padding: 8px; min-height: 240px; }
+  .sa-topbar { flex-wrap: wrap; padding: 5px 6px; }
+  .sa-stat { min-width: 45px; padding: 5px 3px; }
+  .sa-stat-val { font-size: 12px; }
+  .sa-stat-lbl { font-size: 6px; }
+  .sa-matrix-head, .sa-matrix-row { font-size: 8px; grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+  .sa-matrix-head span:last-child, .sa-matrix-row span:last-child { display: none; }
+  .sa-brand-header, .sa-brand-row { font-size: 8px; }
+  .sa-brand-dot { width: 10px; height: 10px; }
+  .sa-pi-header, .sa-pi-row { font-size: 8px; }
+  .sa-store-card { min-width: 100px; padding: 5px 6px; gap: 6px; }
+  .sa-store-name { font-size: 9px; }
+  .sa-store-role { font-size: 7px; }
+  .sa-store-stats { font-size: 9px; gap: 6px; }
+  .sa-cat-grid { gap: 8px; }
+  .sa-hbar { margin-bottom: 3px; }
+  .sa-cat-pill { font-size: 7px; padding: 2px 6px; }
+
+  /* CTA */
+  .cta-input { padding: 10px 14px; font-size: 12px; }
+
+  /* FAQ */
+  .faq-q { padding: 10px 0; }
+  .faq-arrow { width: 16px; height: 16px; }
+  .faq-a p { font-size: 12px; }
+}
+
+/* ── Touch device overrides — disable hover scale effects on mobile ── */
+@media (hover: none) and (pointer: coarse) {
+  .prob-card:hover { transform: none; }
+  .prob-card.anim-slide-up.visible:hover { transform: none !important; }
+  .svc-card:hover { transform: none; }
+  .svc-card.anim-scale.visible:hover { transform: none !important; }
+  .step:hover { transform: none; }
+  .step.anim-slide-left.visible:hover,
+  .step.anim-slide-right.visible:hover { transform: none !important; }
+  .showcase-viewer:hover { transform: none; }
+  .pricing-card:hover { transform: none; }
+  .pricing-card.popular:hover { transform: scale(1.04); }
 }
 
 /* ── DEMO BUTTON ── */
@@ -2054,8 +2254,8 @@ img { max-width: 100%; }
 }
 .demo-modal-overlay.active .demo-modal { transform: scale(1); }
 .demo-modal-close {
-  position: absolute; top: -40px; right: 0; z-index: 2;
-  width: 36px; height: 36px; border-radius: 50%;
+  position: absolute; top: -48px; right: 0; z-index: 2;
+  width: 44px; height: 44px; border-radius: 50%;
   background: var(--surface2); border: 1px solid var(--border2);
   color: var(--text); font-size: 22px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
@@ -2065,12 +2265,53 @@ img { max-width: 100%; }
 .demo-modal-video { width: 100%; height: 100%; }
 .demo-modal-video iframe { width: 100%; height: 100%; border-radius: var(--radius-lg); }
 
-/* Very small screens */
+/* Very small screens — same layout, extra-compact */
 @media (max-width: 360px) {
-  .hero-title { font-size: 22px; }
-  .hero-badge { font-size: 11px; padding: 4px 12px; }
-  .section-title { font-size: 22px; }
-  .prob-card { padding: 16px; }
-  .cmp-wrapper { padding: 16px; }
-  .cmp-item { font-size: 12px; padding: 8px 0; }
+  .hero-badge { font-size: 8px; padding: 3px 8px; margin-bottom: 10px; }
+  .hero-ctas { gap: 4px; }
+  .btn-primary { padding: 5px 10px; font-size: 9px; }
+  .btn-secondary { padding: 5px 10px; font-size: 9px; }
+  .btn-demo { padding: 5px 8px; font-size: 9px; }
+  .hero-stat-val { font-size: 14px; }
+  .hero-stat-label { font-size: 7px; }
+  .hero-avatars { height: 20px; }
+
+  .section-label { font-size: 9px; }
+
+  /* Prob grid — keep 4 cols */
+  .prob-card { padding: 6px; border-radius: 8px; }
+  .prob-icon-art { height: 30px; margin-bottom: 4px; }
+  .prob-icon-art svg { max-width: 50px; }
+  .prob-card h3 { font-size: 7px; margin-bottom: 2px; }
+
+  /* Services — keep cols */
+  .svc-card { padding: 6px 3px; border-radius: 8px; }
+  .svc-card-num { font-size: 14px; }
+  .svc-card-name { font-size: 7px; }
+
+  /* Steps */
+  .step { padding: 8px; gap: 6px; }
+  .step-visual { width: 70px; }
+
+  /* Comparison */
+  .cmp-wrapper { padding: 8px; }
+  .cmp-col-label { font-size: 7px; padding: 3px 6px; }
+  .cmp-item { font-size: 8px; padding: 4px 0; }
+  .cmp-vs { width: 24px; }
+  .cmp-vs::after { width: 22px; height: 22px; font-size: 7px; }
+
+  /* Pricing — keep 3 cols */
+  .pricing-card { padding: 8px; }
+  .pricing-amount { font-size: 18px; }
+  .pricing-tier { font-size: 10px; }
+  .pricing-features li { font-size: 7px; }
+  .btn-pricing { padding: 5px; font-size: 8px; }
+
+  /* Footer */
+  .footer { padding: 16px 0 12px; }
+  .footer-grid { gap: 8px; }
+  .footer-brand p { font-size: 8px; }
+  .footer-col h4 { font-size: 7px; }
+  .footer-col a { font-size: 8px; }
+  .footer-bottom p { font-size: 9px; }
 }

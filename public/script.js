@@ -242,6 +242,20 @@ function animateSaCounters(panel) {
   });
 }
 
+// Showcase auto-advance timer (mobile: auto-play, stops at last tab)
+let showcaseAutoTimer = null;
+function startShowcaseAuto() {
+  clearInterval(showcaseAutoTimer);
+  showcaseAutoTimer = setInterval(() => {
+    if (showcaseCurrentTab >= showcaseTabCount - 1) {
+      stopShowcaseAuto();
+      return;
+    }
+    switchShowcase(showcaseCurrentTab + 1);
+  }, 3500);
+}
+function stopShowcaseAuto() { clearInterval(showcaseAutoTimer); }
+
 const showcaseEl = document.getElementById('showcase');
 
 if (showcaseEl) {
@@ -283,10 +297,12 @@ if (showcaseEl) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         switchShowcase(0); // always reset to tab 0 regardless of exiting state
+        startShowcaseAuto();
         if (!showcaseExiting) lockPageScroll();
         showcaseReleasePending = false;
       } else if (!entry.isIntersecting) {
         unlockPageScroll();
+        stopShowcaseAuto();
         setTimeout(() => { showcaseExiting = false; }, 300);
       }
     });
@@ -309,12 +325,14 @@ if (showcaseEl) {
     if (direction === 1) {
       if (showcaseCurrentTab < showcaseTabCount - 1) {
         switchShowcase(showcaseCurrentTab + 1);
+        startShowcaseAuto();
       } else {
         exitShowcaseScroll(1);
       }
     } else {
       if (showcaseCurrentTab > 0) {
         switchShowcase(showcaseCurrentTab - 1);
+        startShowcaseAuto();
       } else {
         exitShowcaseScroll(-1);
       }
@@ -528,8 +546,11 @@ if (featEl) {
   function startFeatAuto() {
     clearInterval(featAutoTimer);
     featAutoTimer = setInterval(() => {
-      const next = (featCurrentTab + 1) % featTabCount;
-      switchFeatTab(next);
+      if (featCurrentTab >= featTabCount - 1) {
+        stopFeatAuto();
+        return;
+      }
+      switchFeatTab(featCurrentTab + 1);
     }, 3500);
   }
   function stopFeatAuto() { clearInterval(featAutoTimer); }

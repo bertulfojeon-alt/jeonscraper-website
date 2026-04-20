@@ -1234,26 +1234,45 @@ img { max-width: 100%; }
 }
 .fp-bc-excl .fp-bc-count { color: #a78bfa; }
 
-/* ── FEATURES RESPONSIVE — tabs go horizontal on mobile ── */
+/* ── FEATURES RESPONSIVE — only active tab label visible, centered ── */
 @media (max-width: 900px) {
-  .feat-split { flex-direction: column; gap: 8px; }
+  .feat-split { flex-direction: column; gap: 0; }
   .feat-tabs {
-    flex: none; flex-direction: row; gap: 6px;
-    overflow-x: auto; overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    padding-bottom: 4px;
+    flex: none; flex-direction: row;
+    justify-content: center;
+    padding-bottom: 0;
   }
-  .feat-tabs::-webkit-scrollbar { display: none; }
   .feat-tab {
-    flex: 0 0 auto; min-width: 140px; padding: 8px 14px;
-    border-radius: 12px;
+    display: none !important;
   }
-  .ft-desc { display: none; }
-  .ft-chevron { display: none; }
+  .feat-tab.active {
+    display: flex !important;
+    background: none; border: none; box-shadow: none;
+    padding: 6px 0; gap: 0; cursor: default;
+  }
+  .feat-tab.active::after { display: none !important; }
+  .ft-icon-box { display: none !important; }
+  .ft-desc { display: none !important; }
+  .ft-chevron { display: none !important; }
+  .ft-title {
+    font-size: 13px; font-weight: 700; color: var(--purple-light);
+    text-align: center; letter-spacing: 0.04em;
+  }
   .feat-panel { min-height: 340px; flex: 1; }
   .fp-modal { overflow-y: auto; }
   .fp-modal-body { overflow-y: auto; }
+
+  /* Showcase — active-only tab, same as Features */
+  .showcase-tabs { justify-content: center; }
+  .sc-tab { display: none !important; }
+  .sc-tab.active {
+    display: inline-block !important;
+    background: none; border: none; box-shadow: none;
+    padding: 6px 0; cursor: default;
+    font-size: 13px; font-weight: 700; color: var(--purple-light);
+    text-align: center; letter-spacing: 0.04em;
+  }
+  .sc-tab.active:hover { border-color: transparent; color: var(--purple-light); }
 }
 
 /* ── SHOWCASE ── */
@@ -1284,8 +1303,9 @@ img { max-width: 100%; }
   box-shadow: var(--shadow-lg), 0 0 120px rgba(124,58,237,0.12);
 }
 .sc-screen {
-  overflow: hidden; position: relative;
+  overflow: hidden;
   background: var(--bg3);
+  display: grid;
 }
 
 .sc-info {
@@ -1669,10 +1689,13 @@ img { max-width: 100%; }
    ══════════════════════════════════════════════════════════════════════════════ */
 
 .sc-anim {
-  display:none; padding:20px; font-size:12px; min-height:340px;
+  grid-row: 1; grid-column: 1;
+  padding:20px; font-size:12px;
   background:var(--bg3);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
 }
-.sc-anim.active { display:block; }
+.sc-anim.active { opacity: 1; pointer-events: auto; }
 
 /* ── Row stagger animation ── */
 .sa-row-anim {
@@ -2034,8 +2057,7 @@ img { max-width: 100%; }
   .sc-info-title { font-size: 14px; }
   .sc-info-desc { font-size: 12px; }
   .showcase-tabs { gap: 4px; }
-  .sc-tab { padding: 8px 14px; font-size: 11px; }
-  .sc-anim { padding: 14px; min-height: 280px; }
+  .sc-anim { padding: 14px; }
   .sa-topbar { padding: 8px 10px; }
   .sa-stat { min-width: 60px; }
   .sa-stat-val { font-size: 16px; }
@@ -2081,9 +2103,7 @@ img { max-width: 100%; }
   .prob-card h3 { font-size: 11px; }
   .prob-card ul li { font-size: 9px; padding: 2px 0; }
 
-  /* Features — horizontal tabs get smaller */
-  .feat-tab { min-width: 110px; padding: 6px 10px; }
-  .ft-icon-box { width: 28px; height: 28px; }
+  /* Features — active label + panel compact */
   .ft-title { font-size: 10px; }
   .feat-panel { min-height: 280px; }
   .fp-body { padding: 6px 8px; }
@@ -2142,7 +2162,7 @@ img { max-width: 100%; }
   .footer-col a { font-size: 10px; }
 
   /* Showcase */
-  .sc-anim { padding: 10px; min-height: 250px; }
+  .sc-anim { padding: 10px; }
   .sa-topbar { flex-wrap: wrap; padding: 6px 8px; }
   .sa-chip { font-size: 8px; padding: 2px 6px; }
   .sa-stat { min-width: 50px; padding: 6px 3px; }
@@ -2261,9 +2281,7 @@ img { max-width: 100%; }
   .footer-col h4 { font-size: 8px; }
   .footer-col a { font-size: 9px; }
 
-  .feat-tab { min-width: 90px; padding: 4px 6px; }
-  .ft-icon-box { width: 22px; height: 22px; }
-  .ft-title { font-size: 8px; }
+  .ft-title { font-size: 9px; }
   .fp-sv { font-size: 12px; }
   .fp-card-grid { grid-template-columns: repeat(2, 1fr); gap: 3px; }
 }
